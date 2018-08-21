@@ -13,15 +13,15 @@ export const fetchChat = ({id , platsform}) => {
     }
 }
 
-export const fetchChatSuccess = () => {
-    return{
-    }
-}
+export const fetchChatSuccess = () => ({
+    type:FETCH_CHAT_SUCCESS,
+    payload: {data}
+})
 
-export const fetchChatFailure = () => {
-    return{
-    }
-}
+export const fetchChatFailure = () => ({
+    type:FETCH_CHAT_FAILURE,
+    payload:{ code, message }
+})
 
 export const sendMessage = ({id, platsform, message}) => {
     return{
@@ -30,15 +30,15 @@ export const sendMessage = ({id, platsform, message}) => {
     }
 }
 
-export const sendMessageSuccess = () => {
-    return{
-    }
-}
+export const sendMessageSuccess = ({data}) => ({
+    type:SEND_MESSAGE_SUCCESS,
+    payload : {data}
+})
 
-export const sendMessageFailure = () => {
-    return{
-    }
-}
+export const sendMessageFailure = () => ({
+    type: SEND_MESSAGE_FAILURE,
+    payload: { code, message }
+})
 
 const initialState = {
     error: {},
@@ -51,9 +51,49 @@ const reducer = (state = initialState, action = {}) => {
             return {
                 ...state,
                 loading: true,
-                id : action.payload.id,
-                platsform: action.payload.platsform
             }
+        }
+        case FETCH_CHAT_SUCCESS:{
+            const {data} = action.payload
+            return {
+                ...state,
+                loading: false,
+                data: data
+            }
+        }
+        case FETCH_CHAT_FAILURE:{
+            return {
+                ...state,
+                loading: false,
+                error: {
+                  code: action.payload.code,
+                  message: action.payload.message
+                }
+              }
+        }
+        case SEND_MESSAGE:{
+            return {
+                ...state,
+                loading:true,
+            }
+        }
+        case SEND_MESSAGE_SUCCESS:{
+            const {data} = action.payload
+            return{
+                ...state,
+                loading:false,
+                data: data
+            }
+        }
+        case SEND_MESSAGE_FAILURE:{
+            return {
+                ...state,
+                loading: false,
+                error: {
+                  code: action.payload.code,
+                  message: action.payload.message
+                }
+              }
         }
     default:
         return state
