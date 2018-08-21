@@ -8,11 +8,11 @@ import axios from 'axios'
 
 export function* CallLoginAPI(){
   try{
-    const response = yield call(LoginAIP)
+    const response = yield call(LoginAIP),
     //dispatch a sucess action to the store
     yield put({type: API_LOGIN_SUCCESS}
   } catch(error){
-    
+    console.log('fall',error)
   }
 }
 
