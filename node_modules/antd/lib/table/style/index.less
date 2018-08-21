@@ -17,6 +17,10 @@
     transition: opacity .3s;
   }
 
+  &-empty &-body {
+    overflow: auto !important;
+  }
+
   table {
     width: 100%;
     border-collapse: separate;
@@ -169,6 +173,7 @@
   &-tbody > tr > td {
     padding: @table-padding-vertical @table-padding-horizontal;
     word-break: break-word;
+    -ms-word-break: break-all;
   }
 
   &-thead > tr > th.@{table-prefix-cls}-selection-column-custom {

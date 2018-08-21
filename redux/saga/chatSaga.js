@@ -26,3 +26,8 @@ export function* fetchChatSaga(action){
 
     }
 }
+export function* chatSagas() {
+    yield all([
+        takeLatsest(FETCH_CHAT, fetchChatSaga),
+    ])
+  }
