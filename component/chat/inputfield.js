@@ -14,7 +14,6 @@ class Inputfield extends Component {
         this.setState({
             messageInputted: message
         })
-        console.log('message',this.state.messageInputted)
     }
     render(){
         return (
