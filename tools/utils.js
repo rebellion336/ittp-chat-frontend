@@ -1,4 +1,4 @@
-import Router from '../../../../Library/Caches/typescript/2.9/node_modules/@types/next/router'
+import Router from 'next/router'
 import Cookies from 'universal-cookie'
 import moment from 'moment'
 import { message } from 'antd'
@@ -34,40 +34,6 @@ export const json2qs = json => {
     .join('&')
 
   return qs === '' ? '' : `?${qs}`
-}
-export const appTab2Status = tabName => {
-  const mapper = {
-    CHECK_DOC: 'WAIT_DOC,CHECKING_DOC,INCORRECT_DOC',
-    NCB: 'CHECKING_NCB',
-    KEY_DATA: 'KEYING_DATA',
-    SCAN: 'SCANNING',
-    VERIFY: 'VERIFYING,WAIT_VERIFY',
-    ANALYZE: 'ANALYZING',
-    APPROVE: 'APPROVING',
-    CONFIRM: 'CONFIRMING',
-    OPEN: 'LOAN_OPENED,DISBURSED',
-    REJECT: 'REJECT,CANCEL'
-  }
-  return mapper[tabName]
-}
-export const loanTab2Status = tabName => {
-  const mapper = {
-    LOAN_OPENED: 'normal',
-    LOAN_CLOSED: 'close'
-  }
-  return mapper[tabName]
-}
-export const withdrawTab2Status = tabName => {
-  const mapper = {
-    PENDING: 'PENDING',
-    TRANSFERRED: 'TRANSFERRED',
-    CANCELLED: 'CANCELLED',
-    DOWNLOADED: 'DOWNLOADED'
-  }
-  return mapper[tabName]
-}
-export const isClient = () => {
-  return typeof document !== 'undefined'
 }
 export const showError = (error, clearError = () => {}) => {
   if (isClient()) {

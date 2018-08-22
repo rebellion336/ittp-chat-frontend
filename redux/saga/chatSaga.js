@@ -1,4 +1,4 @@
-import {takeLatsest,all,call,put} from 'redux-saga/effexts'
+import {takeLatest,all,call,put} from 'redux-saga/effects'
 import {
     FETCH_CHAT,
     SEND_MESSAGE,
@@ -8,26 +8,25 @@ import {
     sendMessage,
     sendMessageSuccess,
     sendMessageFailure
-} from '../duck/chat'
-import axios from 'axios'
+} from '../ducks/chat'
 import {
     API_SERVER,
     getJSON,
     patchJSON,
     postJSON,
     deleteJSON
-  } from '../../tool/api'
+  } from '../../tools/api'
 
 export function* fetchChatSaga(action){
     try {
-        
+        console.log('try')
     }
-    catch {
-
+    catch (error){
+        console.error('catch'.error)
     }
 }
 export function* chatSagas() {
     yield all([
-        takeLatsest(FETCH_CHAT, fetchChatSaga),
+        takeLatest(FETCH_CHAT, fetchChatSaga),
     ])
   }

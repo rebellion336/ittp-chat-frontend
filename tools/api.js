@@ -1,5 +1,6 @@
 import 'es6-promise'
-import '../../../../Library/Caches/typescript/2.9/node_modules/@types/isomorphic-fetch'
+import 'isomorphic-fetch'
+import Cookies from 'universal-cookie'
 
 export const createHeader = customHeaders => {
     const cookies = new Cookies()
