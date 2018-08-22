@@ -6,6 +6,7 @@ import { redirect } from '../../tools/utils'
 
 export function* loginSaga(action) {
   try {
+    console.log('apisaga:>>>>>',API_SERVER)
     const { token, email, permissions, id } = yield call(
       postJSON,
       `${API_SERVER}/users/login`,
@@ -20,7 +21,7 @@ export function* loginSaga(action) {
     yield put(setCookie({ key: 'id', value: id }))
     // Keep auth info in store
     yield put(loginSuccess({ token, email, permissions, id }))
-    redirect('/applications?tab=ALL')
+    redirect('/chat')
   } catch (error) {
     const { code, message } = error
     yield put(loginFailure({ code, message }))

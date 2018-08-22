@@ -20,6 +20,8 @@ const mode = 'cors'
 const handleError = async response => {
     let errorMessage = ''
     let json
+    console.log('res::::>',response)
+    console.log('url::::>',API_SERVER)
     try {
       json = await response.json()
       errorMessage = json.message
