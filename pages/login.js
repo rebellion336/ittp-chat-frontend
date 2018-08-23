@@ -6,6 +6,7 @@ import FullPageLayout from '../layouts/FullPageLayout'
 import LoginForm from '../component/loginform'
 import { withReduxSaga } from '../redux/store'
 import { connectI18n } from '../hocs/connectI18n'
+import { redirect } from '../tools/utils'
 
 class Login extends Component {
   componentDidMount() {
