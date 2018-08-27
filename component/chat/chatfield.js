@@ -2,6 +2,7 @@ import { Component } from 'react'
 import { Row, Col ,Table} from 'antd';
 import { connect } from 'react-redux';
 import Inputfield from './inputfield'
+import { fetchChat } from '../../redux/ducks/chat'
 
 class MessageField extends Component {
     constructor(props){
@@ -12,38 +13,35 @@ class MessageField extends Component {
                 key: 'key',
             }, 
             {
-                dataIndex: 'opratorMessage',
+                dataIndex: 'operatorMessage',
                 key: 'key',
                 align:'right'
             }
         ]
     }
+    componentDidMount() {
+        this.props.fetchChat({
+            id : 'Uc72aacda842257e6ae27f0bb8d80cc13',
+            platform: 'line'
+        })
+    }
     render(){
-        const dataSource = [
-            {
-                key:1,
-                customerMessage: 'HelloFromCustomer',
-                opratorMessage: ''
-            },
-            {
-                key:2,
-                customerMessage: '',
-                opratorMessage: 'HelloFromOprator'
-            }
-        ]
+        const chatData = this.props.chats.data
         return (
             <div style={{width:'100%'}}>
-                {/* <p style={{textAlign:'left'}}>HelloFromCustomer</p>
-                <p style={{textAlign:'right'}}>HelloFromCA</p> */}
-                <Table dataSource={dataSource} columns={this.columns} pagination={false} />
-                <Inputfield/>
+                <Table dataSource={ chatData } columns={this.columns} pagination={false} />
+                <Inputfield chats={this.props.chats.data}/>
             </div>
         )
     }
 }
-const mapStateToProps = state => ({
+const mapStateToProps = state => {
+    return {
+      chats : state.chat
+    }
+}
 
-})
-
-export default MessageField
-// export default connect(mapStateToProps)(ChatField)
+export default connect(
+    mapStateToProps,
+    {fetchChat}
+)(MessageField)

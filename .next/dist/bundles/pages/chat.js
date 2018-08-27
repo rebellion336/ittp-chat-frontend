@@ -83,6 +83,7 @@ module.exports =
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_redux__ = __webpack_require__("react-redux");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_redux___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_redux__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__inputfield__ = __webpack_require__("./component/chat/inputfield.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__redux_ducks_chat__ = __webpack_require__("./redux/ducks/chat.js");
 var _jsxFileName = '/Users/admin/Desktop/bas/ittp-chat-frontend/component/chat/chatfield.js';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -94,6 +95,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 
 
 
@@ -112,7 +114,7 @@ var MessageField = function (_Component) {
             dataIndex: 'customerMessage',
             key: 'key'
         }, {
-            dataIndex: 'opratorMessage',
+            dataIndex: 'operatorMessage',
             key: 'key',
             align: 'right'
         }];
@@ -120,33 +122,32 @@ var MessageField = function (_Component) {
     }
 
     _createClass(MessageField, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.props.fetchChat({
+                id: 'Uc72aacda842257e6ae27f0bb8d80cc13',
+                platform: 'line'
+            });
+        }
+    }, {
         key: 'render',
         value: function render() {
-            var dataSource = [{
-                key: 1,
-                customerMessage: 'HelloFromCustomer',
-                opratorMessage: ''
-            }, {
-                key: 2,
-                customerMessage: '',
-                opratorMessage: 'HelloFromOprator'
-            }];
+            var chatData = this.props.chats.data;
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
                 { style: { width: '100%' }, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 35
+                        lineNumber: 31
                     }
                 },
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_antd__["Table"], { dataSource: dataSource, columns: this.columns, pagination: false, __source: {
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_antd__["Table"], { dataSource: chatData, columns: this.columns, pagination: false, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 38
+                        lineNumber: 32
                     }
                 }),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__inputfield__["a" /* default */], {
-                    __source: {
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__inputfield__["a" /* default */], { chats: this.props.chats.data, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 39
+                        lineNumber: 33
                     }
                 })
             );
@@ -157,11 +158,12 @@ var MessageField = function (_Component) {
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
 var mapStateToProps = function mapStateToProps(state) {
-    return {};
+    return {
+        chats: state.chat
+    };
 };
 
-/* harmony default export */ __webpack_exports__["a"] = (MessageField);
-// export default connect(mapStateToProps)(ChatField)
+/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_2_react_redux__["connect"])(mapStateToProps, { fetchChat: __WEBPACK_IMPORTED_MODULE_4__redux_ducks_chat__["d" /* fetchChat */] })(MessageField));
 
 /***/ }),
 
@@ -169,21 +171,31 @@ var mapStateToProps = function mapStateToProps(state) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__("react");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_antd__ = __webpack_require__("antd");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_antd___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_antd__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__("babel-runtime/regenerator");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__("react");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_antd__ = __webpack_require__("antd");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_antd___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_antd__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_redux__ = __webpack_require__("react-redux");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_redux___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react_redux__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__redux_ducks_chat__ = __webpack_require__("./redux/ducks/chat.js");
+
 var _jsxFileName = '/Users/admin/Desktop/bas/ittp-chat-frontend/component/chat/inputfield.js';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 
 
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
 
 
 
@@ -200,6 +212,7 @@ var Inputfield = function (_Component) {
             messageInputted: ''
         };
         _this.handleInputChange = _this.handleInputChange.bind(_this);
+        _this.handleSendMessage = _this.handleSendMessage.bind(_this);
         return _this;
     }
 
@@ -212,37 +225,83 @@ var Inputfield = function (_Component) {
             });
         }
     }, {
+        key: 'handleSendMessage',
+        value: function () {
+            var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+                var message, id, platform;
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+                    while (1) {
+                        switch (_context.prev = _context.next) {
+                            case 0:
+                                message = this.state.messageInputted;
+                                // const { id , platform } = this.props
+
+                                id = 'Uc72aacda842257e6ae27f0bb8d80cc13';
+                                platform = 'line';
+                                _context.next = 5;
+                                return this.props.sendMessage(id, platform, message);
+
+                            case 5:
+                                console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+                                console.log('FROMINPUT');
+                                console.log('id', id);
+                                console.log('platform', platform);
+                                console.log('message', message);
+                                console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+                                this.setState({
+                                    messageInputted: ''
+                                });
+
+                            case 12:
+                            case 'end':
+                                return _context.stop();
+                        }
+                    }
+                }, _callee, this);
+            }));
+
+            function handleSendMessage() {
+                return _ref.apply(this, arguments);
+            }
+
+            return handleSendMessage;
+        }()
+    }, {
         key: 'render',
         value: function render() {
-            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                 'div',
                 { style: { padding: '3px', position: 'fixed', bottom: '0', width: '100%' }, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 20
+                        lineNumber: 39
                     }
                 },
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                     'span',
                     {
                         __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 21
+                            lineNumber: 40
                         }
                     },
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_antd__["Input"], { style: { width: '90%' },
+                    __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_antd__["Input"], { style: { width: '90%' },
                         placeholder: 'Input Message',
                         value: this.state.messageInputted,
                         onChange: this.handleInputChange,
                         __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 22
+                            lineNumber: 41
                         }
                     }),
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        __WEBPACK_IMPORTED_MODULE_1_antd__["Button"],
-                        { type: 'primary', style: { width: '10%' }, __source: {
+                    __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                        __WEBPACK_IMPORTED_MODULE_2_antd__["Button"],
+                        {
+                            type: 'primary',
+                            style: { width: '10%' },
+                            onClick: this.handleSendMessage,
+                            __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 27
+                                lineNumber: 46
                             }
                         },
                         'Send'
@@ -253,9 +312,84 @@ var Inputfield = function (_Component) {
     }]);
 
     return Inputfield;
-}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+}(__WEBPACK_IMPORTED_MODULE_1_react__["Component"]);
 
-/* harmony default export */ __webpack_exports__["a"] = (Inputfield);
+var mapStateToProps = function mapStateToProps(state) {
+    return {
+        chats: state.chat
+    };
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_3_react_redux__["connect"])(null, { sendMessage: __WEBPACK_IMPORTED_MODULE_4__redux_ducks_chat__["g" /* sendMessage */] })(Inputfield));
+
+/***/ }),
+
+/***/ "./hocs/connectI18n.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return connectI18n; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__("babel-runtime/regenerator");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_i18next__ = __webpack_require__("react-i18next");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_i18next___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_i18next__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tools_i18n__ = __webpack_require__("./tools/i18n.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tools_i18n___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__tools_i18n__);
+
+
+var _this = this;
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+
+
+
+var connectI18n = function connectI18n(namespaces) {
+  return function (Page) {
+    var i18nPage = Object(__WEBPACK_IMPORTED_MODULE_1_react_i18next__["translate"])(namespaces, { i18n: __WEBPACK_IMPORTED_MODULE_2__tools_i18n___default.a, wait: process.browser })(Page);
+
+    // Passing down initial translations
+    // use req.i18n instance on serverside to avoid overlapping requests set the language wrong
+    i18nPage.getInitialProps = function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(ctx) {
+        var req, i18nProps, pageProps;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                req = ctx.req;
+                i18nProps = {};
+
+                if (req && !process.browser) {
+                  i18nProps = __WEBPACK_IMPORTED_MODULE_2__tools_i18n___default.a.getInitialProps(req, namespaces);
+                }
+
+                pageProps = {};
+
+                if (Page.getInitialProps) {
+                  pageProps = Page.getInitialProps(ctx);
+                }
+
+                return _context.abrupt('return', _extends({}, i18nProps, pageProps));
+
+              case 6:
+              case 'end':
+                return _context.stop();
+            }
+          }
+        }, _callee, _this);
+      }));
+
+      return function (_x) {
+        return _ref.apply(this, arguments);
+      };
+    }();
+
+    return i18nPage;
+  };
+};
 
 /***/ }),
 
@@ -334,8 +468,12 @@ module.exports = "/*!\n * \n * antd v3.8.2\n * \n * Copyright 2015-present, Alip
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__("react");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__layouts_FullPageLayout__ = __webpack_require__("./layouts/FullPageLayout.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__component_chat_chatfield__ = __webpack_require__("./component/chat/chatfield.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_redux__ = __webpack_require__("redux");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_redux___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_redux__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__redux_store__ = __webpack_require__("./redux/store.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__hocs_connectI18n__ = __webpack_require__("./hocs/connectI18n.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__layouts_FullPageLayout__ = __webpack_require__("./layouts/FullPageLayout.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__component_chat_chatfield__ = __webpack_require__("./component/chat/chatfield.js");
 var _jsxFileName = '/Users/admin/Desktop/bas/ittp-chat-frontend/pages/chat.js';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -345,6 +483,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
 
 
 
@@ -363,17 +504,17 @@ var Chat = function (_Component) {
     key: 'render',
     value: function render() {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        __WEBPACK_IMPORTED_MODULE_1__layouts_FullPageLayout__["a" /* default */],
+        __WEBPACK_IMPORTED_MODULE_4__layouts_FullPageLayout__["a" /* default */],
         {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 8
+            lineNumber: 11
           }
         },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__component_chat_chatfield__["a" /* default */], {
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__component_chat_chatfield__["a" /* default */], {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 9
+            lineNumber: 12
           }
         })
       );
@@ -383,7 +524,782 @@ var Chat = function (_Component) {
   return Chat;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (Chat);
+/* harmony default export */ __webpack_exports__["default"] = (Object(__WEBPACK_IMPORTED_MODULE_1_redux__["compose"])(__WEBPACK_IMPORTED_MODULE_2__redux_store__["a" /* withReduxSaga */], Object(__WEBPACK_IMPORTED_MODULE_3__hocs_connectI18n__["a" /* connectI18n */])(['common']))(Chat));
+
+/***/ }),
+
+/***/ "./redux/ducks/auth.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LOGIN; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return LOGOUT; });
+/* unused harmony export login */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return loginSuccess; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return loginFailure; });
+/* unused harmony export logout */
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var LOGIN = 'ittp-chat-frontend/auth/LOGIN';
+var LOGIN_SUCCESS = 'ittp-chat-frontend/auth/LOGIN_SUCCESS';
+var LOGIN_FAILURE = 'ittp-chat-frontend/auth/LOGIN_FAILURE';
+var LOGOUT = 'ittp-chat-frontend/auth/LOGOUT';
+
+var login = function login(_ref) {
+  var email = _ref.email,
+      password = _ref.password;
+
+  return {
+    type: LOGIN,
+    payload: { email: email, password: password }
+  };
+};
+var loginSuccess = function loginSuccess(_ref2) {
+  var token = _ref2.token,
+      email = _ref2.email,
+      permissions = _ref2.permissions,
+      id = _ref2.id;
+  return {
+    type: LOGIN_SUCCESS,
+    payload: { token: token, email: email, permissions: permissions, id: id }
+  };
+};
+var loginFailure = function loginFailure(_ref3) {
+  var code = _ref3.code,
+      message = _ref3.message;
+  return {
+    type: LOGIN_FAILURE,
+    payload: { code: code, message: message }
+  };
+};
+var logout = function logout() {
+  return {
+    type: LOGOUT
+  };
+};
+
+var initialState = {
+  loading: false,
+  error: {}
+};
+var reducer = function reducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+  switch (action.type) {
+    case LOGIN:
+      {
+        return _extends({}, state, {
+          loading: true,
+          error: {}
+        });
+      }
+    case LOGIN_SUCCESS:
+      {
+        var _action$payload = action.payload,
+            token = _action$payload.token,
+            email = _action$payload.email,
+            permissions = _action$payload.permissions,
+            id = _action$payload.id;
+
+        return {
+          error: {},
+          loading: false,
+          token: token,
+          email: email,
+          permissions: permissions,
+          id: id
+        };
+      }
+    case LOGIN_FAILURE:
+      {
+        return {
+          loading: false,
+          error: {
+            code: action.payload.code,
+            message: action.payload.message
+          }
+        };
+      }
+    case LOGOUT:
+      {
+        return {
+          loading: false,
+          error: {}
+        };
+      }
+    default:
+      return state;
+  }
+};
+/* harmony default export */ __webpack_exports__["c"] = (reducer);
+
+/***/ }),
+
+/***/ "./redux/ducks/chat.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FETCH_CHAT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return SEND_MESSAGE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return fetchChat; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return fetchChatSuccess; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return fetchChatFailure; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return sendMessage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return sendMessageSuccess; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return sendMessageFailure; });
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var FETCH_CHAT = 'ittp-chat/chat/FETCH_CHAT';
+var FETCH_CHAT_SUCCESS = 'ittp-chat/chat/FETCH_CHAT_SUCCESS';
+var FETCH_CHAT_FAILURE = 'ittp-chat/chat/FETCH_CHAT_FAILURE';
+
+var SEND_MESSAGE = 'ittp-chat/chat/SEND_MESSAGE';
+var SEND_MESSAGE_SUCCESS = 'ittp-chat/chat/SEND_MESSAGE_SUCCESS';
+var SEND_MESSAGE_FAILURE = 'ittp-chat/chat/SEND_MESSAGE_FAILURE';
+
+var fetchChat = function fetchChat(_ref) {
+    var id = _ref.id,
+        platform = _ref.platform;
+
+    return {
+        type: FETCH_CHAT,
+        payload: { id: id, platform: platform }
+    };
+};
+
+var fetchChatSuccess = function fetchChatSuccess(_ref2) {
+    var data = _ref2.data;
+
+    return {
+        type: FETCH_CHAT_SUCCESS,
+        payload: { data: data }
+    };
+};
+
+var fetchChatFailure = function fetchChatFailure() {
+    return {
+        type: FETCH_CHAT_FAILURE,
+        payload: { code: code, message: message }
+    };
+};
+
+var sendMessage = function sendMessage(_ref3) {
+    var id = _ref3.id,
+        platform = _ref3.platform,
+        message = _ref3.message;
+
+    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+    console.log('FROMDUCK');
+    console.log('id', id);
+    console.log('platform', platform);
+    console.log('message', message);
+    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+    return {
+        type: SEND_MESSAGE,
+        payload: { id: id, platform: platform, message: message }
+    };
+};
+
+var sendMessageSuccess = function sendMessageSuccess(_ref4) {
+    var data = _ref4.data;
+    return {
+        type: SEND_MESSAGE_SUCCESS,
+        payload: { data: data }
+    };
+};
+
+var sendMessageFailure = function sendMessageFailure() {
+    return {
+        type: SEND_MESSAGE_FAILURE,
+        payload: { code: code, message: message }
+    };
+};
+
+var initialState = {
+    error: {},
+    loading: false
+};
+
+var reducer = function reducer() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+    var action = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+    switch (action.type) {
+        case FETCH_CHAT:
+            {
+                return _extends({}, state, {
+                    loading: true
+                });
+            }
+        case FETCH_CHAT_SUCCESS:
+            {
+                var data = action.payload.data;
+
+                return _extends({}, state, {
+                    loading: false,
+                    data: data
+                });
+            }
+        case FETCH_CHAT_FAILURE:
+            {
+                return _extends({}, state, {
+                    loading: false,
+                    error: {
+                        code: action.payload.code,
+                        message: action.payload.message
+                    }
+                });
+            }
+        case SEND_MESSAGE:
+            {
+                var _action$payload = action.payload,
+                    id = _action$payload.id,
+                    platform = _action$payload.platform,
+                    _message = _action$payload.message;
+
+                console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+                console.log('FROMReducer');
+                console.log('id', id);
+                console.log('platform', platform);
+                console.log('message', _message);
+                console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+                return _extends({}, state, {
+                    loading: true
+                });
+            }
+        case SEND_MESSAGE_SUCCESS:
+            {
+                var _data = action.payload.data;
+
+                return _extends({}, state, {
+                    loading: false,
+                    data: _data
+                });
+            }
+        case SEND_MESSAGE_FAILURE:
+            {
+                return _extends({}, state, {
+                    loading: false,
+                    error: {
+                        code: action.payload.code,
+                        message: action.payload.message
+                    }
+                });
+            }
+        default:
+            return state;
+    }
+};
+/* harmony default export */ __webpack_exports__["c"] = (reducer);
+
+/***/ }),
+
+/***/ "./redux/ducks/cookie.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export SET_COOKIE */
+/* unused harmony export REMOVE_COOKIE */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return setCookie; });
+/* unused harmony export setCookieSuccess */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return removeCookie; });
+/* unused harmony export removeCookieSuccess */
+/* unused harmony export loadAllCookies */
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+// types
+var SET_COOKIE = 'ittp-chat-frontend/cookie/SET_COOKIE';
+var SET_COOKIE_SUCCESS = 'ittp-chat-frontend/cookie/SET_COOKIE_SUCCESS';
+var REMOVE_COOKIE = 'ittp-chat-frontend/cookie/REMOVE_COOKIE';
+var REMOVE_COOKIE_SUCCESS = 'ittp-chat-frontend/cookie/REMOVE_COOKIE_SUCCESS';
+var LOAD_ALL_COOKIES = 'ittp-chat-frontend/cookie/LOAD_ALL_COOKIES';
+
+// actions
+var setCookie = function setCookie(_ref) {
+  var key = _ref.key,
+      value = _ref.value;
+
+  return {
+    type: SET_COOKIE,
+    payload: {
+      key: key,
+      value: value
+    }
+  };
+};
+var setCookieSuccess = function setCookieSuccess(_ref2) {
+  var key = _ref2.key,
+      value = _ref2.value;
+
+  return {
+    type: SET_COOKIE_SUCCESS,
+    payload: {
+      key: key,
+      value: value
+    }
+  };
+};
+var removeCookie = function removeCookie(_ref3) {
+  var key = _ref3.key;
+
+  return {
+    type: REMOVE_COOKIE,
+    payload: { key: key }
+  };
+};
+var removeCookieSuccess = function removeCookieSuccess(_ref4) {
+  var key = _ref4.key;
+
+  return {
+    type: REMOVE_COOKIE_SUCCESS,
+    payload: { key: key }
+  };
+};
+// cookies must be an object contain key/value of all cookies
+var loadAllCookies = function loadAllCookies(cookies) {
+  return {
+    type: LOAD_ALL_COOKIES,
+    payload: cookies
+  };
+};
+
+// reducer
+var initialState = {};
+var cookieReducer = function cookieReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments[1];
+
+  switch (action.type) {
+    case SET_COOKIE_SUCCESS:
+      {
+        var _action$payload = action.payload,
+            key = _action$payload.key,
+            value = _action$payload.value;
+
+        return _extends({}, state, _defineProperty({}, key, value));
+      }
+    case REMOVE_COOKIE_SUCCESS:
+      {
+        var newState = Object.assign({}, state);
+        delete newState[action.payload.key];
+        return newState;
+      }
+    case LOAD_ALL_COOKIES:
+      {
+        return _extends({}, state, action.payload);
+      }
+    default:
+      return state;
+  }
+};
+/* harmony default export */ __webpack_exports__["a"] = (cookieReducer);
+
+/***/ }),
+
+/***/ "./redux/ducks/ducks.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return rootReducer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return defaultState; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux__ = __webpack_require__("redux");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_redux__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__auth__ = __webpack_require__("./redux/ducks/auth.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__cookie__ = __webpack_require__("./redux/ducks/cookie.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__chat__ = __webpack_require__("./redux/ducks/chat.js");
+
+
+
+
+
+var rootReducer = Object(__WEBPACK_IMPORTED_MODULE_0_redux__["combineReducers"])({
+    auth: __WEBPACK_IMPORTED_MODULE_1__auth__["c" /* default */],
+    cookie: __WEBPACK_IMPORTED_MODULE_2__cookie__["a" /* default */],
+    chat: __WEBPACK_IMPORTED_MODULE_3__chat__["c" /* default */]
+});
+
+var defaultState = {};
+
+/***/ }),
+
+/***/ "./redux/saga/authSagas.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export loginSaga */
+/* unused harmony export logoutSaga */
+/* harmony export (immutable) */ __webpack_exports__["a"] = authSagas;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__("babel-runtime/regenerator");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__ = __webpack_require__("redux-saga/effects");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_redux_saga_effects___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ducks_auth__ = __webpack_require__("./redux/ducks/auth.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ducks_cookie__ = __webpack_require__("./redux/ducks/cookie.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__tools_api__ = __webpack_require__("./tools/api.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__tools_utils__ = __webpack_require__("./tools/utils.js");
+
+
+var _marked = /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(loginSaga),
+    _marked2 = /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(logoutSaga),
+    _marked3 = /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(authSagas);
+
+
+
+
+
+
+
+function loginSaga(action) {
+  var _ref, token, email, permissions, id, code, message;
+
+  return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function loginSaga$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          _context.prev = 0;
+
+          console.log('apisaga:>>>>>', __WEBPACK_IMPORTED_MODULE_4__tools_api__["a" /* API_SERVER */]);
+          _context.next = 4;
+          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["call"])(__WEBPACK_IMPORTED_MODULE_4__tools_api__["c" /* postJSON */], __WEBPACK_IMPORTED_MODULE_4__tools_api__["a" /* API_SERVER */] + '/users/login', action.payload);
+
+        case 4:
+          _ref = _context.sent;
+          token = _ref.token;
+          email = _ref.email;
+          permissions = _ref.permissions;
+          id = _ref.id;
+          _context.next = 11;
+          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_3__ducks_cookie__["c" /* setCookie */])({ key: 'token', value: token }));
+
+        case 11:
+          _context.next = 13;
+          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_3__ducks_cookie__["c" /* setCookie */])({ key: 'email', value: email }));
+
+        case 13:
+          _context.next = 15;
+          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_3__ducks_cookie__["c" /* setCookie */])({ key: 'permissions', value: JSON.stringify(permissions) }));
+
+        case 15:
+          _context.next = 17;
+          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_3__ducks_cookie__["c" /* setCookie */])({ key: 'id', value: id }));
+
+        case 17:
+          _context.next = 19;
+          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_2__ducks_auth__["e" /* loginSuccess */])({ token: token, email: email, permissions: permissions, id: id }));
+
+        case 19:
+          Object(__WEBPACK_IMPORTED_MODULE_5__tools_utils__["b" /* redirect */])('/chat');
+          _context.next = 27;
+          break;
+
+        case 22:
+          _context.prev = 22;
+          _context.t0 = _context['catch'](0);
+          code = _context.t0.code, message = _context.t0.message;
+          _context.next = 27;
+          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_2__ducks_auth__["d" /* loginFailure */])({ code: code, message: message }));
+
+        case 27:
+        case 'end':
+          return _context.stop();
+      }
+    }
+  }, _marked, this, [[0, 22]]);
+}
+function logoutSaga() {
+  return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function logoutSaga$(_context2) {
+    while (1) {
+      switch (_context2.prev = _context2.next) {
+        case 0:
+          _context2.next = 2;
+          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_3__ducks_cookie__["b" /* removeCookie */])({ key: 'token' }));
+
+        case 2:
+          _context2.next = 4;
+          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_3__ducks_cookie__["b" /* removeCookie */])({ key: 'email' }));
+
+        case 4:
+          _context2.next = 6;
+          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_3__ducks_cookie__["b" /* removeCookie */])({ key: 'permissions' }));
+
+        case 6:
+          _context2.next = 8;
+          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_3__ducks_cookie__["b" /* removeCookie */])({ key: 'id' }));
+
+        case 8:
+          Object(__WEBPACK_IMPORTED_MODULE_5__tools_utils__["b" /* redirect */])('/login');
+
+        case 9:
+        case 'end':
+          return _context2.stop();
+      }
+    }
+  }, _marked2, this);
+}
+function authSagas() {
+  return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function authSagas$(_context3) {
+    while (1) {
+      switch (_context3.prev = _context3.next) {
+        case 0:
+          _context3.next = 2;
+          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["all"])([Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["takeLatest"])(__WEBPACK_IMPORTED_MODULE_2__ducks_auth__["a" /* LOGIN */], loginSaga), Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["takeLatest"])(__WEBPACK_IMPORTED_MODULE_2__ducks_auth__["b" /* LOGOUT */], logoutSaga)]);
+
+        case 2:
+        case 'end':
+          return _context3.stop();
+      }
+    }
+  }, _marked3, this);
+}
+
+/***/ }),
+
+/***/ "./redux/saga/chatSaga.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export fetchChatSaga */
+/* unused harmony export sendMessageSaga */
+/* harmony export (immutable) */ __webpack_exports__["a"] = chatSagas;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__("babel-runtime/regenerator");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__ = __webpack_require__("redux-saga/effects");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_redux_saga_effects___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ducks_chat__ = __webpack_require__("./redux/ducks/chat.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tools_api__ = __webpack_require__("./tools/api.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__tools_utils__ = __webpack_require__("./tools/utils.js");
+
+
+var _marked = /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(fetchChatSaga),
+    _marked2 = /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(sendMessageSaga),
+    _marked3 = /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(chatSagas);
+
+
+
+
+
+
+function fetchChatSaga(action) {
+    var data, code, message;
+    return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function fetchChatSaga$(_context) {
+        while (1) {
+            switch (_context.prev = _context.next) {
+                case 0:
+                    _context.prev = 0;
+                    _context.next = 3;
+                    return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["call"])(__WEBPACK_IMPORTED_MODULE_3__tools_api__["b" /* getJSON */], __WEBPACK_IMPORTED_MODULE_3__tools_api__["a" /* API_SERVER */] + '/chats');
+
+                case 3:
+                    data = _context.sent;
+                    _context.next = 6;
+                    return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_2__ducks_chat__["f" /* fetchChatSuccess */])({ data: data }));
+
+                case 6:
+                    _context.next = 13;
+                    break;
+
+                case 8:
+                    _context.prev = 8;
+                    _context.t0 = _context['catch'](0);
+                    code = _context.t0.code, message = _context.t0.message;
+                    _context.next = 13;
+                    return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_2__ducks_chat__["e" /* fetchChatFailure */])({ code: code, message: message }));
+
+                case 13:
+                case 'end':
+                    return _context.stop();
+            }
+        }
+    }, _marked, this, [[0, 8]]);
+}
+function sendMessageSaga(action) {
+    var _action$payload, id, platform, message, value, data, code, _message;
+
+    return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function sendMessageSaga$(_context2) {
+        while (1) {
+            switch (_context2.prev = _context2.next) {
+                case 0:
+                    _context2.prev = 0;
+                    _action$payload = action.payload, id = _action$payload.id, platform = _action$payload.platform, message = _action$payload.message;
+
+                    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+                    console.log('FROMSAGA');
+                    console.log('id', id);
+                    console.log('platform', platform);
+                    console.log('message', message);
+                    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+                    value = {
+                        id: id,
+                        platform: platform,
+                        message: message
+                    };
+                    _context2.next = 11;
+                    return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["call"])(__WEBPACK_IMPORTED_MODULE_3__tools_api__["c" /* postJSON */], __WEBPACK_IMPORTED_MODULE_3__tools_api__["a" /* API_SERVER */] + '/chats/sendmessage', value);
+
+                case 11:
+                    data = _context2.sent;
+                    _context2.next = 14;
+                    return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_2__ducks_chat__["i" /* sendMessageSuccess */])({ data: data }));
+
+                case 14:
+                    _context2.next = 16;
+                    return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(fetchChatfetchChat({
+                        id: id,
+                        platform: platform
+                    }));
+
+                case 16:
+                    _context2.next = 23;
+                    break;
+
+                case 18:
+                    _context2.prev = 18;
+                    _context2.t0 = _context2['catch'](0);
+                    code = _context2.t0.code, _message = _context2.t0.message;
+                    _context2.next = 23;
+                    return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_2__ducks_chat__["h" /* sendMessageFailure */])({ code: code, message: _message }));
+
+                case 23:
+                case 'end':
+                    return _context2.stop();
+            }
+        }
+    }, _marked2, this, [[0, 18]]);
+}
+function chatSagas() {
+    return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function chatSagas$(_context3) {
+        while (1) {
+            switch (_context3.prev = _context3.next) {
+                case 0:
+                    _context3.next = 2;
+                    return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["all"])([Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["takeLatest"])(__WEBPACK_IMPORTED_MODULE_2__ducks_chat__["a" /* FETCH_CHAT */], fetchChatSaga), Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["takeLatest"])(__WEBPACK_IMPORTED_MODULE_2__ducks_chat__["b" /* SEND_MESSAGE */], sendMessageSaga)]);
+
+                case 2:
+                case 'end':
+                    return _context3.stop();
+            }
+        }
+    }, _marked3, this);
+}
+
+/***/ }),
+
+/***/ "./redux/saga/rootSaga.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = rootSaga;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__("babel-runtime/regenerator");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__ = __webpack_require__("redux-saga/effects");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_redux_saga_effects___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__authSagas__ = __webpack_require__("./redux/saga/authSagas.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__chatSaga__ = __webpack_require__("./redux/saga/chatSaga.js");
+
+
+var _marked = /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(rootSaga);
+
+
+
+
+
+function rootSaga() {
+    return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function rootSaga$(_context) {
+        while (1) {
+            switch (_context.prev = _context.next) {
+                case 0:
+                    _context.next = 2;
+                    return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["all"])([Object(__WEBPACK_IMPORTED_MODULE_2__authSagas__["a" /* authSagas */])(), Object(__WEBPACK_IMPORTED_MODULE_3__chatSaga__["a" /* chatSagas */])()]);
+
+                case 2:
+                case 'end':
+                    return _context.stop();
+            }
+        }
+    }, _marked, this);
+}
+
+/***/ }),
+
+/***/ "./redux/store.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export configureStore */
+/* harmony export (immutable) */ __webpack_exports__["a"] = withReduxSaga;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux__ = __webpack_require__("redux");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_redux__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_next_redux_wrapper__ = __webpack_require__("next-redux-wrapper");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_next_redux_wrapper___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_next_redux_wrapper__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_next_redux_saga__ = __webpack_require__("next-redux-saga");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_next_redux_saga___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_next_redux_saga__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_redux_saga__ = __webpack_require__("redux-saga");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_redux_saga___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_redux_saga__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ducks_ducks__ = __webpack_require__("./redux/ducks/ducks.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__saga_rootSaga__ = __webpack_require__("./redux/saga/rootSaga.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__tools_utils__ = __webpack_require__("./tools/utils.js");
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+
+
+
+
+
+
+
+
+
+var sagaMiddleware = __WEBPACK_IMPORTED_MODULE_3_redux_saga___default()();
+
+var bindMiddleware = function bindMiddleware(middleware) {
+    if (true) {
+        // eslint-disable-next-line global-require, import/no-extraneous-dependencies
+        var _require = __webpack_require__("redux-devtools-extension"),
+            composeWithDevTools = _require.composeWithDevTools;
+
+        return composeWithDevTools(__WEBPACK_IMPORTED_MODULE_0_redux__["applyMiddleware"].apply(undefined, _toConsumableArray(middleware)));
+    }
+    return __WEBPACK_IMPORTED_MODULE_0_redux__["applyMiddleware"].apply(undefined, _toConsumableArray(middleware));
+};
+
+function configureStore() {
+    var initialState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : __WEBPACK_IMPORTED_MODULE_4__ducks_ducks__["a" /* defaultState */];
+    var options = arguments[1];
+
+    var cookies = Object(__WEBPACK_IMPORTED_MODULE_6__tools_utils__["a" /* loadAllCookies */])(options);
+    var token = cookies.token,
+        email = cookies.email,
+        role = cookies.role,
+        permissions = cookies.permissions,
+        id = cookies.id;
+
+    initialState.cookie = cookies; // eslint-disable-line no-param-reassign
+    // eslint-disable-next-line no-param-reassign
+    initialState.auth = {
+        token: token,
+        email: email,
+        role: role,
+        id: id,
+        permissions: permissions,
+        loading: false,
+        error: {}
+    };
+    var store = Object(__WEBPACK_IMPORTED_MODULE_0_redux__["createStore"])(__WEBPACK_IMPORTED_MODULE_4__ducks_ducks__["b" /* rootReducer */], initialState, bindMiddleware([sagaMiddleware]));
+
+    store.runSagaTask = function () {
+        store.sagaTask = sagaMiddleware.run(__WEBPACK_IMPORTED_MODULE_5__saga_rootSaga__["a" /* rootSaga */]);
+    };
+    store.runSagaTask();
+
+    return store;
+}
+
+function withReduxSaga(BaseComponent) {
+    return __WEBPACK_IMPORTED_MODULE_1_next_redux_wrapper___default()(configureStore)(__WEBPACK_IMPORTED_MODULE_2_next_redux_saga___default()(BaseComponent));
+}
 
 /***/ }),
 
@@ -395,6 +1311,556 @@ var Chat = function (_Component) {
 var vars = {
   grey: '#f0f2f5'
 };
+
+/***/ }),
+
+/***/ "./tools/api.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export createHeader */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return API_SERVER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return postJSON; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return getJSON; });
+/* unused harmony export patchJSON */
+/* unused harmony export deleteJSON */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__("babel-runtime/regenerator");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_es6_promise__ = __webpack_require__("es6-promise");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_es6_promise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_es6_promise__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_isomorphic_fetch__ = __webpack_require__("isomorphic-fetch");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_isomorphic_fetch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_isomorphic_fetch__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_universal_cookie__ = __webpack_require__("universal-cookie");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_universal_cookie___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_universal_cookie__);
+
+
+var _this = this;
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+
+
+
+
+var createHeader = function createHeader(customHeaders) {
+  var cookies = new __WEBPACK_IMPORTED_MODULE_3_universal_cookie___default.a();
+  var defaultHeaders = {
+    Accept: 'application/json',
+    'Content-Type': 'application/json'
+  };
+  var headers = customHeaders || defaultHeaders;
+  var token = cookies.get('token');
+  if (typeof token !== 'undefined') {
+    headers.Authorization = 'Bearer ' + token;
+  }
+  return headers;
+};
+var mode = 'cors';
+
+var handleError = function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(response) {
+    var errorMessage, json, error;
+    return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            errorMessage = '';
+            json = void 0;
+
+            console.log('res::::>', response);
+            console.log('url::::>', API_SERVER);
+            _context.prev = 4;
+            _context.next = 7;
+            return response.json();
+
+          case 7:
+            json = _context.sent;
+
+            errorMessage = json.message;
+            _context.next = 14;
+            break;
+
+          case 11:
+            _context.prev = 11;
+            _context.t0 = _context['catch'](4);
+
+            // api does not return error object use default statusText
+            errorMessage = '\n        Cannot parse response.body as json, statusText is ' + response.statusText;
+
+          case 14:
+            if (response.ok) {
+              _context.next = 20;
+              break;
+            }
+
+            error = new Error(errorMessage);
+
+            if (json) {
+              error.code = json.code;
+            }
+            error.code = error.code || response.status;
+            error.response = response;
+            throw error;
+
+          case 20:
+            return _context.abrupt('return', json);
+
+          case 21:
+          case 'end':
+            return _context.stop();
+        }
+      }
+    }, _callee, _this, [[4, 11]]);
+  }));
+
+  return function handleError(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+var API_SERVER = "http://localhost:7778";
+
+
+
+var postJSON = function () {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(url, jsonBody) {
+    var response, json;
+    return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.prev = 0;
+            _context2.next = 3;
+            return fetch(url, {
+              method: 'POST',
+              headers: createHeader(),
+              mode: mode,
+              body: JSON.stringify(jsonBody)
+            });
+
+          case 3:
+            response = _context2.sent;
+            _context2.next = 6;
+            return handleError(response);
+
+          case 6:
+            json = _context2.sent;
+            return _context2.abrupt('return', json);
+
+          case 10:
+            _context2.prev = 10;
+            _context2.t0 = _context2['catch'](0);
+            throw _context2.t0;
+
+          case 13:
+          case 'end':
+            return _context2.stop();
+        }
+      }
+    }, _callee2, _this, [[0, 10]]);
+  }));
+
+  return function postJSON(_x2, _x3) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+
+var getJSON = function () {
+  var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3(url) {
+    var response, json;
+    return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            _context3.prev = 0;
+            _context3.next = 3;
+            return fetch(url, {
+              method: 'GET',
+              headers: createHeader(),
+              mode: mode
+            });
+
+          case 3:
+            response = _context3.sent;
+            _context3.next = 6;
+            return handleError(response);
+
+          case 6:
+            json = _context3.sent;
+            return _context3.abrupt('return', json);
+
+          case 10:
+            _context3.prev = 10;
+            _context3.t0 = _context3['catch'](0);
+            throw _context3.t0;
+
+          case 13:
+          case 'end':
+            return _context3.stop();
+        }
+      }
+    }, _callee3, _this, [[0, 10]]);
+  }));
+
+  return function getJSON(_x4) {
+    return _ref3.apply(this, arguments);
+  };
+}();
+
+var patchJSON = function () {
+  var _ref4 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee4(url, jsonBody) {
+    var response, json;
+    return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            _context4.prev = 0;
+            _context4.next = 3;
+            return fetch(url, {
+              method: 'PATCH',
+              headers: createHeader(),
+              mode: mode,
+              body: JSON.stringify(jsonBody)
+            });
+
+          case 3:
+            response = _context4.sent;
+            _context4.next = 6;
+            return handleError(response);
+
+          case 6:
+            json = _context4.sent;
+            return _context4.abrupt('return', json);
+
+          case 10:
+            _context4.prev = 10;
+            _context4.t0 = _context4['catch'](0);
+            throw _context4.t0;
+
+          case 13:
+          case 'end':
+            return _context4.stop();
+        }
+      }
+    }, _callee4, _this, [[0, 10]]);
+  }));
+
+  return function patchJSON(_x5, _x6) {
+    return _ref4.apply(this, arguments);
+  };
+}();
+
+var deleteJSON = function () {
+  var _ref5 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee5(url) {
+    var response, json;
+    return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee5$(_context5) {
+      while (1) {
+        switch (_context5.prev = _context5.next) {
+          case 0:
+            _context5.prev = 0;
+            _context5.next = 3;
+            return fetch(url, {
+              method: 'DELETE',
+              headers: createHeader(),
+              mode: mode
+            });
+
+          case 3:
+            response = _context5.sent;
+            _context5.next = 6;
+            return handleError(response);
+
+          case 6:
+            json = _context5.sent;
+            return _context5.abrupt('return', json);
+
+          case 10:
+            _context5.prev = 10;
+            _context5.t0 = _context5['catch'](0);
+            throw _context5.t0;
+
+          case 13:
+          case 'end':
+            return _context5.stop();
+        }
+      }
+    }, _callee5, _this, [[0, 10]]);
+  }));
+
+  return function deleteJSON(_x7) {
+    return _ref5.apply(this, arguments);
+  };
+}();
+
+/***/ }),
+
+/***/ "./tools/i18n.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var i18n = __webpack_require__("i18next");
+var XHR = __webpack_require__("i18next-xhr-backend");
+var LanguageDetector = __webpack_require__("i18next-browser-languagedetector");
+
+var options = {
+  fallbackLng: 'en',
+  load: 'languageOnly', // we only provide en, de -> no region specific locals like en-US, de-DE
+
+  // have a common namespace used around the full app
+  ns: ['common'],
+  defaultNS: 'common',
+
+  debug: true,
+  saveMissing: true,
+
+  interpolation: {
+    escapeValue: false, // not needed for react!!
+    formatSeparator: ',',
+    format: function format(value, _format, lng) {
+      if (_format === 'uppercase') return value.toUpperCase();
+      return value;
+    }
+  }
+
+  // for browser use xhr backend to load translations and browser lng detector
+};if (process.browser) {
+  i18n.use(XHR)
+  // .use(Cache)
+  .use(LanguageDetector);
+}
+
+// initialize if not already initialized
+if (!i18n.isInitialized) i18n.init(options);
+
+// a simple helper to getInitialProps passed on loaded i18n data
+i18n.getInitialProps = function (req, namespaces) {
+  if (!namespaces) namespaces = i18n.options.defaultNS;
+  if (typeof namespaces === 'string') namespaces = [namespaces];
+
+  req.i18n.toJSON = function () {
+    return null;
+  }; // do not serialize i18next instance and send to client
+
+  var initialI18nStore = {};
+  req.i18n.languages.forEach(function (l) {
+    initialI18nStore[l] = {};
+    namespaces.forEach(function (ns) {
+      initialI18nStore[l][ns] = req.i18n.services.resourceStore.data[l] ? req.i18n.services.resourceStore.data[l][ns] || {} : {};
+    });
+  });
+
+  return {
+    i18n: req.i18n, // use the instance on req - fixed language on request (avoid issues in race conditions with lngs of different users)
+    initialI18nStore: initialI18nStore,
+    initialLanguage: req.i18n.language
+  };
+};
+
+module.exports = i18n;
+
+/***/ }),
+
+/***/ "./tools/utils.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return loadAllCookies; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return redirect; });
+/* unused harmony export json2qs */
+/* unused harmony export showError */
+/* unused harmony export meta2pagination */
+/* unused harmony export array2keyedObj */
+/* unused harmony export caseInsensitiveMatch */
+/* unused harmony export toYYYYMMDD */
+/* unused harmony export toDDMMYYYY */
+/* unused harmony export iso8601ToLocalTime */
+/* unused harmony export iso8601ToLocalDate */
+/* unused harmony export ddmmyyyyDateDiff */
+/* unused harmony export removeLinebreak */
+/* unused harmony export removeLinebreakFromFields */
+/* unused harmony export datediff */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_next_router__ = __webpack_require__("next/router");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_next_router___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_next_router__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_universal_cookie__ = __webpack_require__("universal-cookie");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_universal_cookie___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_universal_cookie__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment__ = __webpack_require__("moment");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_moment__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_antd__ = __webpack_require__("antd");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_antd___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_antd__);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+var loadAllCookies = function loadAllCookies(_ref) {
+  var req = _ref.req,
+      isServer = _ref.isServer;
+
+  var cookies = void 0;
+  if (isServer) {
+    cookies = new __WEBPACK_IMPORTED_MODULE_1_universal_cookie___default.a(req.headers.cookie);
+  } else {
+    cookies = new __WEBPACK_IMPORTED_MODULE_1_universal_cookie___default.a();
+  }
+  return cookies.getAll();
+};
+var redirect = function redirect(url) {
+  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { res: {}, isServer: false };
+  var res = options.res,
+      isServer = options.isServer;
+
+  if (isServer) {
+    res.writeHead(302, {
+      Location: url
+    });
+    res.end();
+    res.finished = true;
+  } else {
+    __WEBPACK_IMPORTED_MODULE_0_next_router___default.a.replace(url);
+  }
+  return {};
+};
+var json2qs = function json2qs(json) {
+  var qs = Object.keys(json).filter(function (key) {
+    return typeof json[key] !== 'undefined';
+  }).map(function (key) {
+    return encodeURIComponent(key) + '=' + encodeURIComponent(json[key]);
+  }).join('&');
+
+  return qs === '' ? '' : '?' + qs;
+};
+var showError = function showError(error) {
+  var clearError = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
+
+  if (isClient()) {
+    if (error.message) {
+      __WEBPACK_IMPORTED_MODULE_3_antd__["message"].error(error.message);
+      clearError();
+    }
+  }
+};
+var meta2pagination = function meta2pagination(meta) {
+  var total = 0;
+  var current = 1;
+  var pageSize = parseInt("10", 10);
+  if (typeof meta !== 'undefined') {
+    var totalrecords = meta.totalrecords,
+        limit = meta.limit,
+        offset = meta.offset;
+
+    total = totalrecords || total;
+    pageSize = limit || pageSize;
+    current = offset / limit + 1 || current;
+  }
+  return {
+    total: parseInt(total, 10),
+    current: parseInt(current, 10),
+    pageSize: parseInt(pageSize, 10)
+  };
+};
+var array2keyedObj = function array2keyedObj(arr) {
+  var keyField = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'id';
+
+  // If arr is not an array return empty object
+  if (typeof arr === 'undefined' || arr.constructor !== Array) {
+    return {};
+  }
+  var obj = {};
+  arr.forEach(function (item) {
+    obj[item[keyField]] = item;
+  });
+  return obj;
+};
+var caseInsensitiveMatch = function caseInsensitiveMatch(inputValue, option) {
+  return option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1;
+};
+
+// YYYY is always in christ era
+var toYYYYMMDD = function toYYYYMMDD(ddmmyyyy) {
+  var dd = ddmmyyyy.substring(0, 2);
+  var mm = ddmmyyyy.substring(3, 5);
+  var yyyy = ddmmyyyy.substring(6);
+  var christYear = yyyy;
+  if (yyyy > 2400) {
+    christYear = Number(yyyy) - 543;
+  }
+  var date = __WEBPACK_IMPORTED_MODULE_2_moment___default()(christYear + '-' + mm + '-' + dd);
+  if (!date.isValid()) {
+    throw Error(ddmmyyyy + ' is not in mm-dd-yyyy format');
+  }
+  var yyyymmdd = date.format('YYYY-MM-DD');
+  return yyyymmdd;
+};
+// YYYY is always in buddhist era
+var toDDMMYYYY = function toDDMMYYYY(yyyymmdd) {
+  var yyyy = yyyymmdd.substring(0, 4);
+  var mm = yyyymmdd.substring(5, 7);
+  var dd = yyyymmdd.substring(8, 10);
+  var christYear = yyyy;
+  if (yyyy > 2400) {
+    christYear = Number(yyyy) - 543;
+  }
+  var date = __WEBPACK_IMPORTED_MODULE_2_moment___default()(christYear + '-' + mm + '-' + dd);
+  if (!date.isValid()) {
+    throw Error(yyyymmdd + ' is not in yyyy-mm-dd format');
+  }
+  var buddhistYear = Number(christYear) + 543;
+
+  return dd + '-' + mm + '-' + buddhistYear;
+};
+var iso8601ToLocalTime = function iso8601ToLocalTime(dateStr) {
+  return __WEBPACK_IMPORTED_MODULE_2_moment___default()(dateStr).format('YYYY-MM-DD HH:mm:ss');
+};
+var iso8601ToLocalDate = function iso8601ToLocalDate(dateStr) {
+  return __WEBPACK_IMPORTED_MODULE_2_moment___default()(dateStr).format('YYYY-MM-DD');
+};
+var ddmmyyyyDateDiff = function ddmmyyyyDateDiff(ddmmyyyy1, ddmmyyyy2) {
+  var yyyymmdd1 = toYYYYMMDD(ddmmyyyy1);
+  var yyyymmdd2 = toYYYYMMDD(ddmmyyyy2);
+  var d1 = __WEBPACK_IMPORTED_MODULE_2_moment___default()(yyyymmdd1, ['YYYY-MM-DD']);
+  var d2 = __WEBPACK_IMPORTED_MODULE_2_moment___default()(yyyymmdd2, ['YYYY-MM-DD']);
+  if (!d1.isValid() || !d2.isValid()) {
+    throw Error('Either ' + ddmmyyyy1 + ' or ' + ddmmyyyy2 + ' is not in dd-mm-yyyy format');
+  }
+  return __WEBPACK_IMPORTED_MODULE_2_moment___default.a.duration(d2.diff(d1));
+};
+var removeLinebreak = function removeLinebreak(str) {
+  if (typeof str !== 'string') {
+    return str;
+  }
+  return str.replace(/\r?\n|\r/g, '');
+};
+var removeLinebreakFromFields = function removeLinebreakFromFields(obj) {
+  return Object.entries(obj).map(function (_ref2) {
+    var _ref3 = _slicedToArray(_ref2, 2),
+        key = _ref3[0],
+        value = _ref3[1];
+
+    return _defineProperty({}, key, removeLinebreak(value));
+  }).reduce(function (prev, current) {
+    return _extends({}, prev, current);
+  }, {});
+};
+/**
+ * Return date difference calculated in timezone specified in config.defaultTimeZone (process.env.DEFAULT_TIMEZONE)
+ * @param {string} d1 - A valid date string in ISO8601 format
+ * @param {string} d2 - A valid date string in ISO8601 format
+ * @return {number} Date difference between d1 and d2 return positve value if d1 occurred later than d2
+ */
+function datediff(d1, d2) {
+  // Use startOf to compare only date diff ignore time component
+  // Use utcOffset to fix timezone to 7 so we only compare in Bangkok timezone no matter where actual server is located
+  // For instance, duration between 2018-06-05T23:59:59+0000 and 2018-06-06T00:00:00+0000 can be 1 if compared in +0 GMT timezone
+  // However, it will be 0 if compared in +7 GMT timezone because startOf date of both dates will become 2018-06-06
+  var d1date = __WEBPACK_IMPORTED_MODULE_2_moment___default()(d1).utcOffset("+0700").startOf('day');
+  var d2date = __WEBPACK_IMPORTED_MODULE_2_moment___default()(d2).utcOffset("+0700").startOf('day');
+  return d1date.diff(d2date, 'days');
+}
 
 /***/ }),
 
@@ -413,6 +1879,76 @@ module.exports = require("antd");
 
 /***/ }),
 
+/***/ "babel-runtime/regenerator":
+/***/ (function(module, exports) {
+
+module.exports = require("babel-runtime/regenerator");
+
+/***/ }),
+
+/***/ "es6-promise":
+/***/ (function(module, exports) {
+
+module.exports = require("es6-promise");
+
+/***/ }),
+
+/***/ "i18next":
+/***/ (function(module, exports) {
+
+module.exports = require("i18next");
+
+/***/ }),
+
+/***/ "i18next-browser-languagedetector":
+/***/ (function(module, exports) {
+
+module.exports = require("i18next-browser-languagedetector");
+
+/***/ }),
+
+/***/ "i18next-xhr-backend":
+/***/ (function(module, exports) {
+
+module.exports = require("i18next-xhr-backend");
+
+/***/ }),
+
+/***/ "isomorphic-fetch":
+/***/ (function(module, exports) {
+
+module.exports = require("isomorphic-fetch");
+
+/***/ }),
+
+/***/ "moment":
+/***/ (function(module, exports) {
+
+module.exports = require("moment");
+
+/***/ }),
+
+/***/ "next-redux-saga":
+/***/ (function(module, exports) {
+
+module.exports = require("next-redux-saga");
+
+/***/ }),
+
+/***/ "next-redux-wrapper":
+/***/ (function(module, exports) {
+
+module.exports = require("next-redux-wrapper");
+
+/***/ }),
+
+/***/ "next/router":
+/***/ (function(module, exports) {
+
+module.exports = require("next/router");
+
+/***/ }),
+
 /***/ "prop-types":
 /***/ (function(module, exports) {
 
@@ -427,6 +1963,13 @@ module.exports = require("react");
 
 /***/ }),
 
+/***/ "react-i18next":
+/***/ (function(module, exports) {
+
+module.exports = require("react-i18next");
+
+/***/ }),
+
 /***/ "react-redux":
 /***/ (function(module, exports) {
 
@@ -434,10 +1977,45 @@ module.exports = require("react-redux");
 
 /***/ }),
 
+/***/ "redux":
+/***/ (function(module, exports) {
+
+module.exports = require("redux");
+
+/***/ }),
+
+/***/ "redux-devtools-extension":
+/***/ (function(module, exports) {
+
+module.exports = require("redux-devtools-extension");
+
+/***/ }),
+
+/***/ "redux-saga":
+/***/ (function(module, exports) {
+
+module.exports = require("redux-saga");
+
+/***/ }),
+
+/***/ "redux-saga/effects":
+/***/ (function(module, exports) {
+
+module.exports = require("redux-saga/effects");
+
+/***/ }),
+
 /***/ "styled-jsx/style":
 /***/ (function(module, exports) {
 
 module.exports = require("styled-jsx/style");
+
+/***/ }),
+
+/***/ "universal-cookie":
+/***/ (function(module, exports) {
+
+module.exports = require("universal-cookie");
 
 /***/ })
 

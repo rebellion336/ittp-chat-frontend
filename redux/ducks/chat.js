@@ -6,27 +6,35 @@ export const SEND_MESSAGE = 'ittp-chat/chat/SEND_MESSAGE'
 const SEND_MESSAGE_SUCCESS = 'ittp-chat/chat/SEND_MESSAGE_SUCCESS'
 const SEND_MESSAGE_FAILURE = 'ittp-chat/chat/SEND_MESSAGE_FAILURE'
 
-export const fetchChat = ({id , platsform}) => {
+export const fetchChat = ({id , platform}) => {
     return{
         type: FETCH_CHAT,
-        payload: {id , platsform}
+        payload: {id , platform}
     }
 }
 
-export const fetchChatSuccess = () => ({
-    type:FETCH_CHAT_SUCCESS,
-    payload: {data}
-})
+export const fetchChatSuccess = ({ data }) => {
+    return{
+        type:FETCH_CHAT_SUCCESS,
+        payload: {data}
+    }
+}
 
 export const fetchChatFailure = () => ({
     type:FETCH_CHAT_FAILURE,
     payload:{ code, message }
 })
 
-export const sendMessage = ({id, platsform, message}) => {
+export const sendMessage = ({id, platform, message}) => {
+    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+        console.log('FROMDUCK')
+        console.log('id',id)
+        console.log('platform',platform)
+        console.log('message',message)
+        console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
     return{
         type:SEND_MESSAGE,
-        payload:{id, platsform, message}
+        payload:{id, platform, message}
     }
 }
 
@@ -46,7 +54,7 @@ const initialState = {
 }
 
 const reducer = (state = initialState, action = {}) => {
-    switch(action.tpye){
+    switch(action.type){
         case FETCH_CHAT: {
             return {
                 ...state,
@@ -72,6 +80,13 @@ const reducer = (state = initialState, action = {}) => {
               }
         }
         case SEND_MESSAGE:{
+            const {id , platform , message} = action.payload
+            console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+            console.log('FROMReducer')
+            console.log('id',id)
+            console.log('platform',platform)
+            console.log('message',message)
+            console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
             return {
                 ...state,
                 loading:true,
