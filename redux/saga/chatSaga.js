@@ -31,12 +31,6 @@ export function* fetchChatSaga(action){
 export function* sendMessageSaga(action){
     try {
         const {id, platform, message} = action.payload
-        console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-        console.log('FROMSAGA')
-        console.log('id',id)
-        console.log('platform',platform)
-        console.log('message',message)
-        console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
         const value = {
             id : id,
             platform : platform,
@@ -48,7 +42,7 @@ export function* sendMessageSaga(action){
             value
         )
         yield put(sendMessageSuccess({ data }))
-        yield put(fetchChatfetchChat({
+        yield put(fetchChat({
             id : id,
             platform: platform
         }))

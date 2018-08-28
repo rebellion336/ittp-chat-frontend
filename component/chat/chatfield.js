@@ -10,11 +10,11 @@ class MessageField extends Component {
         this.columns=[
             {
                 dataIndex: 'customerMessage',
-                key: 'key',
+                key: 'customerMessage',
             }, 
             {
                 dataIndex: 'operatorMessage',
-                key: 'key',
+                key: 'operatorMessage',
                 align:'right'
             }
         ]
@@ -27,12 +27,15 @@ class MessageField extends Component {
     }
     render(){
         const chatData = this.props.chats.data
+        
         return (
-            <div style={{width:'100%'}}>
-                <Table dataSource={ chatData } columns={this.columns} pagination={false} />
-                <Inputfield chats={this.props.chats.data}/>
+            <div style={{width:'100%'}}>   
+            <Table dataSource={ chatData } columns={this.columns} pagination={false} scroll={{ y: 600 }}/>
+            <Inputfield chats={this.props.chats.data}/>
             </div>
         )
+        
+
     }
 }
 const mapStateToProps = state => {

@@ -25,13 +25,7 @@ export const fetchChatFailure = () => ({
     payload:{ code, message }
 })
 
-export const sendMessage = ({id, platform, message}) => {
-    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-        console.log('FROMDUCK')
-        console.log('id',id)
-        console.log('platform',platform)
-        console.log('message',message)
-        console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+export const sendMessage = (id, platform, message) => {
     return{
         type:SEND_MESSAGE,
         payload:{id, platform, message}

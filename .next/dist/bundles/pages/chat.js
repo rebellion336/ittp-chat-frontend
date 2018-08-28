@@ -112,10 +112,10 @@ var MessageField = function (_Component) {
 
         _this.columns = [{
             dataIndex: 'customerMessage',
-            key: 'key'
+            key: 'customerMessage'
         }, {
             dataIndex: 'operatorMessage',
-            key: 'key',
+            key: 'operatorMessage',
             align: 'right'
         }];
         return _this;
@@ -133,21 +133,22 @@ var MessageField = function (_Component) {
         key: 'render',
         value: function render() {
             var chatData = this.props.chats.data;
+
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
                 { style: { width: '100%' }, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 31
+                        lineNumber: 32
                     }
                 },
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_antd__["Table"], { dataSource: chatData, columns: this.columns, pagination: false, __source: {
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_antd__["Table"], { dataSource: chatData, columns: this.columns, pagination: false, scroll: { y: 600 }, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 32
+                        lineNumber: 33
                     }
                 }),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__inputfield__["a" /* default */], { chats: this.props.chats.data, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 33
+                        lineNumber: 34
                     }
                 })
             );
@@ -242,17 +243,11 @@ var Inputfield = function (_Component) {
                                 return this.props.sendMessage(id, platform, message);
 
                             case 5:
-                                console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-                                console.log('FROMINPUT');
-                                console.log('id', id);
-                                console.log('platform', platform);
-                                console.log('message', message);
-                                console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
                                 this.setState({
                                     messageInputted: ''
                                 });
 
-                            case 12:
+                            case 6:
                             case 'end':
                                 return _context.stop();
                         }
@@ -273,7 +268,7 @@ var Inputfield = function (_Component) {
                 'div',
                 { style: { padding: '3px', position: 'fixed', bottom: '0', width: '100%' }, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 39
+                        lineNumber: 33
                     }
                 },
                 __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
@@ -281,16 +276,17 @@ var Inputfield = function (_Component) {
                     {
                         __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 40
+                            lineNumber: 34
                         }
                     },
                     __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_antd__["Input"], { style: { width: '90%' },
                         placeholder: 'Input Message',
                         value: this.state.messageInputted,
                         onChange: this.handleInputChange,
+                        onPressEnter: this.handleSendMessage,
                         __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 41
+                            lineNumber: 35
                         }
                     }),
                     __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
@@ -301,7 +297,7 @@ var Inputfield = function (_Component) {
                             onClick: this.handleSendMessage,
                             __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 46
+                                lineNumber: 41
                             }
                         },
                         'Send'
@@ -684,25 +680,15 @@ var fetchChatFailure = function fetchChatFailure() {
     };
 };
 
-var sendMessage = function sendMessage(_ref3) {
-    var id = _ref3.id,
-        platform = _ref3.platform,
-        message = _ref3.message;
-
-    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-    console.log('FROMDUCK');
-    console.log('id', id);
-    console.log('platform', platform);
-    console.log('message', message);
-    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+var sendMessage = function sendMessage(id, platform, message) {
     return {
         type: SEND_MESSAGE,
         payload: { id: id, platform: platform, message: message }
     };
 };
 
-var sendMessageSuccess = function sendMessageSuccess(_ref4) {
-    var data = _ref4.data;
+var sendMessageSuccess = function sendMessageSuccess(_ref3) {
+    var data = _ref3.data;
     return {
         type: SEND_MESSAGE_SUCCESS,
         payload: { data: data }
@@ -1124,50 +1110,43 @@ function sendMessageSaga(action) {
                 case 0:
                     _context2.prev = 0;
                     _action$payload = action.payload, id = _action$payload.id, platform = _action$payload.platform, message = _action$payload.message;
-
-                    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-                    console.log('FROMSAGA');
-                    console.log('id', id);
-                    console.log('platform', platform);
-                    console.log('message', message);
-                    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
                     value = {
                         id: id,
                         platform: platform,
                         message: message
                     };
-                    _context2.next = 11;
+                    _context2.next = 5;
                     return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["call"])(__WEBPACK_IMPORTED_MODULE_3__tools_api__["c" /* postJSON */], __WEBPACK_IMPORTED_MODULE_3__tools_api__["a" /* API_SERVER */] + '/chats/sendmessage', value);
 
-                case 11:
+                case 5:
                     data = _context2.sent;
-                    _context2.next = 14;
+                    _context2.next = 8;
                     return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_2__ducks_chat__["i" /* sendMessageSuccess */])({ data: data }));
 
-                case 14:
-                    _context2.next = 16;
-                    return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(fetchChatfetchChat({
+                case 8:
+                    _context2.next = 10;
+                    return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_2__ducks_chat__["d" /* fetchChat */])({
                         id: id,
                         platform: platform
                     }));
 
-                case 16:
-                    _context2.next = 23;
+                case 10:
+                    _context2.next = 17;
                     break;
 
-                case 18:
-                    _context2.prev = 18;
+                case 12:
+                    _context2.prev = 12;
                     _context2.t0 = _context2['catch'](0);
                     code = _context2.t0.code, _message = _context2.t0.message;
-                    _context2.next = 23;
+                    _context2.next = 17;
                     return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_2__ducks_chat__["h" /* sendMessageFailure */])({ code: code, message: _message }));
 
-                case 23:
+                case 17:
                 case 'end':
                     return _context2.stop();
             }
         }
-    }, _marked2, this, [[0, 18]]);
+    }, _marked2, this, [[0, 12]]);
 }
 function chatSagas() {
     return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function chatSagas$(_context3) {
@@ -1366,30 +1345,27 @@ var handleError = function () {
           case 0:
             errorMessage = '';
             json = void 0;
-
-            console.log('res::::>', response);
-            console.log('url::::>', API_SERVER);
-            _context.prev = 4;
-            _context.next = 7;
+            _context.prev = 2;
+            _context.next = 5;
             return response.json();
 
-          case 7:
+          case 5:
             json = _context.sent;
 
             errorMessage = json.message;
-            _context.next = 14;
+            _context.next = 12;
             break;
 
-          case 11:
-            _context.prev = 11;
-            _context.t0 = _context['catch'](4);
+          case 9:
+            _context.prev = 9;
+            _context.t0 = _context['catch'](2);
 
             // api does not return error object use default statusText
             errorMessage = '\n        Cannot parse response.body as json, statusText is ' + response.statusText;
 
-          case 14:
+          case 12:
             if (response.ok) {
-              _context.next = 20;
+              _context.next = 18;
               break;
             }
 
@@ -1402,15 +1378,15 @@ var handleError = function () {
             error.response = response;
             throw error;
 
-          case 20:
+          case 18:
             return _context.abrupt('return', json);
 
-          case 21:
+          case 19:
           case 'end':
             return _context.stop();
         }
       }
-    }, _callee, _this, [[4, 11]]);
+    }, _callee, _this, [[2, 9]]);
   }));
 
   return function handleError(_x) {

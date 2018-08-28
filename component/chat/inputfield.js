@@ -24,12 +24,6 @@ class Inputfield extends Component {
         const id = 'Uc72aacda842257e6ae27f0bb8d80cc13'
         const platform = 'line'
         await this.props.sendMessage( id, platform, message )
-        console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-        console.log('FROMINPUT')
-        console.log('id',id)
-        console.log('platform',platform)
-        console.log('message',message)
-        console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
         this.setState({
             messageInputted : ''
         })
@@ -42,6 +36,7 @@ class Inputfield extends Component {
                     placeholder="Input Message" 
                     value={this.state.messageInputted}
                     onChange={this.handleInputChange}
+                    onPressEnter={this.handleSendMessage}
                     />
                     <Button 
                     type="primary" 
