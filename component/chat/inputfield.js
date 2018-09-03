@@ -1,7 +1,8 @@
 import { Component } from 'react'
 import { Input, Button } from 'antd';
 import { connect } from 'react-redux';
-import { sendMessage } from '../../redux/ducks/chat'
+import { sendMessage , fetchChat } from '../../redux/ducks/chat'
+import {API_SERVER , postJSON} from '../../tools/api'
 
 class Inputfield extends Component {
     constructor(props){
@@ -23,7 +24,26 @@ class Inputfield extends Component {
         //const { id , platform } = this.props
         const id = 'Uc72aacda842257e6ae27f0bb8d80cc13'
         const platform = 'line'
-        await this.props.sendMessage( id, platform, message )
+        //await this.props.sendMessage( id, platform, message )
+        try {
+            const value = {
+                id : id,
+                platform : platform,
+                message : message
+            }
+            await postJSON(
+                `${API_SERVER}/chats/sendmessage`,
+                value
+            )
+        }
+        catch (error){
+            console.error(error)
+        }
+        this.props.fetchChat({
+            id : 'Uc72aacda842257e6ae27f0bb8d80cc13',
+            platform: 'line'
+        }) 
+
         this.setState({
             messageInputted : ''
         })
@@ -59,5 +79,5 @@ const mapStateToProps = state => {
 
 export default connect(
     null,
-    {sendMessage}
+    {sendMessage , fetchChat}
 )(Inputfield)

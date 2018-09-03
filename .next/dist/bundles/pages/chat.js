@@ -194,6 +194,7 @@ var mapStateToProps = function mapStateToProps(state) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_redux__ = __webpack_require__("react-redux");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_redux___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react_redux__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__redux_ducks_chat__ = __webpack_require__("./redux/ducks/chat.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__tools_api__ = __webpack_require__("./tools/api.js");
 
 var _jsxFileName = '/Users/admin/Desktop/bas/ittp-chat-frontend/component/chat/inputfield.js';
 
@@ -208,6 +209,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 
 
 
@@ -242,7 +244,7 @@ var Inputfield = function (_Component) {
         key: 'handleSendMessage',
         value: function () {
             var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
-                var message, id, platform;
+                var message, id, platform, value;
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
                     while (1) {
                         switch (_context.prev = _context.next) {
@@ -252,20 +254,43 @@ var Inputfield = function (_Component) {
 
                                 id = 'Uc72aacda842257e6ae27f0bb8d80cc13';
                                 platform = 'line';
-                                _context.next = 5;
-                                return this.props.sendMessage(id, platform, message);
+                                //await this.props.sendMessage( id, platform, message )
 
-                            case 5:
+                                _context.prev = 3;
+                                value = {
+                                    id: id,
+                                    platform: platform,
+                                    message: message
+                                };
+                                _context.next = 7;
+                                return Object(__WEBPACK_IMPORTED_MODULE_5__tools_api__["c" /* postJSON */])(__WEBPACK_IMPORTED_MODULE_5__tools_api__["a" /* API_SERVER */] + '/chats/sendmessage', value);
+
+                            case 7:
+                                _context.next = 12;
+                                break;
+
+                            case 9:
+                                _context.prev = 9;
+                                _context.t0 = _context['catch'](3);
+
+                                console.error(_context.t0);
+
+                            case 12:
+                                this.props.fetchChat({
+                                    id: 'Uc72aacda842257e6ae27f0bb8d80cc13',
+                                    platform: 'line'
+                                });
+
                                 this.setState({
                                     messageInputted: ''
                                 });
 
-                            case 6:
+                            case 14:
                             case 'end':
                                 return _context.stop();
                         }
                     }
-                }, _callee, this);
+                }, _callee, this, [[3, 9]]);
             }));
 
             function handleSendMessage() {
@@ -281,7 +306,7 @@ var Inputfield = function (_Component) {
                 'div',
                 { style: { padding: '3px', position: 'fixed', bottom: '0', width: '100%' }, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 33
+                        lineNumber: 53
                     }
                 },
                 __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
@@ -289,7 +314,7 @@ var Inputfield = function (_Component) {
                     {
                         __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 34
+                            lineNumber: 54
                         }
                     },
                     __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_antd__["Input"], { style: { width: '90%' },
@@ -299,7 +324,7 @@ var Inputfield = function (_Component) {
                         onPressEnter: this.handleSendMessage,
                         __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 35
+                            lineNumber: 55
                         }
                     }),
                     __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
@@ -310,7 +335,7 @@ var Inputfield = function (_Component) {
                             onClick: this.handleSendMessage,
                             __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 41
+                                lineNumber: 61
                             }
                         },
                         'Send'
@@ -329,7 +354,7 @@ var mapStateToProps = function mapStateToProps(state) {
     };
 };
 
-/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_3_react_redux__["connect"])(null, { sendMessage: __WEBPACK_IMPORTED_MODULE_4__redux_ducks_chat__["g" /* sendMessage */] })(Inputfield));
+/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_3_react_redux__["connect"])(null, { sendMessage: __WEBPACK_IMPORTED_MODULE_4__redux_ducks_chat__["g" /* sendMessage */], fetchChat: __WEBPACK_IMPORTED_MODULE_4__redux_ducks_chat__["d" /* fetchChat */] })(Inputfield));
 
 /***/ }),
 
@@ -1069,13 +1094,11 @@ function authSagas() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_redux_saga_effects___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ducks_chat__ = __webpack_require__("./redux/ducks/chat.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tools_api__ = __webpack_require__("./tools/api.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__tools_utils__ = __webpack_require__("./tools/utils.js");
 
 
 var _marked = /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(fetchChatSaga),
     _marked2 = /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(sendMessageSaga),
     _marked3 = /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(chatSagas);
-
 
 
 

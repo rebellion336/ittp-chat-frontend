@@ -13,7 +13,6 @@ import {
     getJSON,
     postJSON,
   } from '../../tools/api'
-import { json2qs } from '../../tools/utils'
 
 export function* fetchChatSaga(action){
     try {
