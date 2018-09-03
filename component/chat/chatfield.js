@@ -33,7 +33,7 @@ class MessageField extends Component {
         this.props.fetchChat({
             id : 'Uc72aacda842257e6ae27f0bb8d80cc13',
             platform: 'line'
-        })   
+        })
     }
     render(){
         const chatData = this.props.chats.data

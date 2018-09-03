@@ -18,9 +18,10 @@ class Inputfield extends Component {
             messageInputted: message
         })
     }
-    async handleSendMessage(){
+    async handleSendMessage(event){
+        event.preventDefault()
         const message = this.state.messageInputted
-        // const { id , platform } = this.props
+        //const { id , platform } = this.props
         const id = 'Uc72aacda842257e6ae27f0bb8d80cc13'
         const platform = 'line'
         await this.props.sendMessage( id, platform, message )
