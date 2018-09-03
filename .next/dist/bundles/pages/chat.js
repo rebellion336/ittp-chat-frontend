@@ -241,27 +241,26 @@ var Inputfield = function (_Component) {
     }, {
         key: 'handleSendMessage',
         value: function () {
-            var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(event) {
+            var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
                 var message, id, platform;
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
                     while (1) {
                         switch (_context.prev = _context.next) {
                             case 0:
-                                event.preventDefault();
                                 message = this.state.messageInputted;
                                 //const { id , platform } = this.props
 
                                 id = 'Uc72aacda842257e6ae27f0bb8d80cc13';
                                 platform = 'line';
-                                _context.next = 6;
+                                _context.next = 5;
                                 return this.props.sendMessage(id, platform, message);
 
-                            case 6:
+                            case 5:
                                 this.setState({
                                     messageInputted: ''
                                 });
 
-                            case 7:
+                            case 6:
                             case 'end':
                                 return _context.stop();
                         }
@@ -269,7 +268,7 @@ var Inputfield = function (_Component) {
                 }, _callee, this);
             }));
 
-            function handleSendMessage(_x) {
+            function handleSendMessage() {
                 return _ref.apply(this, arguments);
             }
 
@@ -282,7 +281,7 @@ var Inputfield = function (_Component) {
                 'div',
                 { style: { padding: '3px', position: 'fixed', bottom: '0', width: '100%' }, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 34
+                        lineNumber: 33
                     }
                 },
                 __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
@@ -290,7 +289,7 @@ var Inputfield = function (_Component) {
                     {
                         __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 35
+                            lineNumber: 34
                         }
                     },
                     __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_antd__["Input"], { style: { width: '90%' },
@@ -300,7 +299,7 @@ var Inputfield = function (_Component) {
                         onPressEnter: this.handleSendMessage,
                         __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 36
+                            lineNumber: 35
                         }
                     }),
                     __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
@@ -311,7 +310,7 @@ var Inputfield = function (_Component) {
                             onClick: this.handleSendMessage,
                             __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 42
+                                lineNumber: 41
                             }
                         },
                         'Send'
