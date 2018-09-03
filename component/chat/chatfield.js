@@ -1,8 +1,10 @@
 import { Component } from 'react'
-import { Row, Col ,Table} from 'antd';
+import { Table} from 'antd';
 import { connect } from 'react-redux';
 import Inputfield from './inputfield'
 import { fetchChat } from '../../redux/ducks/chat'
+import io from 'socket.io-client'
+import {API_SERVER} from '../../tools/api'
 
 class MessageField extends Component {
     constructor(props){
@@ -18,12 +20,20 @@ class MessageField extends Component {
                 align:'right'
             }
         ]
+        this.socket = io('http://45.77.47.114:7778')
+
+        this.socket.on('RECEIVE_MESSAGE', ()=>{
+            this.props.fetchChat({
+                id : 'Uc72aacda842257e6ae27f0bb8d80cc13',
+                platform: 'line'
+            }) 
+        })
     }
     componentDidMount() {
         this.props.fetchChat({
             id : 'Uc72aacda842257e6ae27f0bb8d80cc13',
             platform: 'line'
-        })
+        })   
     }
     render(){
         const chatData = this.props.chats.data

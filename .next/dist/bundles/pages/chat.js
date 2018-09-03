@@ -84,6 +84,9 @@ module.exports =
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_redux___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_redux__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__inputfield__ = __webpack_require__("./component/chat/inputfield.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__redux_ducks_chat__ = __webpack_require__("./redux/ducks/chat.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_socket_io_client__ = __webpack_require__("socket.io-client");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_socket_io_client___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_socket_io_client__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__tools_api__ = __webpack_require__("./tools/api.js");
 var _jsxFileName = '/Users/admin/Desktop/bas/ittp-chat-frontend/component/chat/chatfield.js';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -95,6 +98,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
 
 
 
@@ -118,6 +123,14 @@ var MessageField = function (_Component) {
             key: 'operatorMessage',
             align: 'right'
         }];
+        _this.socket = __WEBPACK_IMPORTED_MODULE_5_socket_io_client___default()('http://45.77.47.114:7778');
+
+        _this.socket.on('RECEIVE_MESSAGE', function () {
+            _this.props.fetchChat({
+                id: 'Uc72aacda842257e6ae27f0bb8d80cc13',
+                platform: 'line'
+            });
+        });
         return _this;
     }
 
@@ -138,17 +151,17 @@ var MessageField = function (_Component) {
                 'div',
                 { style: { width: '100%' }, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 32
+                        lineNumber: 42
                     }
                 },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_antd__["Table"], { dataSource: chatData, columns: this.columns, pagination: false, scroll: { y: 600 }, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 33
+                        lineNumber: 43
                     }
                 }),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__inputfield__["a" /* default */], { chats: this.props.chats.data, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 34
+                        lineNumber: 44
                     }
                 })
             );
@@ -1394,7 +1407,7 @@ var handleError = function () {
   };
 }();
 
-var API_SERVER = "http://localhost:7778";
+var API_SERVER = "http://45.77.47.114:7778";
 
 
 
@@ -1978,6 +1991,13 @@ module.exports = require("redux-saga");
 /***/ (function(module, exports) {
 
 module.exports = require("redux-saga/effects");
+
+/***/ }),
+
+/***/ "socket.io-client":
+/***/ (function(module, exports) {
+
+module.exports = require("socket.io-client");
 
 /***/ }),
 
