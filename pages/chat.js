@@ -3,7 +3,7 @@ import { compose } from 'redux'
 import { withReduxSaga } from '../redux/store'
 import { connectI18n } from '../hocs/connectI18n'
 import FullPageLayout from '../layouts/FullPageLayout'
-import MessageField from '../component/chat/chatfield'
+import MessageField from '../component/chat/MessageField'
 
 class Chat extends Component {
   render(){

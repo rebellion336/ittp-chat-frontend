@@ -72,7 +72,7 @@ module.exports =
 /************************************************************************/
 /******/ ({
 
-/***/ "./component/chat/chatfield.js":
+/***/ "./component/chat/MessageField.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -87,7 +87,7 @@ module.exports =
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_socket_io_client__ = __webpack_require__("socket.io-client");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_socket_io_client___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_socket_io_client__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__tools_api__ = __webpack_require__("./tools/api.js");
-var _jsxFileName = '/Users/admin/Desktop/bas/ittp-chat-frontend/component/chat/chatfield.js';
+var _jsxFileName = '/Users/admin/Desktop/bas/ittp-chat-frontend/component/chat/MessageField.js';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -145,23 +145,27 @@ var MessageField = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
-            var chatData = this.props.chats.data;
+            var chatData = '';
+            if (this.props.chats.data !== undefined) {
+                chatData = this.props.chats.data.chat;
+                console.log('props CustomerInfo', this.props.chats.data.customerInfo);
+            }
 
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
                 { style: { width: '100%' }, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 42
+                        lineNumber: 46
                     }
                 },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_antd__["Table"], { dataSource: chatData, columns: this.columns, pagination: false, scroll: { y: 600 }, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 43
+                        lineNumber: 47
                     }
                 }),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__inputfield__["a" /* default */], { chats: this.props.chats.data, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 44
+                        lineNumber: 48
                     }
                 })
             );
@@ -244,17 +248,20 @@ var Inputfield = function (_Component) {
         key: 'handleSendMessage',
         value: function () {
             var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
-                var message, id, platform, value;
+                var message, _props$chats$customer, id, platform, value;
+
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
                     while (1) {
                         switch (_context.prev = _context.next) {
                             case 0:
                                 message = this.state.messageInputted;
-                                //const { id , platform } = this.props
-
-                                id = 'Uc72aacda842257e6ae27f0bb8d80cc13';
-                                platform = 'line';
+                                _props$chats$customer = this.props.chats.customerInfo, id = _props$chats$customer.id, platform = _props$chats$customer.platform;
                                 //await this.props.sendMessage( id, platform, message )
+
+                                if (!(message !== '')) {
+                                    _context.next = 13;
+                                    break;
+                                }
 
                                 _context.prev = 3;
                                 value = {
@@ -277,10 +284,11 @@ var Inputfield = function (_Component) {
 
                             case 12:
                                 this.props.fetchChat({
-                                    id: 'Uc72aacda842257e6ae27f0bb8d80cc13',
-                                    platform: 'line'
+                                    id: id,
+                                    platform: platform
                                 });
 
+                            case 13:
                                 this.setState({
                                     messageInputted: ''
                                 });
@@ -306,7 +314,7 @@ var Inputfield = function (_Component) {
                 'div',
                 { style: { padding: '3px', position: 'fixed', bottom: '0', width: '100%' }, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 53
+                        lineNumber: 52
                     }
                 },
                 __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
@@ -314,7 +322,7 @@ var Inputfield = function (_Component) {
                     {
                         __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 54
+                            lineNumber: 53
                         }
                     },
                     __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_antd__["Input"], { style: { width: '90%' },
@@ -324,7 +332,7 @@ var Inputfield = function (_Component) {
                         onPressEnter: this.handleSendMessage,
                         __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 55
+                            lineNumber: 54
                         }
                     }),
                     __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
@@ -335,7 +343,7 @@ var Inputfield = function (_Component) {
                             onClick: this.handleSendMessage,
                             __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 61
+                                lineNumber: 60
                             }
                         },
                         'Send'
@@ -507,7 +515,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__redux_store__ = __webpack_require__("./redux/store.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__hocs_connectI18n__ = __webpack_require__("./hocs/connectI18n.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__layouts_FullPageLayout__ = __webpack_require__("./layouts/FullPageLayout.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__component_chat_chatfield__ = __webpack_require__("./component/chat/chatfield.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__component_chat_MessageField__ = __webpack_require__("./component/chat/MessageField.js");
 var _jsxFileName = '/Users/admin/Desktop/bas/ittp-chat-frontend/pages/chat.js';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -545,7 +553,7 @@ var Chat = function (_Component) {
             lineNumber: 11
           }
         },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__component_chat_chatfield__["a" /* default */], {
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__component_chat_MessageField__["a" /* default */], {
           __source: {
             fileName: _jsxFileName,
             lineNumber: 12
@@ -1094,6 +1102,7 @@ function authSagas() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_redux_saga_effects___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ducks_chat__ = __webpack_require__("./redux/ducks/chat.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tools_api__ = __webpack_require__("./tools/api.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__tools_utils__ = __webpack_require__("./tools/utils.js");
 
 
 var _marked = /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(fetchChatSaga),
@@ -1104,48 +1113,57 @@ var _marked = /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator
 
 
 
+
 function fetchChatSaga(action) {
-    var data, code, message;
+    var _action$payload, id, platform, data, code, message;
+
     return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function fetchChatSaga$(_context) {
         while (1) {
             switch (_context.prev = _context.next) {
                 case 0:
-                    _context.prev = 0;
-                    _context.next = 3;
-                    return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["call"])(__WEBPACK_IMPORTED_MODULE_3__tools_api__["b" /* getJSON */], __WEBPACK_IMPORTED_MODULE_3__tools_api__["a" /* API_SERVER */] + '/chats');
+                    _action$payload = action.payload, id = _action$payload.id, platform = _action$payload.platform;
 
-                case 3:
+                    if (!(platform === 'line')) {
+                        _context.next = 15;
+                        break;
+                    }
+
+                    _context.prev = 2;
+                    _context.next = 5;
+                    return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["call"])(__WEBPACK_IMPORTED_MODULE_3__tools_api__["b" /* getJSON */], __WEBPACK_IMPORTED_MODULE_3__tools_api__["a" /* API_SERVER */] + '/chats/line/' + id);
+
+                case 5:
                     data = _context.sent;
-                    _context.next = 6;
+                    _context.next = 8;
                     return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_2__ducks_chat__["f" /* fetchChatSuccess */])({ data: data }));
 
-                case 6:
-                    _context.next = 13;
+                case 8:
+                    _context.next = 15;
                     break;
 
-                case 8:
-                    _context.prev = 8;
-                    _context.t0 = _context['catch'](0);
+                case 10:
+                    _context.prev = 10;
+                    _context.t0 = _context['catch'](2);
                     code = _context.t0.code, message = _context.t0.message;
-                    _context.next = 13;
+                    _context.next = 15;
                     return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_2__ducks_chat__["e" /* fetchChatFailure */])({ code: code, message: message }));
 
-                case 13:
+                case 15:
                 case 'end':
                     return _context.stop();
             }
         }
-    }, _marked, this, [[0, 8]]);
+    }, _marked, this, [[2, 10]]);
 }
 function sendMessageSaga(action) {
-    var _action$payload, id, platform, message, value, data, code, _message;
+    var _action$payload2, id, platform, message, value, data, code, _message;
 
     return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function sendMessageSaga$(_context2) {
         while (1) {
             switch (_context2.prev = _context2.next) {
                 case 0:
                     _context2.prev = 0;
-                    _action$payload = action.payload, id = _action$payload.id, platform = _action$payload.platform, message = _action$payload.message;
+                    _action$payload2 = action.payload, id = _action$payload2.id, platform = _action$payload2.platform, message = _action$payload2.message;
                     value = {
                         id: id,
                         platform: platform,

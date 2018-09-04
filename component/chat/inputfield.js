@@ -21,29 +21,28 @@ class Inputfield extends Component {
     }
     async handleSendMessage(){
         const message = this.state.messageInputted
-        //const { id , platform } = this.props
-        const id = 'Uc72aacda842257e6ae27f0bb8d80cc13'
-        const platform = 'line'
+        const { id , platform } = this.props.chats.customerInfo
         //await this.props.sendMessage( id, platform, message )
-        try {
-            const value = {
-                id : id,
-                platform : platform,
-                message : message
+        if(message !== ''){
+            try {
+                const value = {
+                    id : id,
+                    platform : platform,
+                    message : message
+                }
+                await postJSON(
+                    `${API_SERVER}/chats/sendmessage`,
+                    value
+                )
             }
-            await postJSON(
-                `${API_SERVER}/chats/sendmessage`,
-                value
-            )
+            catch (error){
+                console.error(error)
+            }
+            this.props.fetchChat({
+                id : id,
+                platform: platform
+            }) 
         }
-        catch (error){
-            console.error(error)
-        }
-        this.props.fetchChat({
-            id : 'Uc72aacda842257e6ae27f0bb8d80cc13',
-            platform: 'line'
-        }) 
-
         this.setState({
             messageInputted : ''
         })

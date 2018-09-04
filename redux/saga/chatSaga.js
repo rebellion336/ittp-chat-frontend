@@ -13,18 +13,22 @@ import {
     getJSON,
     postJSON,
   } from '../../tools/api'
+import { json2qs } from '../../tools/utils'
 
 export function* fetchChatSaga(action){
-    try {
-        const data = yield call(
-            getJSON,
-            `${API_SERVER}/chats`
-        )
-        yield put(fetchChatSuccess({ data }))
-    }
-    catch (error){
-        const { code, message } = error
-        yield put(fetchChatFailure({ code, message }))
+    const {id,platform} = action.payload
+    if(platform === 'line'){
+        try {
+            const data = yield call(
+                getJSON,
+                `${API_SERVER}/chats/line/${id}`
+            )
+            yield put(fetchChatSuccess({ data }))
+        }
+        catch (error){
+            const { code, message } = error
+            yield put(fetchChatFailure({ code, message }))
+        }
     }
 }
 export function* sendMessageSaga(action){
