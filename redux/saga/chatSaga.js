@@ -12,8 +12,7 @@ import {
     API_SERVER,
     getJSON,
     postJSON,
-  } from '../../tools/api'
-import { json2qs } from '../../tools/utils'
+} from '../../tools/api'
 
 export function* fetchChatSaga(action){
     const {id,platform} = action.payload
@@ -60,4 +59,4 @@ export function* chatSagas() {
         takeLatest(FETCH_CHAT, fetchChatSaga),
         takeLatest(SEND_MESSAGE,sendMessageSaga)
     ])
-  }
+}

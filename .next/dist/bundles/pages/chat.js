@@ -366,6 +366,101 @@ var mapStateToProps = function mapStateToProps(state) {
 
 /***/ }),
 
+/***/ "./component/loan/loanAccount.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__("react");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_redux__ = __webpack_require__("react-redux");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_redux___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_redux__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_antd__ = __webpack_require__("antd");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_antd___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_antd__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__redux_ducks_loan__ = __webpack_require__("./redux/ducks/loan.js");
+var _jsxFileName = '/Users/admin/Desktop/bas/ittp-chat-frontend/component/loan/loanAccount.js';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+
+
+var LoanAccount = function (_Component) {
+    _inherits(LoanAccount, _Component);
+
+    function LoanAccount(props) {
+        _classCallCheck(this, LoanAccount);
+
+        var _this = _possibleConstructorReturn(this, (LoanAccount.__proto__ || Object.getPrototypeOf(LoanAccount)).call(this, props));
+
+        _this.columns = [{
+            dataIndex: 'loanId',
+            key: 'loanId',
+            align: 'center'
+        }, {
+            render: function render(record) {
+                var name = record.firstName + ' ' + record.lastName;
+                return name;
+            }
+        }];
+        return _this;
+    }
+
+    _createClass(LoanAccount, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.props.fetchLoan({
+                id: 'Uc72aacda842257e6ae27f0bb8d80cc13'
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var data = this.props.loans.data;
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'div',
+                {
+                    __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 31
+                    }
+                },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_antd__["Table"], { dataSource: data, columns: this.columns, pagination: false, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 32
+                    }
+                }),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', {
+                    __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 33
+                    }
+                })
+            );
+        }
+    }]);
+
+    return LoanAccount;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+var mapStateToProps = function mapStateToProps(state) {
+    return {
+        loans: state.loan
+    };
+};
+/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_1_react_redux__["connect"])(mapStateToProps, { fetchLoan: __WEBPACK_IMPORTED_MODULE_3__redux_ducks_loan__["c" /* fetchLoan */] })(LoanAccount));
+
+/***/ }),
+
 /***/ "./hocs/connectI18n.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -510,21 +605,28 @@ module.exports = "/*!\n * \n * antd v3.8.2\n * \n * Copyright 2015-present, Alip
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__("react");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_redux__ = __webpack_require__("redux");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_redux___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_redux__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__redux_store__ = __webpack_require__("./redux/store.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__hocs_connectI18n__ = __webpack_require__("./hocs/connectI18n.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__layouts_FullPageLayout__ = __webpack_require__("./layouts/FullPageLayout.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__component_chat_MessageField__ = __webpack_require__("./component/chat/MessageField.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_antd__ = __webpack_require__("antd");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_antd___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_antd__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_redux__ = __webpack_require__("redux");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_redux___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_redux__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__redux_store__ = __webpack_require__("./redux/store.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__hocs_connectI18n__ = __webpack_require__("./hocs/connectI18n.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__layouts_FullPageLayout__ = __webpack_require__("./layouts/FullPageLayout.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__component_chat_MessageField__ = __webpack_require__("./component/chat/MessageField.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__component_loan_loanAccount__ = __webpack_require__("./component/loan/loanAccount.js");
 var _jsxFileName = '/Users/admin/Desktop/bas/ittp-chat-frontend/pages/chat.js';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
 
 
 
@@ -546,19 +648,49 @@ var Chat = function (_Component) {
     key: 'render',
     value: function render() {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        __WEBPACK_IMPORTED_MODULE_4__layouts_FullPageLayout__["a" /* default */],
+        __WEBPACK_IMPORTED_MODULE_5__layouts_FullPageLayout__["a" /* default */],
         {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 11
+            lineNumber: 13
           }
         },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__component_chat_MessageField__["a" /* default */], {
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 12
-          }
-        })
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          __WEBPACK_IMPORTED_MODULE_1_antd__["Row"],
+          { style: { width: '100%' }, __source: {
+              fileName: _jsxFileName,
+              lineNumber: 14
+            }
+          },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            __WEBPACK_IMPORTED_MODULE_1_antd__["Col"],
+            { span: 19, __source: {
+                fileName: _jsxFileName,
+                lineNumber: 15
+              }
+            },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__component_chat_MessageField__["a" /* default */], {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 16
+              }
+            })
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            __WEBPACK_IMPORTED_MODULE_1_antd__["Col"],
+            { span: 5, __source: {
+                fileName: _jsxFileName,
+                lineNumber: 18
+              }
+            },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__component_loan_loanAccount__["a" /* default */], {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 19
+              }
+            })
+          )
+        )
       );
     }
   }]);
@@ -566,7 +698,7 @@ var Chat = function (_Component) {
   return Chat;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(__WEBPACK_IMPORTED_MODULE_1_redux__["compose"])(__WEBPACK_IMPORTED_MODULE_2__redux_store__["a" /* withReduxSaga */], Object(__WEBPACK_IMPORTED_MODULE_3__hocs_connectI18n__["a" /* connectI18n */])(['common']))(Chat));
+/* harmony default export */ __webpack_exports__["default"] = (Object(__WEBPACK_IMPORTED_MODULE_2_redux__["compose"])(__WEBPACK_IMPORTED_MODULE_3__redux_store__["a" /* withReduxSaga */], Object(__WEBPACK_IMPORTED_MODULE_4__hocs_connectI18n__["a" /* connectI18n */])(['common']))(Chat));
 
 /***/ }),
 
@@ -790,12 +922,6 @@ var reducer = function reducer() {
                     platform = _action$payload.platform,
                     _message = _action$payload.message;
 
-                console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-                console.log('FROMReducer');
-                console.log('id', id);
-                console.log('platform', platform);
-                console.log('message', _message);
-                console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
                 return _extends({}, state, {
                     loading: true
                 });
@@ -942,6 +1068,8 @@ var cookieReducer = function cookieReducer() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__auth__ = __webpack_require__("./redux/ducks/auth.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__cookie__ = __webpack_require__("./redux/ducks/cookie.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__chat__ = __webpack_require__("./redux/ducks/chat.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__loan__ = __webpack_require__("./redux/ducks/loan.js");
+
 
 
 
@@ -950,10 +1078,94 @@ var cookieReducer = function cookieReducer() {
 var rootReducer = Object(__WEBPACK_IMPORTED_MODULE_0_redux__["combineReducers"])({
     auth: __WEBPACK_IMPORTED_MODULE_1__auth__["c" /* default */],
     cookie: __WEBPACK_IMPORTED_MODULE_2__cookie__["a" /* default */],
-    chat: __WEBPACK_IMPORTED_MODULE_3__chat__["c" /* default */]
+    chat: __WEBPACK_IMPORTED_MODULE_3__chat__["c" /* default */],
+    loan: __WEBPACK_IMPORTED_MODULE_4__loan__["b" /* default */]
 });
 
 var defaultState = {};
+
+/***/ }),
+
+/***/ "./redux/ducks/loan.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FETCH_LOAN; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return fetchLoan; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return fetchLoanSuccess; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return fetchLoanFailure; });
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var FETCH_LOAN = 'ittp-chat/chat/FETCH_LOAN';
+var FETCH_LOAN_SUCCESS = 'ittp-chat/chat/FETCH_LOAN_SUCCESS';
+var FETCH_LOAN_FAILURE = 'ittp-chat/chat/FETCH_LOAN_FAILURE';
+
+var fetchLoan = function fetchLoan(_ref) {
+    var id = _ref.id;
+
+    return {
+        type: FETCH_LOAN,
+        payload: { id: id }
+    };
+};
+
+var fetchLoanSuccess = function fetchLoanSuccess(_ref2) {
+    var data = _ref2.data;
+
+    return {
+        type: FETCH_LOAN_SUCCESS,
+        payload: { data: data }
+    };
+};
+
+var fetchLoanFailure = function fetchLoanFailure() {
+    return {
+        type: FETCH_LOAN_FAILURE,
+        payload: { code: code, message: message }
+    };
+};
+
+var initialState = {
+    error: {},
+    loading: false
+};
+
+var reducer = function reducer() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+    var action = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+    switch (action.type) {
+        case FETCH_LOAN:
+            {
+                console.log('fetch loan reducer', action);
+                return _extends({}, state, {
+                    loading: true
+                });
+            }
+        case FETCH_LOAN_SUCCESS:
+            {
+                var data = action.payload.data;
+
+                return _extends({}, state, {
+                    loading: false,
+                    data: data
+                });
+            }
+        case FETCH_LOAN_FAILURE:
+            {
+                return _extends({}, state, {
+                    loading: false,
+                    error: {
+                        code: action.payload.code,
+                        message: action.payload.message
+                    }
+                });
+            }
+        default:
+            return state;
+    }
+};
+/* harmony default export */ __webpack_exports__["b"] = (reducer);
 
 /***/ }),
 
@@ -1102,13 +1314,11 @@ function authSagas() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_redux_saga_effects___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ducks_chat__ = __webpack_require__("./redux/ducks/chat.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tools_api__ = __webpack_require__("./tools/api.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__tools_utils__ = __webpack_require__("./tools/utils.js");
 
 
 var _marked = /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(fetchChatSaga),
     _marked2 = /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(sendMessageSaga),
     _marked3 = /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(chatSagas);
-
 
 
 
@@ -1220,6 +1430,85 @@ function chatSagas() {
 
 /***/ }),
 
+/***/ "./redux/saga/loanSagas.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export fetchLoanSaga */
+/* harmony export (immutable) */ __webpack_exports__["a"] = loanSagas;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__("babel-runtime/regenerator");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__ = __webpack_require__("redux-saga/effects");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_redux_saga_effects___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ducks_loan__ = __webpack_require__("./redux/ducks/loan.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tools_api__ = __webpack_require__("./tools/api.js");
+
+
+var _marked = /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(fetchLoanSaga),
+    _marked2 = /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(loanSagas);
+
+
+
+
+
+function fetchLoanSaga(action) {
+    var id, data, code, message;
+    return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function fetchLoanSaga$(_context) {
+        while (1) {
+            switch (_context.prev = _context.next) {
+                case 0:
+                    console.log('fetch loan saga action', action);
+                    id = action.payload.id;
+                    //use api to fetch data from apiV2
+
+                    _context.prev = 2;
+                    _context.next = 5;
+                    return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["call"])(__WEBPACK_IMPORTED_MODULE_3__tools_api__["b" /* getJSON */], __WEBPACK_IMPORTED_MODULE_3__tools_api__["a" /* API_SERVER */] + '/chats/' + id);
+
+                case 5:
+                    data = _context.sent;
+
+                    console.log('data in fetchloan From API >>>>>>>>>', data);
+                    _context.next = 9;
+                    return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_2__ducks_loan__["e" /* fetchLoanSuccess */])({ data: data }));
+
+                case 9:
+                    _context.next = 16;
+                    break;
+
+                case 11:
+                    _context.prev = 11;
+                    _context.t0 = _context['catch'](2);
+                    code = _context.t0.code, message = _context.t0.message;
+                    _context.next = 16;
+                    return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_2__ducks_loan__["d" /* fetchLoanFailure */])({ code: code, message: message }));
+
+                case 16:
+                case 'end':
+                    return _context.stop();
+            }
+        }
+    }, _marked, this, [[2, 11]]);
+}
+
+function loanSagas() {
+    return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function loanSagas$(_context2) {
+        while (1) {
+            switch (_context2.prev = _context2.next) {
+                case 0:
+                    _context2.next = 2;
+                    return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["all"])([Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["takeLatest"])(__WEBPACK_IMPORTED_MODULE_2__ducks_loan__["a" /* FETCH_LOAN */], fetchLoanSaga)]);
+
+                case 2:
+                case 'end':
+                    return _context2.stop();
+            }
+        }
+    }, _marked2, this);
+}
+
+/***/ }),
+
 /***/ "./redux/saga/rootSaga.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1231,9 +1520,11 @@ function chatSagas() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_redux_saga_effects___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__authSagas__ = __webpack_require__("./redux/saga/authSagas.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__chatSaga__ = __webpack_require__("./redux/saga/chatSaga.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__loanSagas__ = __webpack_require__("./redux/saga/loanSagas.js");
 
 
 var _marked = /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(rootSaga);
+
 
 
 
@@ -1245,7 +1536,7 @@ function rootSaga() {
             switch (_context.prev = _context.next) {
                 case 0:
                     _context.next = 2;
-                    return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["all"])([Object(__WEBPACK_IMPORTED_MODULE_2__authSagas__["a" /* authSagas */])(), Object(__WEBPACK_IMPORTED_MODULE_3__chatSaga__["a" /* chatSagas */])()]);
+                    return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["all"])([Object(__WEBPACK_IMPORTED_MODULE_2__authSagas__["a" /* authSagas */])(), Object(__WEBPACK_IMPORTED_MODULE_3__chatSaga__["a" /* chatSagas */])(), Object(__WEBPACK_IMPORTED_MODULE_4__loanSagas__["a" /* loanSagas */])()]);
 
                 case 2:
                 case 'end':

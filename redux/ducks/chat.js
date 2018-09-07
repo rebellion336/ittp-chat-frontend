@@ -75,12 +75,6 @@ const reducer = (state = initialState, action = {}) => {
         }
         case SEND_MESSAGE:{
             const {id , platform , message} = action.payload
-            console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-            console.log('FROMReducer')
-            console.log('id',id)
-            console.log('platform',platform)
-            console.log('message',message)
-            console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
             return {
                 ...state,
                 loading:true,
