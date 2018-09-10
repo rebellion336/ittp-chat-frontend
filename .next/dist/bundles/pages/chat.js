@@ -123,7 +123,7 @@ var MessageField = function (_Component) {
             key: 'operatorMessage',
             align: 'right'
         }];
-        _this.socket = __WEBPACK_IMPORTED_MODULE_5_socket_io_client___default()('http://45.77.47.114:7778');
+        _this.socket = __WEBPACK_IMPORTED_MODULE_5_socket_io_client___default()(__WEBPACK_IMPORTED_MODULE_6__tools_api__["a" /* API_SERVER */]);
 
         _this.socket.on('RECEIVE_MESSAGE', function () {
             _this.props.fetchChat({
@@ -148,24 +148,23 @@ var MessageField = function (_Component) {
             var chatData = '';
             if (this.props.chats.data !== undefined) {
                 chatData = this.props.chats.data.chat;
-                console.log('props CustomerInfo', this.props.chats.data.customerInfo);
             }
 
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
                 { style: { width: '100%' }, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 46
+                        lineNumber: 45
                     }
                 },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_antd__["Table"], { dataSource: chatData, columns: this.columns, pagination: false, scroll: { y: 600 }, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 47
+                        lineNumber: 46
                     }
                 }),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__inputfield__["a" /* default */], { chats: this.props.chats.data, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 48
+                        lineNumber: 47
                     }
                 })
             );
@@ -366,6 +365,198 @@ var mapStateToProps = function mapStateToProps(state) {
 
 /***/ }),
 
+/***/ "./component/loan/bindingIdForm.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__("babel-runtime/regenerator");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__("react");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_antd__ = __webpack_require__("antd");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_antd___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_antd__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_redux__ = __webpack_require__("react-redux");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_redux___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react_redux__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__tools_api__ = __webpack_require__("./tools/api.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__tools_validators__ = __webpack_require__("./tools/validators.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__redux_ducks_loan__ = __webpack_require__("./redux/ducks/loan.js");
+
+var _jsxFileName = '/Users/admin/Desktop/bas/ittp-chat-frontend/component/loan/bindingIdForm.js';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+
+
+
+
+var FormItem = __WEBPACK_IMPORTED_MODULE_2_antd__["Form"].Item;
+
+var BindingIdForm = function (_Component) {
+    _inherits(BindingIdForm, _Component);
+
+    function BindingIdForm(props) {
+        _classCallCheck(this, BindingIdForm);
+
+        var _this = _possibleConstructorReturn(this, (BindingIdForm.__proto__ || Object.getPrototypeOf(BindingIdForm)).call(this, props));
+
+        _this.handleSubmit = _this.handleSubmit.bind(_this);
+        return _this;
+    }
+
+    _createClass(BindingIdForm, [{
+        key: 'handleSubmit',
+        value: function handleSubmit(event) {
+            var _this2 = this;
+
+            event.preventDefault();
+            this.props.form.validateFields(function () {
+                var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(err, values) {
+                    var citizenId, _props$customerInfo, id, platform, value;
+
+                    return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+                        while (1) {
+                            switch (_context.prev = _context.next) {
+                                case 0:
+                                    if (err) {
+                                        _context.next = 15;
+                                        break;
+                                    }
+
+                                    citizenId = values.citizenId;
+                                    _props$customerInfo = _this2.props.customerInfo, id = _props$customerInfo.id, platform = _props$customerInfo.platform;
+                                    _context.prev = 3;
+                                    value = {
+                                        id: id,
+                                        citizenId: citizenId,
+                                        platform: platform
+                                    };
+                                    _context.next = 7;
+                                    return Object(__WEBPACK_IMPORTED_MODULE_4__tools_api__["c" /* postJSON */])(__WEBPACK_IMPORTED_MODULE_4__tools_api__["a" /* API_SERVER */] + '/chats/line/binding', value);
+
+                                case 7:
+                                    _this2.props.fetchLoan({ id: id });
+                                    _context.next = 13;
+                                    break;
+
+                                case 10:
+                                    _context.prev = 10;
+                                    _context.t0 = _context['catch'](3);
+
+                                    console.error(_context.t0);
+
+                                case 13:
+                                    _context.next = 16;
+                                    break;
+
+                                case 15:
+                                    console.log('Error');
+
+                                case 16:
+                                case 'end':
+                                    return _context.stop();
+                            }
+                        }
+                    }, _callee, _this2, [[3, 10]]);
+                }));
+
+                return function (_x, _x2) {
+                    return _ref.apply(this, arguments);
+                };
+            }());
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var getFieldDecorator = this.props.form.getFieldDecorator;
+
+            return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_2_antd__["Form"],
+                { onSubmit: this.handleSubmit, style: { textAlign: 'center' }, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 48
+                    }
+                },
+                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('br', {
+                    __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 49
+                    }
+                }),
+                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                    'p',
+                    {
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 50
+                        }
+                    },
+                    '\u0E25\u0E39\u0E01\u0E15\u0E49\u0E32\u0E44\u0E21\u0E48\u0E21\u0E35\u0E1B\u0E23\u0E30\u0E27\u0E31\u0E15\u0E34'
+                ),
+                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('br', {
+                    __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 51
+                    }
+                }),
+                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                    FormItem,
+                    {
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 52
+                        }
+                    },
+                    getFieldDecorator('citizenId', {
+                        rules: [{
+                            required: true,
+                            message: 'โปรดใส่เลขบัตรประชาชนของลูกค้า'
+                        }, {
+                            validator: __WEBPACK_IMPORTED_MODULE_5__tools_validators__["a" /* validCitizenId */]
+                        }]
+                    })(__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_antd__["Input"], { prefix: __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_antd__["Icon"], { type: 'idcard', style: { color: 'rgba(0,0,0,.25)' }, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 64
+                            }
+                        }), placeholder: '\u0E1A\u0E31\u0E15\u0E23\u0E1B\u0E23\u0E30\u0E0A\u0E32\u0E0A\u0E19\u0E02\u0E2D\u0E07\u0E25\u0E39\u0E01\u0E04\u0E49\u0E32', __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 64
+                        }
+                    }))
+                ),
+                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                    __WEBPACK_IMPORTED_MODULE_2_antd__["Button"],
+                    { type: 'primary', htmlType: 'submit', __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 67
+                        }
+                    },
+                    'Binding CitizenId'
+                )
+            );
+        }
+    }]);
+
+    return BindingIdForm;
+}(__WEBPACK_IMPORTED_MODULE_1_react__["Component"]);
+
+var WrappedBindingIdForm = __WEBPACK_IMPORTED_MODULE_2_antd__["Form"].create()(BindingIdForm);
+/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_3_react_redux__["connect"])(null, { fetchLoan: __WEBPACK_IMPORTED_MODULE_6__redux_ducks_loan__["c" /* fetchLoan */] })(WrappedBindingIdForm));
+
+/***/ }),
+
 /***/ "./component/loan/loanAccount.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -377,6 +568,8 @@ var mapStateToProps = function mapStateToProps(state) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_antd__ = __webpack_require__("antd");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_antd___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_antd__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__redux_ducks_loan__ = __webpack_require__("./redux/ducks/loan.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__loanInfo__ = __webpack_require__("./component/loan/loanInfo.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__bindingIdForm__ = __webpack_require__("./component/loan/bindingIdForm.js");
 var _jsxFileName = '/Users/admin/Desktop/bas/ittp-chat-frontend/component/loan/loanAccount.js';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -388,6 +581,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
 
 
 
@@ -412,6 +607,9 @@ var LoanAccount = function (_Component) {
                 return name;
             }
         }];
+        _this.state = {
+            loanData: ''
+        };
         return _this;
     }
 
@@ -423,28 +621,74 @@ var LoanAccount = function (_Component) {
             });
         }
     }, {
+        key: 'handleClickRow',
+        value: function handleClickRow(record) {
+            this.setState({
+                loanData: record
+            });
+        }
+    }, {
         key: 'render',
         value: function render() {
+            var _this2 = this;
+
             var data = this.props.loans.data;
+
+            if (data !== undefined) {
+                if (!data.length == 0) {
+                    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        {
+                            __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 45
+                            }
+                        },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_antd__["Table"], {
+                            style: { cursor: 'pointer' },
+                            dataSource: data,
+                            columns: this.columns,
+                            pagination: false,
+                            onRow: function onRow(record) {
+                                return {
+                                    onClick: function onClick() {
+                                        _this2.handleClickRow(record);
+                                    }
+                                };
+                            },
+                            __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 46
+                            }
+                        }),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', {
+                            __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 59
+                            }
+                        }),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__loanInfo__["a" /* default */], { loanData: this.state.loanData, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 60
+                            }
+                        })
+                    );
+                }
+                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__bindingIdForm__["a" /* default */], { customerInfo: this.props.chats.data.customerInfo, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 64
+                    }
+                });
+            }
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
                 {
                     __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 31
+                        lineNumber: 66
                     }
                 },
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_antd__["Table"], { dataSource: data, columns: this.columns, pagination: false, __source: {
-                        fileName: _jsxFileName,
-                        lineNumber: 32
-                    }
-                }),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', {
-                    __source: {
-                        fileName: _jsxFileName,
-                        lineNumber: 33
-                    }
-                })
+                'LOADING'
             );
         }
     }]);
@@ -454,10 +698,175 @@ var LoanAccount = function (_Component) {
 
 var mapStateToProps = function mapStateToProps(state) {
     return {
-        loans: state.loan
+        loans: state.loan,
+        chats: state.chat
     };
 };
 /* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_1_react_redux__["connect"])(mapStateToProps, { fetchLoan: __WEBPACK_IMPORTED_MODULE_3__redux_ducks_loan__["c" /* fetchLoan */] })(LoanAccount));
+
+/***/ }),
+
+/***/ "./component/loan/loanInfo.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__("react");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_antd__ = __webpack_require__("antd");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_antd___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_antd__);
+var _jsxFileName = '/Users/admin/Desktop/bas/ittp-chat-frontend/component/loan/loanInfo.js';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+var LoanInfo = function (_Component) {
+    _inherits(LoanInfo, _Component);
+
+    function LoanInfo(props) {
+        _classCallCheck(this, LoanInfo);
+
+        return _possibleConstructorReturn(this, (LoanInfo.__proto__ || Object.getPrototypeOf(LoanInfo)).call(this, props));
+    }
+
+    _createClass(LoanInfo, [{
+        key: 'render',
+        value: function render() {
+            var loanData = this.props.loanData;
+
+            if (loanData !== '') {
+                loanData.name = loanData.firstName + ' ' + loanData.lastName;
+                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    {
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 13
+                        }
+                    },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        __WEBPACK_IMPORTED_MODULE_1_antd__["Row"],
+                        {
+                            __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 14
+                            }
+                        },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            __WEBPACK_IMPORTED_MODULE_1_antd__["Col"],
+                            {
+                                __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 15
+                                }
+                            },
+                            'CustomerName: ',
+                            loanData.name
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        __WEBPACK_IMPORTED_MODULE_1_antd__["Row"],
+                        {
+                            __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 19
+                            }
+                        },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            __WEBPACK_IMPORTED_MODULE_1_antd__["Col"],
+                            {
+                                __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 20
+                                }
+                            },
+                            'citizenId: ',
+                            loanData.citizenId
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        __WEBPACK_IMPORTED_MODULE_1_antd__["Row"],
+                        {
+                            __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 24
+                            }
+                        },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            __WEBPACK_IMPORTED_MODULE_1_antd__["Col"],
+                            {
+                                __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 25
+                                }
+                            },
+                            'productName: ',
+                            loanData.productName
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        __WEBPACK_IMPORTED_MODULE_1_antd__["Row"],
+                        {
+                            __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 29
+                            }
+                        },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            __WEBPACK_IMPORTED_MODULE_1_antd__["Col"],
+                            {
+                                __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 30
+                                }
+                            },
+                            'installAmount: ',
+                            loanData.installAmount
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        __WEBPACK_IMPORTED_MODULE_1_antd__["Row"],
+                        {
+                            __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 34
+                            }
+                        },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            __WEBPACK_IMPORTED_MODULE_1_antd__["Col"],
+                            {
+                                __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 35
+                                }
+                            },
+                            '\u0E02\u0E49\u0E2D\u0E21\u0E39\u0E25\u0E2D\u0E37\u0E48\u0E19\u0E46'
+                        )
+                    )
+                );
+            }
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', {
+                __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 42
+                }
+            });
+        }
+    }]);
+
+    return LoanInfo;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["a"] = (LoanInfo);
 
 /***/ }),
 
@@ -1100,6 +1509,10 @@ var FETCH_LOAN = 'ittp-chat/chat/FETCH_LOAN';
 var FETCH_LOAN_SUCCESS = 'ittp-chat/chat/FETCH_LOAN_SUCCESS';
 var FETCH_LOAN_FAILURE = 'ittp-chat/chat/FETCH_LOAN_FAILURE';
 
+// export const BIND_ID = 'ittp-chat/chat/BIND_ID'
+// const BIND_ID_SUCCESS = 'ittp-chat/chat/BIND_ID_SUCCESS'
+// const BIND_ID_FAILURE = 'ittp-chat/chat/BIND_ID_FAILURE'
+
 var fetchLoan = function fetchLoan(_ref) {
     var id = _ref.id;
 
@@ -1124,6 +1537,25 @@ var fetchLoanFailure = function fetchLoanFailure() {
         payload: { code: code, message: message }
     };
 };
+
+// export const bindId = ({ id , citizenId , platform }) => ({
+//     type:BIND_ID,
+//     payload:{id , citizenId , platform}
+// })
+
+// export const bindIdSuccess = ({ data }) => {
+//     return{
+//         type:BIND_ID_SUCCESS,
+//         payload: {data}
+//     }
+// }
+
+// export const bindIdFailure = ({ data }) => {
+//     return{
+//         type:BIND_ID_FAILURE,
+//     payload:{ code, message }
+//     }
+// }
 
 var initialState = {
     error: {},
@@ -1161,6 +1593,30 @@ var reducer = function reducer() {
                     }
                 });
             }
+        // case BIND_ID: {
+        //     return {
+        //         ...state,
+        //         loading: true
+        //     }
+        // }
+        // case BIND_ID_SUCCESS: {
+        //     const {data} = action.payload
+        //     return {
+        //         ...state,
+        //         loading : false,
+        //         data : data
+        //     }
+        // }
+        // case BIND_ID_FAILURE: {
+        //     return {
+        //         ...state,
+        //         loading: false,
+        //         error: {
+        //           code: action.payload.code,
+        //           message: action.payload.message
+        //         }
+        //     }
+        // }
         default:
             return state;
     }
@@ -1457,39 +1913,58 @@ function fetchLoanSaga(action) {
         while (1) {
             switch (_context.prev = _context.next) {
                 case 0:
-                    console.log('fetch loan saga action', action);
                     id = action.payload.id;
                     //use api to fetch data from apiV2
 
-                    _context.prev = 2;
-                    _context.next = 5;
+                    _context.prev = 1;
+                    _context.next = 4;
                     return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["call"])(__WEBPACK_IMPORTED_MODULE_3__tools_api__["b" /* getJSON */], __WEBPACK_IMPORTED_MODULE_3__tools_api__["a" /* API_SERVER */] + '/chats/' + id);
 
-                case 5:
+                case 4:
                     data = _context.sent;
-
-                    console.log('data in fetchloan From API >>>>>>>>>', data);
-                    _context.next = 9;
+                    _context.next = 7;
                     return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_2__ducks_loan__["e" /* fetchLoanSuccess */])({ data: data }));
 
-                case 9:
-                    _context.next = 16;
+                case 7:
+                    _context.next = 14;
                     break;
 
-                case 11:
-                    _context.prev = 11;
-                    _context.t0 = _context['catch'](2);
+                case 9:
+                    _context.prev = 9;
+                    _context.t0 = _context['catch'](1);
                     code = _context.t0.code, message = _context.t0.message;
-                    _context.next = 16;
+                    _context.next = 14;
                     return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_2__ducks_loan__["d" /* fetchLoanFailure */])({ code: code, message: message }));
 
-                case 16:
+                case 14:
                 case 'end':
                     return _context.stop();
             }
         }
-    }, _marked, this, [[2, 11]]);
+    }, _marked, this, [[1, 9]]);
 }
+
+// ยังเขียนไม่เสร์จ
+// export function* bindIdSaga(action){
+//     const {id , citizenId , platform} = action.payload
+//     //use api to bind LINE/FACEBOOK ID with customerCitizenId
+//     try{
+//         const value = {
+//             id: id,
+//             citizenId : citizenId,
+//             platform: platform
+//         }
+//         postJSON(
+//             `${API_SERVER}/chats/line/binding`,
+//             value
+//         )
+//         yield put(bindIdSuccess({data}))
+//     }
+//     catch(error){
+//         console.error(error)
+//     }
+// }
+
 
 function loanSagas() {
     return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function loanSagas$(_context2) {
@@ -1497,7 +1972,9 @@ function loanSagas() {
             switch (_context2.prev = _context2.next) {
                 case 0:
                     _context2.next = 2;
-                    return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["all"])([Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["takeLatest"])(__WEBPACK_IMPORTED_MODULE_2__ducks_loan__["a" /* FETCH_LOAN */], fetchLoanSaga)]);
+                    return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["all"])([Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["takeLatest"])(__WEBPACK_IMPORTED_MODULE_2__ducks_loan__["a" /* FETCH_LOAN */], fetchLoanSaga)]
+                    // takeLatest(BIND_ID, bindIdSaga)
+                    );
 
                 case 2:
                 case 'end':
@@ -2182,6 +2659,59 @@ function datediff(d1, d2) {
   var d2date = __WEBPACK_IMPORTED_MODULE_2_moment___default()(d2).utcOffset("+0700").startOf('day');
   return d1date.diff(d2date, 'days');
 }
+
+/***/ }),
+
+/***/ "./tools/validators.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return validCitizenId; });
+/* unused harmony export validDate */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment__ = __webpack_require__("moment");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_moment__);
+
+
+var validCitizenId = function validCitizenId(rule, value, callback) {
+  var i = 0;
+  var sum = 0;
+  var id = value;
+  if (id !== undefined) {
+    if (id.length < 13) callback('กรุณากรอกรหัสบัตรประชาชนให้ครบ 13 หลัก');
+    for (i = 0, sum = 0; i < 12; i += 1) {
+      sum += parseFloat(id.charAt(i)) * (13 - i);
+    }if ((11 - sum % 11) % 10 !== parseFloat(id.charAt(12))) {
+      callback('รหัสบัตรประชาชนไม่ถูกต้องกรุณากรอกใหม่อีกครั้ง');
+    }
+  }
+  callback();
+};
+var validDate = function validDate(rule, value, callback) {
+  // Not yet complete YYYY-MM-DD
+  if (value === undefined) {
+    callback();
+  } else if (value.length < 10) {
+    callback('กรุณากรอกวันที่เดือนปี เช่น 13-07-2526');
+  } else {
+    // Accept only YYYY-MM-DD
+    var date = value.split('-');
+    var year = (date[2] - 543) % 4;
+    var birthDate = __WEBPACK_IMPORTED_MODULE_0_moment___default()(value, 'YYYY-MM-DD', true);
+    if (!birthDate.isValid()) {
+      // Our system will convert DD-MM-YYYY to YYYY-MM-DD
+      if (date[0] > 0 && date[0] <= 29 && date[1] === '02' && year === 0) {
+        callback();
+      }
+      callback('กรุณากรอกวันที่เดือนปี เช่น 13-07-2526');
+    } else {
+      var birthYear = birthDate.year();
+      if (birthYear < 1900) {
+        callback('กรุณากรอกปี พ.ศ.');
+      }
+      callback();
+    }
+  }
+};
 
 /***/ }),
 
