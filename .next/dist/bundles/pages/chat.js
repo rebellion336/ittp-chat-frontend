@@ -311,7 +311,7 @@ var Inputfield = function (_Component) {
         value: function render() {
             return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                 'div',
-                { style: { padding: '3px', position: 'fixed', bottom: '0', width: '100%' }, __source: {
+                { style: { padding: '3px', bottom: '0', width: '100%' }, __source: {
                         fileName: _jsxFileName,
                         lineNumber: 52
                     }
@@ -365,6 +365,57 @@ var mapStateToProps = function mapStateToProps(state) {
 
 /***/ }),
 
+/***/ "./component/contact/contactList.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__("react");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+var _jsxFileName = '/Users/admin/Desktop/bas/ittp-chat-frontend/component/contact/contactList.js';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+var ContactList = function (_Component) {
+    _inherits(ContactList, _Component);
+
+    function ContactList(props) {
+        _classCallCheck(this, ContactList);
+
+        return _possibleConstructorReturn(this, (ContactList.__proto__ || Object.getPrototypeOf(ContactList)).call(this, props));
+    }
+
+    _createClass(ContactList, [{
+        key: 'render',
+        value: function render() {
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'div',
+                { style: { textAlign: 'center' }, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 9
+                    }
+                },
+                'Contact List'
+            );
+        }
+    }]);
+
+    return ContactList;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["a"] = (ContactList);
+
+/***/ }),
+
 /***/ "./component/loan/bindingIdForm.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -403,6 +454,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 var FormItem = __WEBPACK_IMPORTED_MODULE_2_antd__["Form"].Item;
+var Search = __WEBPACK_IMPORTED_MODULE_2_antd__["Input"].Search;
 
 var BindingIdForm = function (_Component) {
     _inherits(BindingIdForm, _Component);
@@ -486,13 +538,13 @@ var BindingIdForm = function (_Component) {
                 __WEBPACK_IMPORTED_MODULE_2_antd__["Form"],
                 { onSubmit: this.handleSubmit, style: { textAlign: 'center' }, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 48
+                        lineNumber: 49
                     }
                 },
                 __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('br', {
                     __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 49
+                        lineNumber: 50
                     }
                 }),
                 __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
@@ -500,7 +552,7 @@ var BindingIdForm = function (_Component) {
                     {
                         __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 50
+                            lineNumber: 51
                         }
                     },
                     '\u0E25\u0E39\u0E01\u0E15\u0E49\u0E32\u0E44\u0E21\u0E48\u0E21\u0E35\u0E1B\u0E23\u0E30\u0E27\u0E31\u0E15\u0E34'
@@ -508,7 +560,7 @@ var BindingIdForm = function (_Component) {
                 __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('br', {
                     __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 51
+                        lineNumber: 52
                     }
                 }),
                 __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
@@ -516,7 +568,7 @@ var BindingIdForm = function (_Component) {
                     {
                         __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 52
+                            lineNumber: 53
                         }
                     },
                     getFieldDecorator('citizenId', {
@@ -526,13 +578,63 @@ var BindingIdForm = function (_Component) {
                         }, {
                             validator: __WEBPACK_IMPORTED_MODULE_5__tools_validators__["a" /* validCitizenId */]
                         }]
-                    })(__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_antd__["Input"], { prefix: __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_antd__["Icon"], { type: 'idcard', style: { color: 'rgba(0,0,0,.25)' }, __source: {
+                    })(__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(Search, {
+                        prefix: __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_antd__["Icon"], { type: 'idcard', style: { color: 'rgba(0,0,0,.25)' }, __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 64
+                                lineNumber: 66
                             }
-                        }), placeholder: '\u0E1A\u0E31\u0E15\u0E23\u0E1B\u0E23\u0E30\u0E0A\u0E32\u0E0A\u0E19\u0E02\u0E2D\u0E07\u0E25\u0E39\u0E01\u0E04\u0E49\u0E32', __source: {
+                        }),
+                        placeholder: '\u0E1A\u0E31\u0E15\u0E23\u0E1B\u0E23\u0E30\u0E0A\u0E32\u0E0A\u0E19\u0E02\u0E2D\u0E07\u0E25\u0E39\u0E01\u0E04\u0E49\u0E32',
+                        enterButton: '\u0E15\u0E23\u0E27\u0E08\u0E2A\u0E2D\u0E1A',
+                        __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 64
+                            lineNumber: 65
+                        }
+                    }))
+                ),
+                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                    FormItem,
+                    {
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 73
+                        }
+                    },
+                    getFieldDecorator('customerName', {
+                        rules: [{
+                            required: true,
+                            message: 'โปรดระบุชื่อของลูกค้า'
+                        }]
+                    })(__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_antd__["Input"], { prefix: __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_antd__["Icon"], { type: 'user', style: { color: 'rgba(0,0,0,.25)' }, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 82
+                            }
+                        }), placeholder: '\u0E0A\u0E37\u0E48\u0E2D\u0E02\u0E2D\u0E07\u0E25\u0E39\u0E01\u0E04\u0E49\u0E32', __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 82
+                        }
+                    }))
+                ),
+                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                    FormItem,
+                    {
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 85
+                        }
+                    },
+                    getFieldDecorator('phoneNumber', {
+                        rules: [{
+                            required: false,
+                            message: 'โปรดเบอร์โทรศัพท์ของลูกค้า'
+                        }]
+                    })(__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_antd__["Input"], { prefix: __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_antd__["Icon"], { type: 'phone', style: { color: 'rgba(0,0,0,.25)' }, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 94
+                            }
+                        }), placeholder: '\u0E40\u0E1A\u0E2D\u0E23\u0E4C\u0E42\u0E17\u0E23\u0E28\u0E31\u0E1E\u0E17\u0E4C\u0E02\u0E2D\u0E07\u0E25\u0E39\u0E01\u0E04\u0E49\u0E32', __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 94
                         }
                     }))
                 ),
@@ -540,7 +642,7 @@ var BindingIdForm = function (_Component) {
                     __WEBPACK_IMPORTED_MODULE_2_antd__["Button"],
                     { type: 'primary', htmlType: 'submit', __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 67
+                            lineNumber: 97
                         }
                     },
                     'Binding CitizenId'
@@ -682,8 +784,7 @@ var LoanAccount = function (_Component) {
             }
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
-                {
-                    __source: {
+                { style: { textAlign: 'center' }, __source: {
                         fileName: _jsxFileName,
                         lineNumber: 66
                     }
@@ -1023,6 +1124,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__layouts_FullPageLayout__ = __webpack_require__("./layouts/FullPageLayout.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__component_chat_MessageField__ = __webpack_require__("./component/chat/MessageField.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__component_loan_loanAccount__ = __webpack_require__("./component/loan/loanAccount.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__component_contact_contactList__ = __webpack_require__("./component/contact/contactList.js");
 var _jsxFileName = '/Users/admin/Desktop/bas/ittp-chat-frontend/pages/chat.js';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -1034,6 +1136,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 
 
 
@@ -1061,41 +1164,55 @@ var Chat = function (_Component) {
         {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 13
+            lineNumber: 14
           }
         },
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           __WEBPACK_IMPORTED_MODULE_1_antd__["Row"],
           { style: { width: '100%' }, __source: {
               fileName: _jsxFileName,
-              lineNumber: 14
+              lineNumber: 15
             }
           },
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             __WEBPACK_IMPORTED_MODULE_1_antd__["Col"],
-            { span: 19, __source: {
-                fileName: _jsxFileName,
-                lineNumber: 15
-              }
-            },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__component_chat_MessageField__["a" /* default */], {
-              __source: {
+            { span: 5, __source: {
                 fileName: _jsxFileName,
                 lineNumber: 16
+              }
+            },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__component_contact_contactList__["a" /* default */], {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 17
               }
             })
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             __WEBPACK_IMPORTED_MODULE_1_antd__["Col"],
-            { span: 5, __source: {
+            { span: 12, __source: {
                 fileName: _jsxFileName,
-                lineNumber: 18
+                lineNumber: 19
+              }
+            },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__component_chat_MessageField__["a" /* default */], {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 20
+              }
+            })
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            __WEBPACK_IMPORTED_MODULE_1_antd__["Col"],
+            { span: 7, __source: {
+                fileName: _jsxFileName,
+                lineNumber: 22
               }
             },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__component_loan_loanAccount__["a" /* default */], {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 19
+                lineNumber: 23
               }
             })
           )

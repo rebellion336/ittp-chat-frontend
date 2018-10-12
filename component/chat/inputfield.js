@@ -49,7 +49,7 @@ class Inputfield extends Component {
     }
     render(){
         return (
-            <div style={{padding: '3px', position: 'fixed', bottom: '0', width: '100%'}}>
+            <div style={{padding: '3px', bottom: '0', width: '100%'}}>
                 <span>
                     <Input style={{width:'90%'}} 
                     placeholder="Input Message" 

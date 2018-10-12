@@ -5,7 +5,8 @@ import {API_SERVER , postJSON} from '../../tools/api'
 import {validCitizenId} from '../../tools/validators'
 import { fetchLoan } from '../../redux/ducks/loan'
 
-const FormItem = Form.Item;
+const FormItem = Form.Item
+const Search = Input.Search
 
 class BindingIdForm extends Component {
 
@@ -50,18 +51,47 @@ class BindingIdForm extends Component {
             <p>ลูกต้าไม่มีประวัติ</p>
             <br/>
             <FormItem>
-              {getFieldDecorator('citizenId', {
+                {getFieldDecorator('citizenId', {
+                    rules: [
+                        { 
+                            required: true, 
+                            message: 'โปรดใส่เลขบัตรประชาชนของลูกค้า' 
+                        },
+                        {
+                            validator: validCitizenId
+                        }
+                    ],
+                    })(
+                        <Search
+                            prefix={<Icon type="idcard" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                            placeholder="บัตรประชาชนของลูกค้า"
+                            enterButton="ตรวจสอบ"
+                        />
+                    )
+                }
+            </FormItem>
+            <FormItem>
+              {getFieldDecorator('customerName', {
                 rules: [
                     { 
-                        required: true, 
-                        message: 'โปรดใส่เลขบัตรประชาชนของลูกค้า' 
+                        required: true,
+                        message: 'โปรดระบุชื่อของลูกค้า' 
                     },
-                    {
-                        validator: validCitizenId
-                    }
                 ],
               })(
-                <Input prefix={<Icon type="idcard" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="บัตรประชาชนของลูกค้า" />
+                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="ชื่อของลูกค้า" />
+              )}
+            </FormItem>
+            <FormItem>
+              {getFieldDecorator('phoneNumber', {
+                rules: [
+                    { 
+                        required: false, 
+                        message: 'โปรดเบอร์โทรศัพท์ของลูกค้า'
+                    },
+                ],
+              })(
+                <Input prefix={<Icon type="phone" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="เบอร์โทรศัพท์ของลูกค้า" />
               )}
             </FormItem>
             <Button type="primary" htmlType="submit">

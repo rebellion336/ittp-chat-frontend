@@ -63,7 +63,7 @@ class LoanAccount extends Component {
             }
             return <BindingIdForm customerInfo={this.props.chats.data.customerInfo}/>
         }
-        return <div>LOADING</div>
+        return <div style={{textAlign:'center'}}>LOADING</div>
     }
 }
 
