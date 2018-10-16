@@ -108,76 +108,86 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 var MessageField = function (_Component) {
-    _inherits(MessageField, _Component);
+  _inherits(MessageField, _Component);
 
-    function MessageField(props) {
-        _classCallCheck(this, MessageField);
+  function MessageField(props) {
+    _classCallCheck(this, MessageField);
 
-        var _this = _possibleConstructorReturn(this, (MessageField.__proto__ || Object.getPrototypeOf(MessageField)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (MessageField.__proto__ || Object.getPrototypeOf(MessageField)).call(this, props));
 
-        _this.columns = [{
-            dataIndex: 'customerMessage',
-            key: 'customerMessage'
-        }, {
-            dataIndex: 'operatorMessage',
-            key: 'operatorMessage',
-            align: 'right'
-        }];
-        _this.socket = __WEBPACK_IMPORTED_MODULE_5_socket_io_client___default()(__WEBPACK_IMPORTED_MODULE_6__tools_api__["a" /* API_SERVER */]);
-
-        _this.socket.on('RECEIVE_MESSAGE', function () {
-            _this.props.fetchChat({
-                id: 'Uc72aacda842257e6ae27f0bb8d80cc13',
-                platform: 'line'
-            });
-        });
-        return _this;
-    }
-
-    _createClass(MessageField, [{
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            this.props.fetchChat({
-                id: 'Uc72aacda842257e6ae27f0bb8d80cc13',
-                platform: 'line'
-            });
-        }
+    _this.columns = [{
+      dataIndex: 'customerMessage',
+      key: 'customerMessage'
     }, {
-        key: 'render',
-        value: function render() {
-            var chatData = '';
-            if (this.props.chats.data !== undefined) {
-                chatData = this.props.chats.data.chat;
-            }
+      dataIndex: 'operatorMessage',
+      key: 'operatorMessage',
+      align: 'right'
+    }];
+    // this.socket = io(
+    //   'https://us-central1-noburo-216104.cloudfunctions.net/line:9000'
+    // )
+    //     this.socket.on('RECEIVE_MESSAGE', () => {
+    //       this.props.fetchChat({
+    //         id: 'Uc72aacda842257e6ae27f0bb8d80cc13',
+    //         platform: 'line',
+    //       })
+    //     })
+    //     this.socket.on('connect', function() {
+    //       var sessionid = socket.socket.sessionid
+    //       console.log('sessionId>>>', sessionid)
+    //     })
+    return _this;
+  }
 
-            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                'div',
-                { style: { width: '100%' }, __source: {
-                        fileName: _jsxFileName,
-                        lineNumber: 45
-                    }
-                },
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_antd__["Table"], { dataSource: chatData, columns: this.columns, pagination: false, scroll: { y: 600 }, __source: {
-                        fileName: _jsxFileName,
-                        lineNumber: 46
-                    }
-                }),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__inputfield__["a" /* default */], { chats: this.props.chats.data, __source: {
-                        fileName: _jsxFileName,
-                        lineNumber: 47
-                    }
-                })
-            );
-        }
-    }]);
+  _createClass(MessageField, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.props.fetchChat({
+        id: 'Uc72aacda842257e6ae27f0bb8d80cc13',
+        platform: 'line'
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var chatData = '';
+      if (this.props.chats.data !== undefined) {
+        chatData = this.props.chats.data.chat;
+      }
 
-    return MessageField;
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        { style: { width: '100%' }, __source: {
+            fileName: _jsxFileName,
+            lineNumber: 50
+          }
+        },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_antd__["Table"], {
+          dataSource: chatData,
+          columns: this.columns,
+          pagination: false,
+          scroll: { y: 600 },
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 51
+          }
+        }),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__inputfield__["a" /* default */], { chats: this.props.chats.data, __source: {
+            fileName: _jsxFileName,
+            lineNumber: 57
+          }
+        })
+      );
+    }
+  }]);
+
+  return MessageField;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
 var mapStateToProps = function mapStateToProps(state) {
-    return {
-        chats: state.chat
-    };
+  return {
+    chats: state.chat
+  };
 };
 
 /* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_2_react_redux__["connect"])(mapStateToProps, { fetchChat: __WEBPACK_IMPORTED_MODULE_4__redux_ducks_chat__["d" /* fetchChat */] })(MessageField));
@@ -1898,107 +1908,107 @@ var _marked = /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator
 
 
 function fetchChatSaga(action) {
-    var _action$payload, id, platform, data, code, message;
+  var _action$payload, id, platform, data, code, message;
 
-    return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function fetchChatSaga$(_context) {
-        while (1) {
-            switch (_context.prev = _context.next) {
-                case 0:
-                    _action$payload = action.payload, id = _action$payload.id, platform = _action$payload.platform;
+  return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function fetchChatSaga$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          _action$payload = action.payload, id = _action$payload.id, platform = _action$payload.platform;
 
-                    if (!(platform === 'line')) {
-                        _context.next = 15;
-                        break;
-                    }
+          if (!(platform === 'line')) {
+            _context.next = 15;
+            break;
+          }
 
-                    _context.prev = 2;
-                    _context.next = 5;
-                    return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["call"])(__WEBPACK_IMPORTED_MODULE_3__tools_api__["b" /* getJSON */], __WEBPACK_IMPORTED_MODULE_3__tools_api__["a" /* API_SERVER */] + '/chats/line/' + id);
+          _context.prev = 2;
+          _context.next = 5;
+          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["call"])(__WEBPACK_IMPORTED_MODULE_3__tools_api__["b" /* getJSON */], __WEBPACK_IMPORTED_MODULE_3__tools_api__["a" /* API_SERVER */] + '/chats/line/' + id);
 
-                case 5:
-                    data = _context.sent;
-                    _context.next = 8;
-                    return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_2__ducks_chat__["f" /* fetchChatSuccess */])({ data: data }));
+        case 5:
+          data = _context.sent;
+          _context.next = 8;
+          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_2__ducks_chat__["f" /* fetchChatSuccess */])({ data: data }));
 
-                case 8:
-                    _context.next = 15;
-                    break;
+        case 8:
+          _context.next = 15;
+          break;
 
-                case 10:
-                    _context.prev = 10;
-                    _context.t0 = _context['catch'](2);
-                    code = _context.t0.code, message = _context.t0.message;
-                    _context.next = 15;
-                    return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_2__ducks_chat__["e" /* fetchChatFailure */])({ code: code, message: message }));
+        case 10:
+          _context.prev = 10;
+          _context.t0 = _context['catch'](2);
+          code = _context.t0.code, message = _context.t0.message;
+          _context.next = 15;
+          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_2__ducks_chat__["e" /* fetchChatFailure */])({ code: code, message: message }));
 
-                case 15:
-                case 'end':
-                    return _context.stop();
-            }
-        }
-    }, _marked, this, [[2, 10]]);
+        case 15:
+        case 'end':
+          return _context.stop();
+      }
+    }
+  }, _marked, this, [[2, 10]]);
 }
 function sendMessageSaga(action) {
-    var _action$payload2, id, platform, message, value, data, code, _message;
+  var _action$payload2, id, platform, message, value, data, code, _message;
 
-    return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function sendMessageSaga$(_context2) {
-        while (1) {
-            switch (_context2.prev = _context2.next) {
-                case 0:
-                    _context2.prev = 0;
-                    _action$payload2 = action.payload, id = _action$payload2.id, platform = _action$payload2.platform, message = _action$payload2.message;
-                    value = {
-                        id: id,
-                        platform: platform,
-                        message: message
-                    };
-                    _context2.next = 5;
-                    return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["call"])(__WEBPACK_IMPORTED_MODULE_3__tools_api__["c" /* postJSON */], __WEBPACK_IMPORTED_MODULE_3__tools_api__["a" /* API_SERVER */] + '/chats/sendmessage', value);
+  return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function sendMessageSaga$(_context2) {
+    while (1) {
+      switch (_context2.prev = _context2.next) {
+        case 0:
+          _context2.prev = 0;
+          _action$payload2 = action.payload, id = _action$payload2.id, platform = _action$payload2.platform, message = _action$payload2.message;
+          value = {
+            id: id,
+            platform: platform,
+            message: message
+          };
+          _context2.next = 5;
+          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["call"])(__WEBPACK_IMPORTED_MODULE_3__tools_api__["c" /* postJSON */], __WEBPACK_IMPORTED_MODULE_3__tools_api__["a" /* API_SERVER */] + '/chats/sendmessage', value);
 
-                case 5:
-                    data = _context2.sent;
-                    _context2.next = 8;
-                    return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_2__ducks_chat__["i" /* sendMessageSuccess */])({ data: data }));
+        case 5:
+          data = _context2.sent;
+          _context2.next = 8;
+          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_2__ducks_chat__["i" /* sendMessageSuccess */])({ data: data }));
 
-                case 8:
-                    _context2.next = 10;
-                    return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_2__ducks_chat__["d" /* fetchChat */])({
-                        id: id,
-                        platform: platform
-                    }));
+        case 8:
+          _context2.next = 10;
+          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_2__ducks_chat__["d" /* fetchChat */])({
+            id: id,
+            platform: platform
+          }));
 
-                case 10:
-                    _context2.next = 17;
-                    break;
+        case 10:
+          _context2.next = 17;
+          break;
 
-                case 12:
-                    _context2.prev = 12;
-                    _context2.t0 = _context2['catch'](0);
-                    code = _context2.t0.code, _message = _context2.t0.message;
-                    _context2.next = 17;
-                    return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_2__ducks_chat__["h" /* sendMessageFailure */])({ code: code, message: _message }));
+        case 12:
+          _context2.prev = 12;
+          _context2.t0 = _context2['catch'](0);
+          code = _context2.t0.code, _message = _context2.t0.message;
+          _context2.next = 17;
+          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_2__ducks_chat__["h" /* sendMessageFailure */])({ code: code, message: _message }));
 
-                case 17:
-                case 'end':
-                    return _context2.stop();
-            }
-        }
-    }, _marked2, this, [[0, 12]]);
+        case 17:
+        case 'end':
+          return _context2.stop();
+      }
+    }
+  }, _marked2, this, [[0, 12]]);
 }
 function chatSagas() {
-    return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function chatSagas$(_context3) {
-        while (1) {
-            switch (_context3.prev = _context3.next) {
-                case 0:
-                    _context3.next = 2;
-                    return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["all"])([Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["takeLatest"])(__WEBPACK_IMPORTED_MODULE_2__ducks_chat__["a" /* FETCH_CHAT */], fetchChatSaga), Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["takeLatest"])(__WEBPACK_IMPORTED_MODULE_2__ducks_chat__["b" /* SEND_MESSAGE */], sendMessageSaga)]);
+  return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function chatSagas$(_context3) {
+    while (1) {
+      switch (_context3.prev = _context3.next) {
+        case 0:
+          _context3.next = 2;
+          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["all"])([Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["takeLatest"])(__WEBPACK_IMPORTED_MODULE_2__ducks_chat__["a" /* FETCH_CHAT */], fetchChatSaga), Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["takeLatest"])(__WEBPACK_IMPORTED_MODULE_2__ducks_chat__["b" /* SEND_MESSAGE */], sendMessageSaga)]);
 
-                case 2:
-                case 'end':
-                    return _context3.stop();
-            }
-        }
-    }, _marked3, this);
+        case 2:
+        case 'end':
+          return _context3.stop();
+      }
+    }
+  }, _marked3, this);
 }
 
 /***/ }),
