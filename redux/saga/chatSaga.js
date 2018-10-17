@@ -1,4 +1,5 @@
 import { takeLatest, all, call, put } from 'redux-saga/effects'
+import database from '../../firebase/firebase'
 import {
   FETCH_CHAT,
   SEND_MESSAGE,
@@ -14,7 +15,20 @@ export function* fetchChatSaga(action) {
   const { id, platform } = action.payload
   if (platform === 'line') {
     try {
-      const data = yield call(getJSON, `${API_SERVER}/chats/line/${id}`)
+      //const data = yield call(getJSON, `${API_SERVER}/chats/line/${id}`)
+      const data = []
+
+      //get data from firebase
+      const dataRef = database.ref(`Message/${id}`)
+      yield dataRef.once('value', snapshot => {
+        console.log('snapshot>>>>', snapshot.val())
+        snapshot.forEach(childSnapshot => {
+          data.push({
+            ...childSnapshot.val(),
+          })
+        })
+      })
+
       yield put(fetchChatSuccess({ data }))
     } catch (error) {
       const { code, message } = error

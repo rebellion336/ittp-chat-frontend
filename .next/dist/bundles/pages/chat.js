@@ -150,16 +150,17 @@ var MessageField = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
+      console.log('props>>>', this.props);
       var chatData = '';
       if (this.props.chats.data !== undefined) {
-        chatData = this.props.chats.data.chat;
+        chatData = this.props.chats.data;
       }
 
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
         { style: { width: '100%' }, __source: {
             fileName: _jsxFileName,
-            lineNumber: 50
+            lineNumber: 51
           }
         },
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_antd__["Table"], {
@@ -169,12 +170,12 @@ var MessageField = function (_Component) {
           scroll: { y: 600 },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 51
+            lineNumber: 52
           }
         }),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__inputfield__["a" /* default */], { chats: this.props.chats.data, __source: {
             fileName: _jsxFileName,
-            lineNumber: 57
+            lineNumber: 58
           }
         })
       );
@@ -981,6 +982,56 @@ var LoanInfo = function (_Component) {
 
 /***/ }),
 
+/***/ "./firebase/firebase.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return database; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_firebase__ = __webpack_require__("firebase");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_firebase__);
+/* unused harmony reexport firebase */
+
+
+var config = {
+  apiKey: 'AIzaSyB9Pi3DKZIH3QzQjeRdA_BFomxGcIQpO70',
+  authDomain: 'noburo-216104.firebaseapp.com',
+  databaseURL: 'https://noburo-216104.firebaseio.com',
+  projectId: 'noburo-216104',
+  storageBucket: 'noburo-216104.appspot.com',
+  messagingSenderId: '299165439192'
+};
+
+if (!__WEBPACK_IMPORTED_MODULE_0_firebase__["apps"].length) {
+  __WEBPACK_IMPORTED_MODULE_0_firebase__["initializeApp"](config);
+}
+
+__WEBPACK_IMPORTED_MODULE_0_firebase__["auth"]().signInAnonymously().catch(function (error) {
+  // Handle Errors here.
+  var errorCode = error.code;
+  var errorMessage = error.message;
+  console.log('errorCode>>>>', errorCode, '      errorMessage>>>>', errorMessage);
+});
+
+__WEBPACK_IMPORTED_MODULE_0_firebase__["auth"]().onAuthStateChanged(function (user) {
+  if (user) {
+    // User is signed in.
+    var isAnonymous = user.isAnonymous;
+    var uid = user.uid;
+    console.log('userLogin');
+    console.log('isAnonymous>>>>', isAnonymous);
+    console.log('uid', uid);
+  } else {
+    // User is signed out.
+    console.log('userlogout');
+  }
+});
+
+var database = __WEBPACK_IMPORTED_MODULE_0_firebase__["database"]();
+
+
+
+/***/ }),
+
 /***/ "./hocs/connectI18n.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1369,121 +1420,121 @@ var SEND_MESSAGE_SUCCESS = 'ittp-chat/chat/SEND_MESSAGE_SUCCESS';
 var SEND_MESSAGE_FAILURE = 'ittp-chat/chat/SEND_MESSAGE_FAILURE';
 
 var fetchChat = function fetchChat(_ref) {
-    var id = _ref.id,
-        platform = _ref.platform;
+  var id = _ref.id,
+      platform = _ref.platform;
 
-    return {
-        type: FETCH_CHAT,
-        payload: { id: id, platform: platform }
-    };
+  return {
+    type: FETCH_CHAT,
+    payload: { id: id, platform: platform }
+  };
 };
 
 var fetchChatSuccess = function fetchChatSuccess(_ref2) {
-    var data = _ref2.data;
+  var data = _ref2.data;
 
-    return {
-        type: FETCH_CHAT_SUCCESS,
-        payload: { data: data }
-    };
+  return {
+    type: FETCH_CHAT_SUCCESS,
+    payload: { data: data }
+  };
 };
 
 var fetchChatFailure = function fetchChatFailure() {
-    return {
-        type: FETCH_CHAT_FAILURE,
-        payload: { code: code, message: message }
-    };
+  return {
+    type: FETCH_CHAT_FAILURE,
+    payload: { code: code, message: message }
+  };
 };
 
 var sendMessage = function sendMessage(id, platform, message) {
-    return {
-        type: SEND_MESSAGE,
-        payload: { id: id, platform: platform, message: message }
-    };
+  return {
+    type: SEND_MESSAGE,
+    payload: { id: id, platform: platform, message: message }
+  };
 };
 
 var sendMessageSuccess = function sendMessageSuccess(_ref3) {
-    var data = _ref3.data;
-    return {
-        type: SEND_MESSAGE_SUCCESS,
-        payload: { data: data }
-    };
+  var data = _ref3.data;
+  return {
+    type: SEND_MESSAGE_SUCCESS,
+    payload: { data: data }
+  };
 };
 
 var sendMessageFailure = function sendMessageFailure() {
-    return {
-        type: SEND_MESSAGE_FAILURE,
-        payload: { code: code, message: message }
-    };
+  return {
+    type: SEND_MESSAGE_FAILURE,
+    payload: { code: code, message: message }
+  };
 };
 
 var initialState = {
-    error: {},
-    loading: false
+  error: {},
+  loading: false
 };
 
 var reducer = function reducer() {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
-    var action = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-    switch (action.type) {
-        case FETCH_CHAT:
-            {
-                return _extends({}, state, {
-                    loading: true
-                });
-            }
-        case FETCH_CHAT_SUCCESS:
-            {
-                var data = action.payload.data;
+  switch (action.type) {
+    case FETCH_CHAT:
+      {
+        return _extends({}, state, {
+          loading: true
+        });
+      }
+    case FETCH_CHAT_SUCCESS:
+      {
+        var data = action.payload.data;
 
-                return _extends({}, state, {
-                    loading: false,
-                    data: data
-                });
-            }
-        case FETCH_CHAT_FAILURE:
-            {
-                return _extends({}, state, {
-                    loading: false,
-                    error: {
-                        code: action.payload.code,
-                        message: action.payload.message
-                    }
-                });
-            }
-        case SEND_MESSAGE:
-            {
-                var _action$payload = action.payload,
-                    id = _action$payload.id,
-                    platform = _action$payload.platform,
-                    _message = _action$payload.message;
+        return _extends({}, state, {
+          loading: false,
+          data: data
+        });
+      }
+    case FETCH_CHAT_FAILURE:
+      {
+        return _extends({}, state, {
+          loading: false,
+          error: {
+            code: action.payload.code,
+            message: action.payload.message
+          }
+        });
+      }
+    case SEND_MESSAGE:
+      {
+        var _action$payload = action.payload,
+            id = _action$payload.id,
+            platform = _action$payload.platform,
+            _message = _action$payload.message;
 
-                return _extends({}, state, {
-                    loading: true
-                });
-            }
-        case SEND_MESSAGE_SUCCESS:
-            {
-                var _data = action.payload.data;
+        return _extends({}, state, {
+          loading: true
+        });
+      }
+    case SEND_MESSAGE_SUCCESS:
+      {
+        var _data = action.payload.data;
 
-                return _extends({}, state, {
-                    loading: false,
-                    data: _data
-                });
-            }
-        case SEND_MESSAGE_FAILURE:
-            {
-                return _extends({}, state, {
-                    loading: false,
-                    error: {
-                        code: action.payload.code,
-                        message: action.payload.message
-                    }
-                });
-            }
-        default:
-            return state;
-    }
+        return _extends({}, state, {
+          loading: false,
+          data: _data
+        });
+      }
+    case SEND_MESSAGE_FAILURE:
+      {
+        return _extends({}, state, {
+          loading: false,
+          error: {
+            code: action.payload.code,
+            message: action.payload.message
+          }
+        });
+      }
+    default:
+      return state;
+  }
 };
 /* harmony default export */ __webpack_exports__["c"] = (reducer);
 
@@ -1895,9 +1946,12 @@ function authSagas() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__ = __webpack_require__("redux-saga/effects");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_redux_saga_effects___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ducks_chat__ = __webpack_require__("./redux/ducks/chat.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tools_api__ = __webpack_require__("./tools/api.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__firebase_firebase__ = __webpack_require__("./firebase/firebase.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ducks_chat__ = __webpack_require__("./redux/ducks/chat.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__tools_api__ = __webpack_require__("./tools/api.js");
 
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _marked = /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(fetchChatSaga),
     _marked2 = /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(sendMessageSaga),
@@ -1907,8 +1961,9 @@ var _marked = /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator
 
 
 
+
 function fetchChatSaga(action) {
-  var _action$payload, id, platform, data, code, message;
+  var _action$payload, id, platform, data, dataRef, code, message;
 
   return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function fetchChatSaga$(_context) {
     while (1) {
@@ -1917,36 +1972,47 @@ function fetchChatSaga(action) {
           _action$payload = action.payload, id = _action$payload.id, platform = _action$payload.platform;
 
           if (!(platform === 'line')) {
-            _context.next = 15;
+            _context.next = 16;
             break;
           }
 
           _context.prev = 2;
-          _context.next = 5;
-          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["call"])(__WEBPACK_IMPORTED_MODULE_3__tools_api__["b" /* getJSON */], __WEBPACK_IMPORTED_MODULE_3__tools_api__["a" /* API_SERVER */] + '/chats/line/' + id);
 
-        case 5:
-          data = _context.sent;
-          _context.next = 8;
-          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_2__ducks_chat__["f" /* fetchChatSuccess */])({ data: data }));
+          //const data = yield call(getJSON, `${API_SERVER}/chats/line/${id}`)
+          data = [];
 
-        case 8:
-          _context.next = 15;
+          //get data from firebase
+
+          dataRef = __WEBPACK_IMPORTED_MODULE_2__firebase_firebase__["a" /* default */].ref('Message/' + id);
+          _context.next = 7;
+          return dataRef.once('value', function (snapshot) {
+            console.log('snapshot>>>>', snapshot.val());
+            snapshot.forEach(function (childSnapshot) {
+              data.push(_extends({}, childSnapshot.val()));
+            });
+          });
+
+        case 7:
+          _context.next = 9;
+          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_3__ducks_chat__["f" /* fetchChatSuccess */])({ data: data }));
+
+        case 9:
+          _context.next = 16;
           break;
 
-        case 10:
-          _context.prev = 10;
+        case 11:
+          _context.prev = 11;
           _context.t0 = _context['catch'](2);
           code = _context.t0.code, message = _context.t0.message;
-          _context.next = 15;
-          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_2__ducks_chat__["e" /* fetchChatFailure */])({ code: code, message: message }));
+          _context.next = 16;
+          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_3__ducks_chat__["e" /* fetchChatFailure */])({ code: code, message: message }));
 
-        case 15:
+        case 16:
         case 'end':
           return _context.stop();
       }
     }
-  }, _marked, this, [[2, 10]]);
+  }, _marked, this, [[2, 11]]);
 }
 function sendMessageSaga(action) {
   var _action$payload2, id, platform, message, value, data, code, _message;
@@ -1963,16 +2029,16 @@ function sendMessageSaga(action) {
             message: message
           };
           _context2.next = 5;
-          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["call"])(__WEBPACK_IMPORTED_MODULE_3__tools_api__["c" /* postJSON */], __WEBPACK_IMPORTED_MODULE_3__tools_api__["a" /* API_SERVER */] + '/chats/sendmessage', value);
+          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["call"])(__WEBPACK_IMPORTED_MODULE_4__tools_api__["c" /* postJSON */], __WEBPACK_IMPORTED_MODULE_4__tools_api__["a" /* API_SERVER */] + '/chats/sendmessage', value);
 
         case 5:
           data = _context2.sent;
           _context2.next = 8;
-          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_2__ducks_chat__["i" /* sendMessageSuccess */])({ data: data }));
+          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_3__ducks_chat__["i" /* sendMessageSuccess */])({ data: data }));
 
         case 8:
           _context2.next = 10;
-          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_2__ducks_chat__["d" /* fetchChat */])({
+          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_3__ducks_chat__["d" /* fetchChat */])({
             id: id,
             platform: platform
           }));
@@ -1986,7 +2052,7 @@ function sendMessageSaga(action) {
           _context2.t0 = _context2['catch'](0);
           code = _context2.t0.code, _message = _context2.t0.message;
           _context2.next = 17;
-          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_2__ducks_chat__["h" /* sendMessageFailure */])({ code: code, message: _message }));
+          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_3__ducks_chat__["h" /* sendMessageFailure */])({ code: code, message: _message }));
 
         case 17:
         case 'end':
@@ -2001,7 +2067,7 @@ function chatSagas() {
       switch (_context3.prev = _context3.next) {
         case 0:
           _context3.next = 2;
-          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["all"])([Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["takeLatest"])(__WEBPACK_IMPORTED_MODULE_2__ducks_chat__["a" /* FETCH_CHAT */], fetchChatSaga), Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["takeLatest"])(__WEBPACK_IMPORTED_MODULE_2__ducks_chat__["b" /* SEND_MESSAGE */], sendMessageSaga)]);
+          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["all"])([Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["takeLatest"])(__WEBPACK_IMPORTED_MODULE_3__ducks_chat__["a" /* FETCH_CHAT */], fetchChatSaga), Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["takeLatest"])(__WEBPACK_IMPORTED_MODULE_3__ducks_chat__["b" /* SEND_MESSAGE */], sendMessageSaga)]);
 
         case 2:
         case 'end':
@@ -2868,6 +2934,13 @@ module.exports = require("babel-runtime/regenerator");
 /***/ (function(module, exports) {
 
 module.exports = require("es6-promise");
+
+/***/ }),
+
+/***/ "firebase":
+/***/ (function(module, exports) {
+
+module.exports = require("firebase");
 
 /***/ }),
 

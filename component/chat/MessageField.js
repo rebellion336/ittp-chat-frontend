@@ -41,9 +41,10 @@ class MessageField extends Component {
     })
   }
   render() {
+    console.log('props>>>', this.props)
     let chatData = ''
     if (this.props.chats.data !== undefined) {
-      chatData = this.props.chats.data.chat
+      chatData = this.props.chats.data
     }
 
     return (
