@@ -49,10 +49,6 @@ class MessageField extends Component {
   //   })
   // }
   render() {
-    // let chatLog = ''
-    // if (this.props.chats.data !== undefined) {
-    //   chatLog = this.props.chats.data
-    // }
     return (
       <div style={{ width: '100%' }}>
         <Table
