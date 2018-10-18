@@ -84,10 +84,13 @@ module.exports =
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_redux___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_redux__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__inputfield__ = __webpack_require__("./component/chat/inputfield.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__redux_ducks_chat__ = __webpack_require__("./redux/ducks/chat.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_socket_io_client__ = __webpack_require__("socket.io-client");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_socket_io_client___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_socket_io_client__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__tools_api__ = __webpack_require__("./tools/api.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__firebase_firebase__ = __webpack_require__("./firebase/firebase.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_socket_io_client__ = __webpack_require__("socket.io-client");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_socket_io_client___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_socket_io_client__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__tools_api__ = __webpack_require__("./tools/api.js");
 var _jsxFileName = '/Users/admin/Desktop/bas/ittp-chat-frontend/component/chat/MessageField.js';
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -98,6 +101,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 
 
 
@@ -123,6 +127,26 @@ var MessageField = function (_Component) {
       key: 'operatorMessage',
       align: 'right'
     }];
+    _this.state = {
+      chatLog: [],
+      id: 'Uc72aacda842257e6ae27f0bb8d80cc13'
+    };
+    try {
+      //get data from firebase
+      var dataRef = __WEBPACK_IMPORTED_MODULE_5__firebase_firebase__["a" /* default */].ref('Message/' + _this.state.id);
+      dataRef.on('value', function (snapshot) {
+        var data = [];
+        snapshot.forEach(function (childSnapshot) {
+          data.push(_extends({}, childSnapshot.val()));
+        });
+        _this.setState({
+          chatLog: data
+        });
+        console.log('data In messageField>>>', data);
+      });
+    } catch (error) {
+      console.log('error firebase in messageField >>>>', error);
+    }
     // this.socket = io(
     //   'https://us-central1-noburo-216104.cloudfunctions.net/line:9000'
     // )
@@ -138,44 +162,41 @@ var MessageField = function (_Component) {
     //     })
     return _this;
   }
+  // componentDidMount() {
+  //   this.props.fetchChat({
+  //     id: 'Uc72aacda842257e6ae27f0bb8d80cc13',
+  //     platform: 'line',
+  //   })
+  // }
+
 
   _createClass(MessageField, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.props.fetchChat({
-        id: 'Uc72aacda842257e6ae27f0bb8d80cc13',
-        platform: 'line'
-      });
-    }
-  }, {
     key: 'render',
     value: function render() {
-      console.log('props>>>', this.props);
-      var chatData = '';
-      if (this.props.chats.data !== undefined) {
-        chatData = this.props.chats.data;
-      }
-
+      // let chatLog = ''
+      // if (this.props.chats.data !== undefined) {
+      //   chatLog = this.props.chats.data
+      // }
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
         { style: { width: '100%' }, __source: {
             fileName: _jsxFileName,
-            lineNumber: 51
+            lineNumber: 72
           }
         },
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_antd__["Table"], {
-          dataSource: chatData,
+          dataSource: this.state.chatLog,
           columns: this.columns,
           pagination: false,
           scroll: { y: 600 },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 52
+            lineNumber: 73
           }
         }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__inputfield__["a" /* default */], { chats: this.props.chats.data, __source: {
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__inputfield__["a" /* default */], { id: this.state.id, __source: {
             fileName: _jsxFileName,
-            lineNumber: 58
+            lineNumber: 79
           }
         })
       );
@@ -209,6 +230,7 @@ var mapStateToProps = function mapStateToProps(state) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_redux___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react_redux__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__redux_ducks_chat__ = __webpack_require__("./redux/ducks/chat.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__tools_api__ = __webpack_require__("./tools/api.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__firebase_firebase__ = __webpack_require__("./firebase/firebase.js");
 
 var _jsxFileName = '/Users/admin/Desktop/bas/ittp-chat-frontend/component/chat/inputfield.js';
 
@@ -230,149 +252,148 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
+
 var Inputfield = function (_Component) {
-    _inherits(Inputfield, _Component);
+  _inherits(Inputfield, _Component);
 
-    function Inputfield(props) {
-        _classCallCheck(this, Inputfield);
+  function Inputfield(props) {
+    _classCallCheck(this, Inputfield);
 
-        var _this = _possibleConstructorReturn(this, (Inputfield.__proto__ || Object.getPrototypeOf(Inputfield)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Inputfield.__proto__ || Object.getPrototypeOf(Inputfield)).call(this, props));
 
-        _this.state = {
-            messageInputted: ''
-        };
-        _this.handleInputChange = _this.handleInputChange.bind(_this);
-        _this.handleSendMessage = _this.handleSendMessage.bind(_this);
-        return _this;
+    _this.state = {
+      messageInputted: ''
+    };
+    _this.handleInputChange = _this.handleInputChange.bind(_this);
+    _this.handleSendMessage = _this.handleSendMessage.bind(_this);
+    return _this;
+  }
+
+  _createClass(Inputfield, [{
+    key: 'handleInputChange',
+    value: function handleInputChange(event) {
+      var message = event.target.value;
+      this.setState({
+        messageInputted: message
+      });
     }
+  }, {
+    key: 'handleSendMessage',
+    value: function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+        var message, id, value;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                message = this.state.messageInputted;
+                id = this.props.id;
 
-    _createClass(Inputfield, [{
-        key: 'handleInputChange',
-        value: function handleInputChange(event) {
-            var message = event.target.value;
-            this.setState({
-                messageInputted: message
-            });
-        }
-    }, {
-        key: 'handleSendMessage',
-        value: function () {
-            var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
-                var message, _props$chats$customer, id, platform, value;
+                if (!(message !== '')) {
+                  _context.next = 13;
+                  break;
+                }
 
-                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
-                    while (1) {
-                        switch (_context.prev = _context.next) {
-                            case 0:
-                                message = this.state.messageInputted;
-                                _props$chats$customer = this.props.chats.customerInfo, id = _props$chats$customer.id, platform = _props$chats$customer.platform;
-                                //await this.props.sendMessage( id, platform, message )
+                _context.prev = 3;
+                value = {
+                  userId: id,
+                  message: message
+                };
+                _context.next = 7;
+                return Object(__WEBPACK_IMPORTED_MODULE_5__tools_api__["d" /* postJSON */])(__WEBPACK_IMPORTED_MODULE_5__tools_api__["b" /* FIREBASE_SERVER */] + '/sendmessage', value);
 
-                                if (!(message !== '')) {
-                                    _context.next = 13;
-                                    break;
-                                }
+              case 7:
+                _context.next = 12;
+                break;
 
-                                _context.prev = 3;
-                                value = {
-                                    id: id,
-                                    platform: platform,
-                                    message: message
-                                };
-                                _context.next = 7;
-                                return Object(__WEBPACK_IMPORTED_MODULE_5__tools_api__["c" /* postJSON */])(__WEBPACK_IMPORTED_MODULE_5__tools_api__["a" /* API_SERVER */] + '/chats/sendmessage', value);
+              case 9:
+                _context.prev = 9;
+                _context.t0 = _context['catch'](3);
 
-                            case 7:
-                                _context.next = 12;
-                                break;
+                console.error(_context.t0);
 
-                            case 9:
-                                _context.prev = 9;
-                                _context.t0 = _context['catch'](3);
+              case 12:
+                this.props.fetchChat({
+                  id: id,
+                  platform: 'line'
+                });
 
-                                console.error(_context.t0);
+              case 13:
+                this.setState({
+                  messageInputted: ''
+                });
 
-                            case 12:
-                                this.props.fetchChat({
-                                    id: id,
-                                    platform: platform
-                                });
-
-                            case 13:
-                                this.setState({
-                                    messageInputted: ''
-                                });
-
-                            case 14:
-                            case 'end':
-                                return _context.stop();
-                        }
-                    }
-                }, _callee, this, [[3, 9]]);
-            }));
-
-            function handleSendMessage() {
-                return _ref.apply(this, arguments);
+              case 14:
+              case 'end':
+                return _context.stop();
             }
+          }
+        }, _callee, this, [[3, 9]]);
+      }));
 
-            return handleSendMessage;
-        }()
-    }, {
-        key: 'render',
-        value: function render() {
-            return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-                'div',
-                { style: { padding: '3px', bottom: '0', width: '100%' }, __source: {
-                        fileName: _jsxFileName,
-                        lineNumber: 52
-                    }
-                },
-                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-                    'span',
-                    {
-                        __source: {
-                            fileName: _jsxFileName,
-                            lineNumber: 53
-                        }
-                    },
-                    __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_antd__["Input"], { style: { width: '90%' },
-                        placeholder: 'Input Message',
-                        value: this.state.messageInputted,
-                        onChange: this.handleInputChange,
-                        onPressEnter: this.handleSendMessage,
-                        __source: {
-                            fileName: _jsxFileName,
-                            lineNumber: 54
-                        }
-                    }),
-                    __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-                        __WEBPACK_IMPORTED_MODULE_2_antd__["Button"],
-                        {
-                            type: 'primary',
-                            style: { width: '10%' },
-                            onClick: this.handleSendMessage,
-                            __source: {
-                                fileName: _jsxFileName,
-                                lineNumber: 60
-                            }
-                        },
-                        'Send'
-                    )
-                )
-            );
-        }
-    }]);
+      function handleSendMessage() {
+        return _ref.apply(this, arguments);
+      }
 
-    return Inputfield;
+      return handleSendMessage;
+    }()
+  }, {
+    key: 'render',
+    value: function render() {
+      return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+        'div',
+        { style: { padding: '3px', bottom: '0', width: '100%' }, __source: {
+            fileName: _jsxFileName,
+            lineNumber: 47
+          }
+        },
+        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+          'span',
+          {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 48
+            }
+          },
+          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_antd__["Input"], {
+            style: { width: '90%' },
+            placeholder: 'Input Message',
+            value: this.state.messageInputted,
+            onChange: this.handleInputChange,
+            onPressEnter: this.handleSendMessage,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 49
+            }
+          }),
+          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+            __WEBPACK_IMPORTED_MODULE_2_antd__["Button"],
+            {
+              type: 'primary',
+              style: { width: '10%' },
+              onClick: this.handleSendMessage,
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 56
+              }
+            },
+            'Send'
+          )
+        )
+      );
+    }
+  }]);
+
+  return Inputfield;
 }(__WEBPACK_IMPORTED_MODULE_1_react__["Component"]);
 
 var mapStateToProps = function mapStateToProps(state) {
-    return {
-        chats: state.chat
-    };
+  return {
+    chats: state.chat
+  };
 };
 
-/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_3_react_redux__["connect"])(null, { sendMessage: __WEBPACK_IMPORTED_MODULE_4__redux_ducks_chat__["g" /* sendMessage */], fetchChat: __WEBPACK_IMPORTED_MODULE_4__redux_ducks_chat__["d" /* fetchChat */] })(Inputfield));
+/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_3_react_redux__["connect"])(null, { sendMessage: __WEBPACK_IMPORTED_MODULE_4__redux_ducks_chat__["e" /* sendMessage */], fetchChat: __WEBPACK_IMPORTED_MODULE_4__redux_ducks_chat__["d" /* fetchChat */] })(Inputfield));
 
 /***/ }),
 
@@ -507,7 +528,7 @@ var BindingIdForm = function (_Component) {
                                         platform: platform
                                     };
                                     _context.next = 7;
-                                    return Object(__WEBPACK_IMPORTED_MODULE_4__tools_api__["c" /* postJSON */])(__WEBPACK_IMPORTED_MODULE_4__tools_api__["a" /* API_SERVER */] + '/chats/line/binding', value);
+                                    return Object(__WEBPACK_IMPORTED_MODULE_4__tools_api__["d" /* postJSON */])(__WEBPACK_IMPORTED_MODULE_4__tools_api__["a" /* API_SERVER */] + '/chats/line/binding', value);
 
                                 case 7:
                                     _this2.props.fetchLoan({ id: id });
@@ -1404,11 +1425,11 @@ var reducer = function reducer() {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FETCH_CHAT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return SEND_MESSAGE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return fetchChat; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return fetchChatSuccess; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return fetchChatFailure; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return sendMessage; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return sendMessageSuccess; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return sendMessageFailure; });
+/* unused harmony export fetchChatSuccess */
+/* unused harmony export fetchChatFailure */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return sendMessage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return sendMessageSuccess; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return sendMessageFailure; });
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var FETCH_CHAT = 'ittp-chat/chat/FETCH_CHAT';
@@ -1841,7 +1862,7 @@ function loginSaga(action) {
 
           console.log('apisaga:>>>>>', __WEBPACK_IMPORTED_MODULE_4__tools_api__["a" /* API_SERVER */]);
           _context.next = 4;
-          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["call"])(__WEBPACK_IMPORTED_MODULE_4__tools_api__["c" /* postJSON */], __WEBPACK_IMPORTED_MODULE_4__tools_api__["a" /* API_SERVER */] + '/users/login', action.payload);
+          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["call"])(__WEBPACK_IMPORTED_MODULE_4__tools_api__["d" /* postJSON */], __WEBPACK_IMPORTED_MODULE_4__tools_api__["a" /* API_SERVER */] + '/users/login', action.payload);
 
         case 4:
           _ref = _context.sent;
@@ -1951,8 +1972,6 @@ function authSagas() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__tools_api__ = __webpack_require__("./tools/api.js");
 
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _marked = /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(fetchChatSaga),
     _marked2 = /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(sendMessageSaga),
     _marked3 = /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(chatSagas);
@@ -1963,7 +1982,7 @@ var _marked = /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator
 
 
 function fetchChatSaga(action) {
-  var _action$payload, id, platform, data, dataRef, code, message;
+  var _action$payload, id, platform;
 
   return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function fetchChatSaga$(_context) {
     while (1) {
@@ -1971,48 +1990,34 @@ function fetchChatSaga(action) {
         case 0:
           _action$payload = action.payload, id = _action$payload.id, platform = _action$payload.platform;
 
-          if (!(platform === 'line')) {
-            _context.next = 16;
-            break;
+          if (platform === 'line') {
+            // ไม่จำเป็นแล้ว ลบได้เลย
+            // try {
+            //   //const data = yield call(getJSON, `${API_SERVER}/chats/line/${id}`)
+            //   const data = []
+            //   //get data from firebase
+            //   const dataRef = database.ref(`Message/${id}`)
+            //   yield dataRef.once('value', snapshot => {
+            //     console.log('snapshot>>>>', snapshot.val())
+            //     snapshot.forEach(childSnapshot => {
+            //       data.push({
+            //         ...childSnapshot.val(),
+            //       })
+            //     })
+            //   })
+            //   yield put(fetchChatSuccess({ data }))
+            // } catch (error) {
+            //   const { code, message } = error
+            //   yield put(fetchChatFailure({ code, message }))
+            // }
           }
 
-          _context.prev = 2;
-
-          //const data = yield call(getJSON, `${API_SERVER}/chats/line/${id}`)
-          data = [];
-
-          //get data from firebase
-
-          dataRef = __WEBPACK_IMPORTED_MODULE_2__firebase_firebase__["a" /* default */].ref('Message/' + id);
-          _context.next = 7;
-          return dataRef.once('value', function (snapshot) {
-            console.log('snapshot>>>>', snapshot.val());
-            snapshot.forEach(function (childSnapshot) {
-              data.push(_extends({}, childSnapshot.val()));
-            });
-          });
-
-        case 7:
-          _context.next = 9;
-          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_3__ducks_chat__["f" /* fetchChatSuccess */])({ data: data }));
-
-        case 9:
-          _context.next = 16;
-          break;
-
-        case 11:
-          _context.prev = 11;
-          _context.t0 = _context['catch'](2);
-          code = _context.t0.code, message = _context.t0.message;
-          _context.next = 16;
-          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_3__ducks_chat__["e" /* fetchChatFailure */])({ code: code, message: message }));
-
-        case 16:
+        case 2:
         case 'end':
           return _context.stop();
       }
     }
-  }, _marked, this, [[2, 11]]);
+  }, _marked, this);
 }
 function sendMessageSaga(action) {
   var _action$payload2, id, platform, message, value, data, code, _message;
@@ -2029,12 +2034,12 @@ function sendMessageSaga(action) {
             message: message
           };
           _context2.next = 5;
-          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["call"])(__WEBPACK_IMPORTED_MODULE_4__tools_api__["c" /* postJSON */], __WEBPACK_IMPORTED_MODULE_4__tools_api__["a" /* API_SERVER */] + '/chats/sendmessage', value);
+          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["call"])(__WEBPACK_IMPORTED_MODULE_4__tools_api__["d" /* postJSON */], __WEBPACK_IMPORTED_MODULE_4__tools_api__["a" /* API_SERVER */] + '/chats/sendmessage', value);
 
         case 5:
           data = _context2.sent;
           _context2.next = 8;
-          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_3__ducks_chat__["i" /* sendMessageSuccess */])({ data: data }));
+          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_3__ducks_chat__["g" /* sendMessageSuccess */])({ data: data }));
 
         case 8:
           _context2.next = 10;
@@ -2052,7 +2057,7 @@ function sendMessageSaga(action) {
           _context2.t0 = _context2['catch'](0);
           code = _context2.t0.code, _message = _context2.t0.message;
           _context2.next = 17;
-          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_3__ducks_chat__["h" /* sendMessageFailure */])({ code: code, message: _message }));
+          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_3__ducks_chat__["f" /* sendMessageFailure */])({ code: code, message: _message }));
 
         case 17:
         case 'end':
@@ -2111,7 +2116,7 @@ function fetchLoanSaga(action) {
 
                     _context.prev = 1;
                     _context.next = 4;
-                    return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["call"])(__WEBPACK_IMPORTED_MODULE_3__tools_api__["b" /* getJSON */], __WEBPACK_IMPORTED_MODULE_3__tools_api__["a" /* API_SERVER */] + '/chats/' + id);
+                    return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["call"])(__WEBPACK_IMPORTED_MODULE_3__tools_api__["c" /* getJSON */], __WEBPACK_IMPORTED_MODULE_3__tools_api__["a" /* API_SERVER */] + '/chats/' + id);
 
                 case 4:
                     data = _context.sent;
@@ -2314,8 +2319,9 @@ var vars = {
 "use strict";
 /* unused harmony export createHeader */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return API_SERVER; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return postJSON; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return getJSON; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return FIREBASE_SERVER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return postJSON; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return getJSON; });
 /* unused harmony export patchJSON */
 /* unused harmony export deleteJSON */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__("babel-runtime/regenerator");
@@ -2410,6 +2416,8 @@ var handleError = function () {
 }();
 
 var API_SERVER = "http://45.77.47.114:7778";
+
+var FIREBASE_SERVER = "https://us-central1-noburo-216104.cloudfunctions.net/line";
 
 
 

@@ -3,6 +3,7 @@ import { Table } from 'antd'
 import { connect } from 'react-redux'
 import Inputfield from './inputfield'
 import { fetchChat } from '../../redux/ducks/chat'
+import database from '../../firebase/firebase'
 import io from 'socket.io-client'
 import { API_SERVER } from '../../tools/api'
 
@@ -20,6 +21,28 @@ class MessageField extends Component {
         align: 'right',
       },
     ]
+    this.state = {
+      chatLog: [],
+      id: 'Uc72aacda842257e6ae27f0bb8d80cc13',
+    }
+    try {
+      //get data from firebase
+      const dataRef = database.ref(`Message/${this.state.id}`)
+      dataRef.on('value', snapshot => {
+        const data = []
+        snapshot.forEach(childSnapshot => {
+          data.push({
+            ...childSnapshot.val(),
+          })
+        })
+        this.setState({
+          chatLog: data,
+        })
+        console.log('data In messageField>>>', data)
+      })
+    } catch (error) {
+      console.log('error firebase in messageField >>>>', error)
+    }
     // this.socket = io(
     //   'https://us-central1-noburo-216104.cloudfunctions.net/line:9000'
     // )
@@ -34,28 +57,26 @@ class MessageField extends Component {
     //       console.log('sessionId>>>', sessionid)
     //     })
   }
-  componentDidMount() {
-    this.props.fetchChat({
-      id: 'Uc72aacda842257e6ae27f0bb8d80cc13',
-      platform: 'line',
-    })
-  }
+  // componentDidMount() {
+  //   this.props.fetchChat({
+  //     id: 'Uc72aacda842257e6ae27f0bb8d80cc13',
+  //     platform: 'line',
+  //   })
+  // }
   render() {
-    console.log('props>>>', this.props)
-    let chatData = ''
-    if (this.props.chats.data !== undefined) {
-      chatData = this.props.chats.data
-    }
-
+    // let chatLog = ''
+    // if (this.props.chats.data !== undefined) {
+    //   chatLog = this.props.chats.data
+    // }
     return (
       <div style={{ width: '100%' }}>
         <Table
-          dataSource={chatData}
+          dataSource={this.state.chatLog}
           columns={this.columns}
           pagination={false}
           scroll={{ y: 600 }}
         />
-        <Inputfield chats={this.props.chats.data} />
+        <Inputfield id={this.state.id} />
       </div>
     )
   }

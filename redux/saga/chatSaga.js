@@ -14,26 +14,25 @@ import { API_SERVER, getJSON, postJSON } from '../../tools/api'
 export function* fetchChatSaga(action) {
   const { id, platform } = action.payload
   if (platform === 'line') {
-    try {
-      //const data = yield call(getJSON, `${API_SERVER}/chats/line/${id}`)
-      const data = []
-
-      //get data from firebase
-      const dataRef = database.ref(`Message/${id}`)
-      yield dataRef.once('value', snapshot => {
-        console.log('snapshot>>>>', snapshot.val())
-        snapshot.forEach(childSnapshot => {
-          data.push({
-            ...childSnapshot.val(),
-          })
-        })
-      })
-
-      yield put(fetchChatSuccess({ data }))
-    } catch (error) {
-      const { code, message } = error
-      yield put(fetchChatFailure({ code, message }))
-    }
+    // ไม่จำเป็นแล้ว ลบได้เลย
+    // try {
+    //   //const data = yield call(getJSON, `${API_SERVER}/chats/line/${id}`)
+    //   const data = []
+    //   //get data from firebase
+    //   const dataRef = database.ref(`Message/${id}`)
+    //   yield dataRef.once('value', snapshot => {
+    //     console.log('snapshot>>>>', snapshot.val())
+    //     snapshot.forEach(childSnapshot => {
+    //       data.push({
+    //         ...childSnapshot.val(),
+    //       })
+    //     })
+    //   })
+    //   yield put(fetchChatSuccess({ data }))
+    // } catch (error) {
+    //   const { code, message } = error
+    //   yield put(fetchChatFailure({ code, message }))
+    // }
   }
 }
 export function* sendMessageSaga(action) {

@@ -7,6 +7,7 @@
     "dev": "cross-env NODE_ENV=develop node server.js"
   },
   "dependencies": {
+    "@line/bot-sdk": "^6.3.0",
     "antd": "^3.2.0",
     "autoprefixer": "^7.2.5",
     "child_process": "^1.0.2",
