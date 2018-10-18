@@ -85,9 +85,7 @@ module.exports =
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__inputfield__ = __webpack_require__("./component/chat/inputfield.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__redux_ducks_chat__ = __webpack_require__("./redux/ducks/chat.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__firebase_firebase__ = __webpack_require__("./firebase/firebase.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_socket_io_client__ = __webpack_require__("socket.io-client");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_socket_io_client___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_socket_io_client__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__tools_api__ = __webpack_require__("./tools/api.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__tools_api__ = __webpack_require__("./tools/api.js");
 var _jsxFileName = '/Users/admin/Desktop/bas/ittp-chat-frontend/component/chat/MessageField.js';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -101,7 +99,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 
 
 
@@ -142,24 +139,10 @@ var MessageField = function (_Component) {
         _this.setState({
           chatLog: data
         });
-        console.log('data In messageField>>>', data);
       });
     } catch (error) {
       console.log('error firebase in messageField >>>>', error);
     }
-    // this.socket = io(
-    //   'https://us-central1-noburo-216104.cloudfunctions.net/line:9000'
-    // )
-    //     this.socket.on('RECEIVE_MESSAGE', () => {
-    //       this.props.fetchChat({
-    //         id: 'Uc72aacda842257e6ae27f0bb8d80cc13',
-    //         platform: 'line',
-    //       })
-    //     })
-    //     this.socket.on('connect', function() {
-    //       var sessionid = socket.socket.sessionid
-    //       console.log('sessionId>>>', sessionid)
-    //     })
     return _this;
   }
   // componentDidMount() {
@@ -181,7 +164,7 @@ var MessageField = function (_Component) {
         'div',
         { style: { width: '100%' }, __source: {
             fileName: _jsxFileName,
-            lineNumber: 72
+            lineNumber: 57
           }
         },
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_antd__["Table"], {
@@ -191,12 +174,12 @@ var MessageField = function (_Component) {
           scroll: { y: 600 },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 73
+            lineNumber: 58
           }
         }),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__inputfield__["a" /* default */], { id: this.state.id, __source: {
             fileName: _jsxFileName,
-            lineNumber: 79
+            lineNumber: 64
           }
         })
       );
@@ -3061,13 +3044,6 @@ module.exports = require("redux-saga");
 /***/ (function(module, exports) {
 
 module.exports = require("redux-saga/effects");
-
-/***/ }),
-
-/***/ "socket.io-client":
-/***/ (function(module, exports) {
-
-module.exports = require("socket.io-client");
 
 /***/ }),
 
