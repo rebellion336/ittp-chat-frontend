@@ -1,32 +1,28 @@
-import {takeLatest,all,call,put} from 'redux-saga/effects'
+import { takeLatest, all, call, put } from 'redux-saga/effects'
 import {
-    FETCH_LOAN,
-    fetchLoanSuccess,
-    fetchLoanFailure,
-    BIND_ID,
-    bindId,
-    bindIdSuccess,
-    bindIdFailure
+  FETCH_LOAN,
+  fetchLoanSuccess,
+  fetchLoanFailure,
+  BIND_ID,
+  bindId,
+  bindIdSuccess,
+  bindIdFailure,
 } from '../ducks/loan'
-import {
-    API_SERVER,
-    getJSON,
-} from '../../tools/api'
+import { API_SERVER, getJSON } from '../../tools/api'
 
-export function* fetchLoanSaga(action){
-    const {id} = action.payload
-    //use api to fetch data from apiV2
-    try {
-        const data = yield call(
-            getJSON,
-            `${API_SERVER}/chats/${id}`
-        )
-        yield put(fetchLoanSuccess({ data }))
-    }
-    catch(error){
-        const { code, message } = error
-        yield put(fetchLoanFailure({ code, message }))
-    }
+export function* fetchLoanSaga(action) {
+  console.log('fetchLoanSaga')
+  const { id } = action.payload
+  //use api to fetch data from apiV2
+  try {
+    const data = yield call(getJSON, `${API_SERVER}/chats/${id}`)
+    console.log('data in loanSaga', data)
+    yield put(fetchLoanSuccess({ data }))
+  } catch (error) {
+    console.log('fecthLoanError')
+    const { code, message } = error
+    yield put(fetchLoanFailure({ code, message }))
+  }
 }
 
 // ยังเขียนไม่เสร์จ
@@ -50,11 +46,9 @@ export function* fetchLoanSaga(action){
 //     }
 // }
 
-
-
 export function* loanSagas() {
-    yield all([
-        takeLatest(FETCH_LOAN, fetchLoanSaga),
-        // takeLatest(BIND_ID, bindIdSaga)
-    ])
+  yield all([
+    takeLatest(FETCH_LOAN, fetchLoanSaga),
+    // takeLatest(BIND_ID, bindIdSaga)
+  ])
 }

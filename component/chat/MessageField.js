@@ -42,12 +42,12 @@ class MessageField extends Component {
       console.log('error firebase in messageField >>>>', error)
     }
   }
-  // componentDidMount() {
-  //   this.props.fetchChat({
-  //     id: 'Uc72aacda842257e6ae27f0bb8d80cc13',
-  //     platform: 'line',
-  //   })
-  // }
+  componentDidMount() {
+    this.props.fetchChat({
+      id: 'Uc72aacda842257e6ae27f0bb8d80cc13',
+      platform: 'line',
+    })
+  }
   render() {
     return (
       <div style={{ width: '100%' }}>

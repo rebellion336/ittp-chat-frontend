@@ -3,7 +3,6 @@ import { Input, Button } from 'antd'
 import { connect } from 'react-redux'
 import { sendMessage, fetchChat } from '../../redux/ducks/chat'
 import { API_SERVER, FIREBASE_SERVER, postJSON } from '../../tools/api'
-import database from '../../firebase/firebase'
 
 class Inputfield extends Component {
   constructor(props) {
