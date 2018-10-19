@@ -31,11 +31,8 @@ firebase
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     // User is signed in.
-    var isAnonymous = user.isAnonymous
-    var uid = user.uid
-    console.log('userLogin')
-    console.log('isAnonymous>>>>', isAnonymous)
-    console.log('uid', uid)
+    const isAnonymous = user.isAnonymous //ตรวจสอบว่า ผู้ใช้เข้าระบบแบบ Anonymous หรือเปล่า
+    const uid = user.uid // id ของผู้ใช้
   } else {
     // User is signed out.
     console.log('userlogout')

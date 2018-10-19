@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import { Form, Icon, Input, Button } from 'antd'
 import { connect } from 'react-redux'
-import { API_SERVER, FIREBASE_SERVER, postJSON } from '../../tools/api'
+import { FIREBASE_SERVER, postJSON } from '../../tools/api'
 import { validCitizenId } from '../../tools/validators'
 import { fetchLoan } from '../../redux/ducks/loan'
 
