@@ -49,9 +49,9 @@ class MessageField extends Component {
     //   id: 'Uc72aacda842257e6ae27f0bb8d80cc13',
     //   platform: 'line',
     // })
-    // this.props.setActiveUser({
-    //   id: 'Uc72aacda842257e6ae27f0bb8d80cc13',
-    // })
+    this.props.setActiveUser({
+      id: 'Uc72aacda842257e6ae27f0bb8d80cc13',
+    })
   }
   render() {
     return (
