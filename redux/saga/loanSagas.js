@@ -11,12 +11,10 @@ import {
 import { API_SERVER, getJSON } from '../../tools/api'
 
 export function* fetchLoanSaga(action) {
-  console.log('fetchLoanSaga')
   const { id } = action.payload
   //use api to fetch data from apiV2
   try {
     const data = yield call(getJSON, `${API_SERVER}/chats/${id}`)
-    console.log('data in loanSaga', data)
     yield put(fetchLoanSuccess({ data }))
   } catch (error) {
     console.log('fecthLoanError')

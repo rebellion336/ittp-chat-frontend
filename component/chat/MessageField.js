@@ -3,6 +3,7 @@ import { Table } from 'antd'
 import { connect } from 'react-redux'
 import Inputfield from './inputfield'
 import { fetchChat } from '../../redux/ducks/chat'
+import { setActiveUser } from '../../redux/ducks/activeUser'
 import database from '../../firebase/firebase'
 import { API_SERVER } from '../../tools/api'
 
@@ -24,6 +25,7 @@ class MessageField extends Component {
       chatLog: [],
       id: 'Uc72aacda842257e6ae27f0bb8d80cc13',
     }
+    console.log('this.props.id constructor>>>>>', this.props.activeUsers.id)
     try {
       //get data from firebase
       const dataRef = database.ref(`Message/${this.state.id}`)
@@ -42,12 +44,15 @@ class MessageField extends Component {
       console.log('error firebase in messageField >>>>', error)
     }
   }
-  // componentDidMount() {
-  //   this.props.fetchChat({
-  //     id: 'Uc72aacda842257e6ae27f0bb8d80cc13',
-  //     platform: 'line',
-  //   })
-  // }
+  componentDidMount() {
+    // this.props.fetchChat({
+    //   id: 'Uc72aacda842257e6ae27f0bb8d80cc13',
+    //   platform: 'line',
+    // })
+    this.props.setActiveUser({
+      id: 'Uc72aacda842257e6ae27f0bb8d80cc13',
+    })
+  }
   render() {
     return (
       <div style={{ width: '100%' }}>
@@ -65,10 +70,11 @@ class MessageField extends Component {
 const mapStateToProps = state => {
   return {
     chats: state.chat,
+    activeUsers: state.activeUser,
   }
 }
 
 export default connect(
   mapStateToProps,
-  { fetchChat }
+  { fetchChat, setActiveUser }
 )(MessageField)

@@ -7,7 +7,6 @@ const FETCH_LOAN_FAILURE = 'ittp-chat/chat/FETCH_LOAN_FAILURE'
 // const BIND_ID_FAILURE = 'ittp-chat/chat/BIND_ID_FAILURE'
 
 export const fetchLoan = ({ id }) => {
-  console.log('fetchLoan')
   return {
     type: FETCH_LOAN,
     payload: { id },
@@ -15,7 +14,6 @@ export const fetchLoan = ({ id }) => {
 }
 
 export const fetchLoanSuccess = ({ data }) => {
-  console.log('fetchLoanSuccess')
   return {
     type: FETCH_LOAN_SUCCESS,
     payload: { data },
@@ -54,7 +52,6 @@ const initialState = {
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case FETCH_LOAN: {
-      console.log('fetch loan reducer', action)
       return {
         ...state,
         loading: true,

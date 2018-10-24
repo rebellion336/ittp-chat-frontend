@@ -1,5 +1,4 @@
 import { takeLatest, all, call, put } from 'redux-saga/effects'
-import database from '../../firebase/firebase'
 import {
   FETCH_CHAT,
   SEND_MESSAGE,
