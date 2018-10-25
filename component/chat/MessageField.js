@@ -64,7 +64,7 @@ class MessageField extends Component {
           pagination={false}
           scroll={{ y: 540 }}
         />
-        <Inputfield id={this.state.id} />
+        <Inputfield id={this.props.activeId} />
       </div>
     )
   }

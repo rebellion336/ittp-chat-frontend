@@ -1,6 +1,6 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
-import { Row, Col, Table } from 'antd'
+import { Row, Col, Table, Badge } from 'antd'
 import MessageField from '../../component/chat/MessageField'
 import LoanAccount from '../../component/loan/loanAccount'
 import { fetchActiveUser } from '../../redux/ducks/activeUser'
@@ -13,6 +13,16 @@ class ContactList extends Component {
         title: 'รายชื่อลูกค้า',
         dataIndex: 'name',
         key: 'name',
+      },
+      {
+        render: record => {
+          return (
+            <Badge
+              count={record.count}
+              style={{ backgroundColor: '#88DDBB' }}
+            />
+          )
+        },
       },
     ]
     this.state = {
