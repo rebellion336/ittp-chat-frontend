@@ -31,7 +31,6 @@ class ContactList extends Component {
   }
 
   render() {
-    console.log('activeId >>>', this.state.activeId)
     if (this.props.activeUsers.data !== undefined) {
       const contactList = this.props.activeUsers.data
       return (
@@ -59,7 +58,11 @@ class ContactList extends Component {
         </Row>
       )
     }
-    return <center>Loading</center>
+    return (
+      <div style={{ textAlign: 'center', fontSize: '36px', paddingTop: '3%' }}>
+        Loading
+      </div>
+    )
   }
 }
 const mapStateToProps = state => {

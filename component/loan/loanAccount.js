@@ -13,7 +13,7 @@ class LoanAccount extends Component {
         title: 'ข้อมูลลูกค้า',
         dataIndex: 'loanId',
         key: 'loanId',
-        align: 'center',
+        // align: 'center',
       },
       {
         render: record => {
@@ -27,10 +27,14 @@ class LoanAccount extends Component {
       id: 'Uc72aacda842257e6ae27f0bb8d80cc13',
     }
   }
-  componentDidMount() {
-    this.props.fetchLoan({
-      id: this.state.id,
-    })
+
+  componentDidUpdate(prevProps) {
+    // Typical usage (don't forget to compare props)
+    if (this.props.activeId !== prevProps.activeId) {
+      this.props.fetchLoan({
+        id: this.props.activeId,
+      })
+    }
   }
 
   handleClickRow(record) {
@@ -41,6 +45,7 @@ class LoanAccount extends Component {
 
   render() {
     const { data } = this.props.loans
+    console.log('data in loanAccount', data)
     if (data !== undefined) {
       if (!data.length == 0) {
         return (
@@ -65,7 +70,22 @@ class LoanAccount extends Component {
       }
       return <BindingIdForm id={this.state.id} />
     }
-    return <div style={{ textAlign: 'center' }}>LOADING</div>
+    const initData = [
+      {
+        firstName: '',
+        lastName: '',
+        loanId: 'โปรดเลือกคู่สนทนา',
+      },
+    ]
+    //return <div style={{ textAlign: 'center' , fontSize : '24px' , paddingTop : '10px' }}>โปรดเลือกคู่สนทนา</div>
+    return (
+      <Table
+        style={{ cursor: 'pointer' }}
+        dataSource={initData}
+        columns={this.columns}
+        pagination={false}
+      />
+    )
   }
 }
 

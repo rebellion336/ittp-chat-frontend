@@ -11,11 +11,14 @@ class MessageField extends Component {
         title: 'การสนทนา',
         dataIndex: 'customerMessage',
         key: 'customerMessage',
+        align: 'left',
+        width: '50%',
       },
       {
         dataIndex: 'operatorMessage',
         key: 'operatorMessage',
         align: 'right',
+        width: '50%',
       },
     ]
     this.state = {
@@ -24,7 +27,6 @@ class MessageField extends Component {
           operatorMessage: 'โปรดเลือกคู่สนทนา',
         },
       ],
-      id: 'Uc72aacda842257e6ae27f0bb8d80cc13',
     }
   }
 
@@ -32,10 +34,9 @@ class MessageField extends Component {
     // Typical usage (don't forget to compare props)
     if (this.props.activeId !== prevProps.activeId) {
       if (this.props.activeId !== '') {
-        console.log('props.id in MessageField In if', this.props.activeId)
         try {
           //get data from firebase
-          const dataRef = database.ref(`Message/${this.state.id}`)
+          const dataRef = database.ref(`Message/${this.props.activeId}`)
           dataRef.on('value', snapshot => {
             const data = []
             snapshot.forEach(childSnapshot => {
@@ -61,7 +62,7 @@ class MessageField extends Component {
           dataSource={this.state.chatLog}
           columns={this.columns}
           pagination={false}
-          scroll={{ y: 545 }}
+          scroll={{ y: 540 }}
         />
         <Inputfield id={this.state.id} />
       </div>

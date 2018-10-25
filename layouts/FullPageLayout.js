@@ -6,7 +6,7 @@ const FullPageLayout = ({ children }) => {
   return (
     <div
       style={{
-        display: 'flex',
+        // display: 'flex',
         height: '100%',
         width: '100%',
       }}
