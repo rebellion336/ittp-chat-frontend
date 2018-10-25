@@ -1,21 +1,28 @@
 import { takeLatest, all, put } from 'redux-saga/effects'
 import {
-  SET_ACTIVE_USER,
-  setActiveUserSuccess,
-  setActiveUserFailure,
+  FETCH_ACTIVE_USER,
+  fetchActiveUserSuccess,
+  fetchActiveUserFailure,
 } from '../ducks/activeUser'
+import database from '../../firebase/firebase'
 
-export function* setActiveUserSagas(action) {
-  const { id } = action.payload
+export function* fetchActiveUserSagas(action) {
   try {
-    yield put(setActiveUserSuccess({ id }))
+    const data = []
+    const activeUserRef = database.ref('ActiveUser')
+    yield activeUserRef.once('value', snapshot => {
+      snapshot.forEach(childSnapshot => {
+        data.push(childSnapshot.val())
+      })
+    })
+    yield put(fetchActiveUserSuccess({ data }))
   } catch (error) {
-    console.log('error setActiveUserSagas>>>>', error)
+    console.log('error fetchActiveUserSagas>>>>', error)
     const { code, message } = error
-    yield put(setActiveUserFailure({ code, message }))
+    yield put(fetchActiveUserFailure({ code, message }))
   }
 }
 
 export function* activeUserSagas() {
-  yield all([takeLatest(SET_ACTIVE_USER, setActiveUserSagas)])
+  yield all([takeLatest(FETCH_ACTIVE_USER, fetchActiveUserSagas)])
 }

@@ -10,6 +10,7 @@ class LoanAccount extends Component {
     super(props)
     this.columns = [
       {
+        title: 'ข้อมูลลูกค้า',
         dataIndex: 'loanId',
         key: 'loanId',
         align: 'center',

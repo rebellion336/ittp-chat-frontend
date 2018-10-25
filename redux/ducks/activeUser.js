@@ -1,23 +1,25 @@
-export const SET_ACTIVE_USER = 'ittp-chat/activeUser/SET_ACTIVE_USER'
-const SET_ACTIVE_USER_SUCCESS = 'ittp-chat/activeUser/SET_ACTIVE_USER_SUCCESS'
-const SET_ACTIVE_USER_FAILURE = 'ittp-chat/activeUser/SET_ACTIVE_USER_FAILURE'
+export const FETCH_ACTIVE_USER = 'ittp-chat/activeUser/FETCH_ACTIVE_USER'
+const FETCH_ACTIVE_USER_SUCCESS =
+  'ittp-chat/activeUser/FETCH_ACTIVE_USER_SUCCESS'
+const FETCH_ACTIVE_USER_FAILURE =
+  'ittp-chat/activeUser/FETCH_ACTIVE_USER_FAILURE'
 
-export const setActiveUser = ({ id }) => {
+export const fetchActiveUser = () => {
   return {
-    type: SET_ACTIVE_USER,
-    payload: { id },
+    type: FETCH_ACTIVE_USER,
+    payload: {},
   }
 }
 
-export const setActiveUserSuccess = ({ id }) => {
+export const fetchActiveUserSuccess = ({ data }) => {
   return {
-    type: SET_ACTIVE_USER_SUCCESS,
-    payload: { id },
+    type: FETCH_ACTIVE_USER_SUCCESS,
+    payload: { data },
   }
 }
 
-export const setActiveUserFailure = () => ({
-  type: SET_ACTIVE_USER_FAILURE,
+export const fetchActiveUserFailure = () => ({
+  type: FETCH_ACTIVE_USER_FAILURE,
   payload: { code, message },
 })
 
@@ -28,21 +30,21 @@ const initialState = {
 
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case SET_ACTIVE_USER: {
+    case FETCH_ACTIVE_USER: {
       return {
         ...state,
         loading: true,
       }
     }
-    case SET_ACTIVE_USER_SUCCESS: {
-      const { id } = action.payload
+    case FETCH_ACTIVE_USER_SUCCESS: {
+      const { data } = action.payload
       return {
         ...state,
         loading: false,
-        id: id,
+        data: data,
       }
     }
-    case SET_ACTIVE_USER_FAILURE: {
+    case FETCH_ACTIVE_USER_FAILURE: {
       return {
         ...state,
         loading: false,
