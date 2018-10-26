@@ -1,9 +1,11 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
-import { Row, Col, Table, Badge } from 'antd'
+import { Row, Col, Table, Badge, Icon } from 'antd'
 import MessageField from '../../component/chat/MessageField'
 import LoanAccount from '../../component/loan/loanAccount'
 import { fetchActiveUser } from '../../redux/ducks/activeUser'
+import database from '../../firebase/firebase'
+import { patchJSON, FIREBASE_SERVER } from '../../tools/api'
 
 class ContactList extends Component {
   constructor(props) {
@@ -24,25 +26,54 @@ class ContactList extends Component {
           )
         },
       },
+      {
+        render: record => {
+          return (
+            <Icon
+              type="close-circle"
+              theme="outlined"
+              style={{ fontSize: '20px', paddingTop: '5px' }}
+              onClick={() => this.unActiveUser(record.userId)}
+            />
+          )
+        },
+      },
     ]
     this.state = {
       activeId: '',
+      activeUserData: undefined,
     }
-  }
-  componentDidMount() {
-    this.props.fetchActiveUser()
+    try {
+      const activeUserRef = database.ref('ActiveUser')
+      activeUserRef.on('value', snapshot => {
+        const data = []
+        snapshot.forEach(childSnapshot => {
+          data.push(childSnapshot.val())
+        })
+        this.setState({
+          activeUserData: data,
+        })
+      })
+    } catch (error) {
+      console.log('error at cintactList firebase', error)
+    }
+    this.unActiveUser = this.unActiveUser.bind()
   }
 
-  handleClickRow(record) {
-    console.log('click!!! >>>', record.userId)
+  async unActiveUser(userId) {
+    await patchJSON(`${FIREBASE_SERVER}/unActiveUser/${userId}`)
+  }
+
+  async handleClickRow(record) {
     this.setState({
       activeId: record.userId,
     })
+    await patchJSON(`${FIREBASE_SERVER}/patchMessageCount/${record.userId}`)
   }
 
   render() {
-    if (this.props.activeUsers.data !== undefined) {
-      const contactList = this.props.activeUsers.data
+    if (this.state.activeUserData !== undefined) {
+      const contactList = this.state.activeUserData
       return (
         <Row style={{ width: '100%' }}>
           <Col span={5}>

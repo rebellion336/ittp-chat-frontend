@@ -1,4 +1,4 @@
-import { takeLatest, all, put } from 'redux-saga/effects'
+import { takeLatest, all, put, take } from 'redux-saga/effects'
 import {
   FETCH_ACTIVE_USER,
   fetchActiveUserSuccess,
@@ -15,6 +15,7 @@ export function* fetchActiveUserSagas(action) {
         data.push(childSnapshot.val())
       })
     })
+
     yield put(fetchActiveUserSuccess({ data }))
   } catch (error) {
     console.log('error fetchActiveUserSagas>>>>', error)

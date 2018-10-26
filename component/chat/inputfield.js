@@ -65,12 +65,6 @@ class Inputfield extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    chats: state.chat,
-  }
-}
-
 export default connect(
   null,
   { sendMessage, fetchChat }
