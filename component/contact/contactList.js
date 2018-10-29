@@ -15,6 +15,7 @@ class ContactList extends Component {
         title: 'รายชื่อลูกค้า',
         dataIndex: 'name',
         key: 'name',
+        width: '75%',
       },
       {
         render: record => {
@@ -25,6 +26,7 @@ class ContactList extends Component {
             />
           )
         },
+        width: '10%',
       },
       {
         render: record => {
@@ -37,6 +39,7 @@ class ContactList extends Component {
             />
           )
         },
+        width: '15%',
       },
     ]
     this.state = {

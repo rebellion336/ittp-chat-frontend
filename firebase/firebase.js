@@ -9,6 +9,8 @@ const config = {
   messagingSenderId: '299165439192',
 }
 
+const provider = new firebase.auth.GoogleAuthProvider()
+
 if (!firebase.apps.length) {
   firebase.initializeApp(config)
 }
@@ -33,6 +35,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     // User is signed in.
     const isAnonymous = user.isAnonymous //ตรวจสอบว่า ผู้ใช้เข้าระบบแบบ Anonymous หรือเปล่า
     const uid = user.uid // id ของผู้ใช้
+    console.log('UserLogin ID>>>', uid)
   } else {
     // User is signed out.
     console.log('userlogout')
