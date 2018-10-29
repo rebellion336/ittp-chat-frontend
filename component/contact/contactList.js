@@ -4,7 +4,7 @@ import { Row, Col, Table, Badge, Icon } from 'antd'
 import MessageField from '../../component/chat/MessageField'
 import LoanAccount from '../../component/loan/loanAccount'
 import { fetchActiveUser } from '../../redux/ducks/activeUser'
-import database from '../../firebase/firebase'
+import database, { firebase } from '../../firebase/firebase'
 import { patchJSON, FIREBASE_SERVER } from '../../tools/api'
 
 class ContactList extends Component {
@@ -46,20 +46,48 @@ class ContactList extends Component {
       activeId: '',
       activeUserData: undefined,
     }
-    try {
-      const activeUserRef = database.ref('ActiveUser')
-      activeUserRef.on('value', snapshot => {
-        const data = []
-        snapshot.forEach(childSnapshot => {
-          data.push(childSnapshot.val())
-        })
-        this.setState({
-          activeUserData: data,
-        })
-      })
-    } catch (error) {
-      console.log('error at cintactList firebase', error)
-    }
+    //check if user is signed in
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        // User is signed in.
+        const displayName = user.displayName
+        const email = user.email
+        const emailVerified = user.emailVerified
+        const photoURL = user.photoURL
+        const isAnonymous = user.isAnonymous
+        const uid = user.uid
+        const providerData = user.providerData
+        // ...
+      } else {
+        // No user is signed in.
+        // then redirect to google login to sign user up
+        firebase
+          .auth()
+          .signInWithRedirect(provider)
+          .then(function(result) {
+            // This gives you a Google Access Token. You can use it to access the Google API.
+            const token = result.credential.accessToken
+            // The signed-in user info.
+            const user = result.user
+            console.log('token>>', token)
+            console.log('user>>>', user)
+          })
+          .catch(function(error) {
+            // Handle Errors here.
+            const errorCode = error.code
+            const errorMessage = error.message
+            // The email of the user's account used.
+            const email = error.email
+            // The firebase.auth.AuthCredential type that was used.
+            const credential = error.credential
+
+            console.log('errorCode>>', errorCode)
+            console.log('errorMessage>>>', errorMessage)
+            console.log('email error>>>', email)
+            console.log('credential error', credential)
+          })
+      }
+    })
     this.unActiveUser = this.unActiveUser.bind()
   }
 
@@ -72,6 +100,23 @@ class ContactList extends Component {
       activeId: record.userId,
     })
     await patchJSON(`${FIREBASE_SERVER}/patchMessageCount/${record.userId}`)
+  }
+
+  componentDidMount() {
+    try {
+      const activeUserRef = database.ref('ActiveUser')
+      activeUserRef.on('value', snapshot => {
+        const data = []
+        snapshot.forEach(childSnapshot => {
+          data.push(childSnapshot.val())
+        })
+        this.setState({
+          activeUserData: data,
+        })
+      })
+    } catch (error) {
+      console.log('error at contactList firebase', error)
+    }
   }
 
   render() {

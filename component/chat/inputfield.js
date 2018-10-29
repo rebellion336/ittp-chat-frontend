@@ -2,7 +2,7 @@ import { Component } from 'react'
 import { Input, Button } from 'antd'
 import { connect } from 'react-redux'
 import { sendMessage, fetchChat } from '../../redux/ducks/chat'
-import { API_SERVER, FIREBASE_SERVER, postJSON } from '../../tools/api'
+import { FIREBASE_SERVER, postJSON } from '../../tools/api'
 
 class Inputfield extends Component {
   constructor(props) {
@@ -32,10 +32,6 @@ class Inputfield extends Component {
       } catch (error) {
         console.error(error)
       }
-      this.props.fetchChat({
-        id: id,
-        platform: 'line',
-      })
     }
     this.setState({
       messageInputted: '',
@@ -67,5 +63,5 @@ class Inputfield extends Component {
 
 export default connect(
   null,
-  { sendMessage, fetchChat }
+  { sendMessage }
 )(Inputfield)
