@@ -29,12 +29,13 @@ exports['default'] = {
     TimePicker: _it_IT6['default'],
     Calendar: _it_IT8['default'],
     Table: {
-        filterTitle: 'Menu Filtro',
+        filterTitle: 'Menù Filtro',
         filterConfirm: 'OK',
         filterReset: 'Reset',
         emptyText: 'Nessun dato',
         selectAll: 'Seleziona pagina corrente',
-        selectInvert: 'Selezionare Inverti'
+        selectInvert: 'Inverti selezione nella pagina corrente',
+        sortTitle: 'Ordina'
     },
     Modal: {
         okText: 'OK',

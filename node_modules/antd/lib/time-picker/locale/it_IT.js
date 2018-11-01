@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 var locale = {
-    placeholder: 'Selezionare il tempo'
+    placeholder: 'Selezionare l\'orario'
 };
 exports['default'] = locale;
 module.exports = exports['default'];

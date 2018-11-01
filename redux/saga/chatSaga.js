@@ -8,7 +8,7 @@ import {
   sendMessageSuccess,
   sendMessageFailure,
 } from '../ducks/chat'
-import { API_SERVER, getJSON, postJSON } from '../../tools/api'
+import { API_SERVER, postJSON } from '../../tools/api'
 
 export function* fetchChatSaga(action) {
   const { id, platform } = action.payload
