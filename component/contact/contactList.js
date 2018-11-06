@@ -4,8 +4,9 @@ import { Row, Col, Table, Badge, Icon, Tabs } from 'antd'
 import MessageField from '../../component/chat/MessageField'
 import LoanAccount from '../../component/loan/loanAccount'
 import { fetchActiveUser } from '../../redux/ducks/activeUser'
-import database, { firebase } from '../../firebase/firebase'
+import database, { provider, firebase } from '../../firebase/firebase'
 import { patchJSON, FIREBASE_SERVER } from '../../tools/api'
+import { Button } from 'antd/lib/radio'
 
 const TabPane = Tabs.TabPane
 
@@ -57,9 +58,10 @@ class ContactList extends Component {
       botResponseData: undefined,
       status: 'Loading',
       inactiveUserData: undefined,
+      displayName: '',
     }
     //check if user is signed in
-    firebase.auth().onAuthStateChanged(function(user) {
+    firebase.auth().onAuthStateChanged(user => {
       if (user) {
         // User is signed in.
         // infomation that User Obj. have
@@ -70,10 +72,15 @@ class ContactList extends Component {
         const isAnonymous = user.isAnonymous //ture or falue
         const uid = user.uid // unique Id for user
         const providerData = user.providerData
+        console.log('user>>>>>>>>', user)
+        this.setState({
+          displayName: displayName,
+        })
         // ...
       } else {
         // No user is signed in.
         // then redirect to google login to sign user up
+        console.log('go to login')
         firebase
           .auth()
           .signInWithRedirect(provider)
@@ -91,10 +98,6 @@ class ContactList extends Component {
             const email = error.email
             const credential = error.credential
 
-            this.setState({
-              status: 'Google Login Error',
-            })
-
             console.log('errorCode>>', errorCode)
             console.log('errorMessage>>>', errorMessage)
             console.log('email error>>>', email)
@@ -102,7 +105,8 @@ class ContactList extends Component {
           })
       }
     })
-    this.unActiveUser = this.unActiveUser.bind()
+    this.unActiveUser = this.unActiveUser.bind(this)
+    this.signOut = this.signOut.bind(this)
   }
 
   async unActiveUser(userId) {
@@ -114,6 +118,20 @@ class ContactList extends Component {
       activeId: record.userId,
     })
     await patchJSON(`${FIREBASE_SERVER}/patchMessageCount/${record.userId}`)
+  }
+
+  async signOut() {
+    await firebase
+      .auth()
+      .signOut()
+      .then(function() {
+        // Sign-out successful.
+        console.log('user signed OUT')
+      })
+      .catch(function(error) {
+        // An error happened.
+        console.log('signed out error')
+      })
   }
 
   componentDidMount() {
@@ -162,6 +180,8 @@ class ContactList extends Component {
         <Row style={{ width: '100%', height: '100%' }}>
           <Col span={5} style={{ height: '100%' }}>
             <div style={{ height: '50%' }}>
+              สวัสดี >>>>> {this.state.displayName}
+              <Button onClick={this.signOut}>signed out</Button>
               <Tabs defaultActiveKey="ADMIN" type="card">
                 <TabPane tab="ADMIN" key="ADMIN">
                   <Table
