@@ -88,7 +88,7 @@ class MessageField extends Component {
 
   render() {
     return (
-      <div style={{ width: '100%' }}>
+      <div style={{ width: '100%', height: '100%' }}>
         <Table
           dataSource={this.state.chatLog}
           columns={this.columns}

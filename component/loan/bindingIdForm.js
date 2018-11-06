@@ -20,7 +20,6 @@ class BindingIdForm extends Component {
       if (!err) {
         const { citizenId, userName, userLastName, phoneNumber } = values
         const { id } = this.props
-        console.log('id>>>', id)
         try {
           const value = {
             userId: id,
@@ -30,9 +29,7 @@ class BindingIdForm extends Component {
             phoneNumber,
           }
           //await postJSON(`${API_SERVER}/chats/line/binding`, value)
-          console.log('firebase API start')
           await postJSON(`${FIREBASE_SERVER}/bindId`, value)
-          console.log('END firebase API')
           this.props.fetchLoan({ id })
         } catch (error) {
           console.error(error)
@@ -62,12 +59,11 @@ class BindingIdForm extends Component {
               },
             ],
           })(
-            <Search
+            <Input
               prefix={
                 <Icon type="idcard" style={{ color: 'rgba(0,0,0,.25)' }} />
               }
               placeholder="บัตรประชาชนของลูกค้า"
-              enterButton="ตรวจสอบ"
             />
           )}
         </FormItem>

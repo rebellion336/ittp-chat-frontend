@@ -12,6 +12,13 @@ const TabPane = Tabs.TabPane
 class ContactList extends Component {
   constructor(props) {
     super(props)
+    this.inActiveColumns = [
+      {
+        title: 'inActiveUser',
+        dataIndex: 'name',
+        key: 'name',
+      },
+    ]
     this.columns = [
       {
         title: 'รายชื่อลูกค้า',
@@ -49,6 +56,7 @@ class ContactList extends Component {
       activeUserData: undefined,
       botResponseData: undefined,
       status: 'Loading',
+      inactiveUserData: undefined,
     }
     //check if user is signed in
     firebase.auth().onAuthStateChanged(function(user) {
@@ -130,6 +138,16 @@ class ContactList extends Component {
           botResponseData: botResponseData,
         })
       })
+      const inactiveUserRef = database.ref('InactiveUser')
+      inactiveUserRef.on('value', snapshot => {
+        const inactiveUserData = []
+        snapshot.forEach(childSnapshot => {
+          inactiveUserData.push(childSnapshot.val())
+        })
+        this.setState({
+          inactiveUserData: inactiveUserData,
+        })
+      })
     } catch (error) {
       console.log('error at contactList firebase', error)
     }
@@ -139,41 +157,60 @@ class ContactList extends Component {
     if (this.state.activeUserData !== undefined) {
       const contactList = this.state.activeUserData
       const botResponseList = this.state.botResponseData
+      const inactiveUserList = this.state.inactiveUserData
       return (
-        <Row style={{ width: '100%' }}>
-          <Col span={5}>
-            <Tabs defaultActiveKey="ADMIN" type="card">
-              <TabPane tab="ADMIN" key="ADMIN">
-                <Table
-                  dataSource={contactList}
-                  columns={this.columns}
-                  pagination={false}
-                  onRow={record => {
-                    return {
-                      onClick: () => {
-                        this.handleClickRow(record)
-                      },
-                    }
-                  }}
-                />
-              </TabPane>
-              <TabPane tab="BOT" key="BOT">
-                <Table
-                  dataSource={botResponseList}
-                  columns={this.columns}
-                  pagination={false}
-                  onRow={record => {
-                    return {
-                      onClick: () => {
-                        this.handleClickRow(record)
-                      },
-                    }
-                  }}
-                />
-              </TabPane>
-            </Tabs>
+        <Row style={{ width: '100%', height: '100%' }}>
+          <Col span={5} style={{ height: '100%' }}>
+            <div style={{ height: '50%' }}>
+              <Tabs defaultActiveKey="ADMIN" type="card">
+                <TabPane tab="ADMIN" key="ADMIN">
+                  <Table
+                    dataSource={contactList}
+                    columns={this.columns}
+                    pagination={false}
+                    scroll={{ y: 200 }}
+                    onRow={record => {
+                      return {
+                        onClick: () => {
+                          this.handleClickRow(record)
+                        },
+                      }
+                    }}
+                  />
+                </TabPane>
+                <TabPane tab="BOT" key="BOT">
+                  <Table
+                    dataSource={botResponseList}
+                    columns={this.columns}
+                    pagination={false}
+                    onRow={record => {
+                      return {
+                        onClick: () => {
+                          this.handleClickRow(record)
+                        },
+                      }
+                    }}
+                  />
+                </TabPane>
+              </Tabs>
+            </div>
+            <div style={{ height: '48%' }}>
+              <Table
+                dataSource={inactiveUserList}
+                columns={this.inActiveColumns}
+                pagination={false}
+                scroll={{ y: 200 }}
+                onRow={record => {
+                  return {
+                    onClick: () => {
+                      this.handleClickRow(record)
+                    },
+                  }
+                }}
+              />
+            </div>
           </Col>
-          <Col span={12}>
+          <Col span={12} style={{ height: '100%' }}>
             <MessageField activeId={this.state.activeId} />
           </Col>
           <Col span={7}>
