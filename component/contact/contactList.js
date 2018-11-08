@@ -190,7 +190,9 @@ class ContactList extends Component {
               position: 'relative',
             }}
           >
-            <div style={{ display: 'flex', position: 'relative' }}>
+            <div
+              style={{ display: 'flex', height: '13%', position: 'relative' }}
+            >
               <Menu mode="vertical" style={{ width: '100%' }}>
                 <Menu.Item style={{ fontSize: '20px' }}>
                   ITTP Customer Service
@@ -210,12 +212,7 @@ class ContactList extends Component {
 
             <div
               class="scroll-container"
-              style={{
-                width: '100%',
-                height: '87%',
-                float: 'left',
-                position: 'relative',
-              }}
+              style={{ width: '100%', height: '87%' }}
             >
               test
               <br />
