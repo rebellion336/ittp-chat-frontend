@@ -1,6 +1,6 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
-import { Row, Col, Table, Badge, Icon, Tabs } from 'antd'
+import { Row, Col, Table, Badge, Icon, Tabs, Menu } from 'antd'
 import MessageField from '../../component/chat/MessageField'
 import LoanAccount from '../../component/loan/loanAccount'
 import { fetchActiveUser } from '../../redux/ducks/activeUser'
@@ -9,6 +9,7 @@ import { patchJSON, FIREBASE_SERVER } from '../../tools/api'
 import { Button } from 'antd/lib/radio'
 
 const TabPane = Tabs.TabPane
+const SubMenu = Menu.SubMenu
 
 class ContactList extends Component {
   constructor(props) {
@@ -178,10 +179,148 @@ class ContactList extends Component {
       const inactiveUserList = this.state.inactiveUserData
       return (
         <Row style={{ width: '100%', height: '100%' }}>
-          <Col span={5} style={{ height: '100%' }}>
-            <div style={{ height: '50%' }}>
-              สวัสดี >>>>> {this.state.displayName}
-              <Button onClick={this.signOut}>signed out</Button>
+          <Col
+            span={5}
+            style={{
+              height: '100%',
+              background: '#FFFFFF',
+              borderRight: 'solid',
+              borderWidth: '0.5px',
+              overflow: 'hidden',
+              position: 'relative',
+            }}
+          >
+            <div style={{ display: 'flex', position: 'relative' }}>
+              <Menu mode="vertical" style={{ width: '100%' }}>
+                <Menu.Item style={{ fontSize: '20px' }}>
+                  ITTP Customer Service
+                </Menu.Item>
+                <SubMenu
+                  title={
+                    <span>
+                      <Icon type="user" />
+                      <span>{this.state.displayName}</span>
+                    </span>
+                  }
+                >
+                  <Menu.Item onClick={this.signOut}>Signed Out</Menu.Item>
+                </SubMenu>
+              </Menu>
+            </div>
+
+            <div
+              class="scroll-container"
+              style={{
+                width: '100%',
+                height: '87%',
+                float: 'left',
+                position: 'relative',
+              }}
+            >
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              test
+              <br />
+              END
+            </div>
+
+            {/* <div style={{ height: '43.2%' }}>
               <Tabs defaultActiveKey="ADMIN" type="card">
                 <TabPane tab="ADMIN" key="ADMIN">
                   <Table
@@ -214,7 +353,7 @@ class ContactList extends Component {
                 </TabPane>
               </Tabs>
             </div>
-            <div style={{ height: '48%' }}>
+            <div style={{ height: '43.2%' }}>
               <Table
                 dataSource={inactiveUserList}
                 columns={this.inActiveColumns}
@@ -228,7 +367,7 @@ class ContactList extends Component {
                   }
                 }}
               />
-            </div>
+            </div> */}
           </Col>
           <Col span={12} style={{ height: '100%' }}>
             <MessageField activeId={this.state.activeId} />
@@ -236,9 +375,15 @@ class ContactList extends Component {
           <Col span={7}>
             <LoanAccount activeId={this.state.activeId} />
           </Col>
-          <style jsx global>{`
+          <style>{`
             .ant-tabs-bar {
               margin: 0px !important;
+            }
+            .scroll-container {
+              overflow: hidden;
+            } 
+            .scroll-container:hover {
+              overflow-y: auto;
             }
           `}</style>
         </Row>
