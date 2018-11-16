@@ -6,9 +6,7 @@ import LoanAccount from '../../component/loan/loanAccount'
 import { fetchActiveUser } from '../../redux/ducks/activeUser'
 import database, { provider, firebase } from '../../firebase/firebase'
 import { patchJSON, FIREBASE_SERVER } from '../../tools/api'
-import { Button } from 'antd/lib/radio'
 
-const TabPane = Tabs.TabPane
 const SubMenu = Menu.SubMenu
 
 class ContactList extends Component {
@@ -60,6 +58,7 @@ class ContactList extends Component {
       status: 'Loading',
       inactiveUserData: undefined,
       displayName: '',
+      openKeys: ['ADMIN'],
     }
     //check if user is signed in
     firebase.auth().onAuthStateChanged(user => {
@@ -108,15 +107,16 @@ class ContactList extends Component {
     })
     this.unActiveUser = this.unActiveUser.bind(this)
     this.signOut = this.signOut.bind(this)
+    this.onOpenChange = this.onOpenChange.bind(this)
   }
 
   async unActiveUser(userId) {
     await patchJSON(`${FIREBASE_SERVER}/unActiveUser/${userId}`)
   }
 
-  async handleClickRow(record) {
+  async handleClickRow(userId) {
     this.setState({
-      activeId: record.userId,
+      activeId: userId,
     })
     await patchJSON(`${FIREBASE_SERVER}/patchMessageCount/${record.userId}`)
   }
@@ -140,8 +140,24 @@ class ContactList extends Component {
       const activeUserRef = database.ref('ActiveUser')
       activeUserRef.on('value', snapshot => {
         const activeUserData = []
+        //const list = []
         snapshot.forEach(childSnapshot => {
-          activeUserData.push(childSnapshot.val())
+          //activeUserData.push(childSnapshot.val())
+          activeUserData.push(
+            <Menu.Item key={childSnapshot.val().userId}>
+              {childSnapshot.val().name}
+              <Icon
+                type="close-circle"
+                theme="outlined"
+                style={{
+                  fontSize: '20px',
+                  paddingTop: '10px',
+                  float: 'right',
+                }}
+                onClick={() => this.unActiveUser(childSnapshot.val().userId)}
+              />
+            </Menu.Item>
+          )
         })
         this.setState({
           activeUserData: activeUserData,
@@ -151,7 +167,21 @@ class ContactList extends Component {
       botResponseRef.on('value', snapshot => {
         const botResponseData = []
         snapshot.forEach(childSnapshot => {
-          botResponseData.push(childSnapshot.val())
+          botResponseData.push(
+            <Menu.Item key={childSnapshot.val().userId}>
+              {childSnapshot.val().name}
+              <Icon
+                type="close-circle"
+                theme="outlined"
+                style={{
+                  fontSize: '20px',
+                  paddingTop: '10px',
+                  float: 'right',
+                }}
+                onClick={() => this.unActiveUser(childSnapshot.val().userId)}
+              />
+            </Menu.Item>
+          )
         })
         this.setState({
           botResponseData: botResponseData,
@@ -161,7 +191,11 @@ class ContactList extends Component {
       inactiveUserRef.on('value', snapshot => {
         const inactiveUserData = []
         snapshot.forEach(childSnapshot => {
-          inactiveUserData.push(childSnapshot.val())
+          inactiveUserData.push(
+            <Menu.Item key={childSnapshot.val().userId}>
+              {childSnapshot.val().name}
+            </Menu.Item>
+          )
         })
         this.setState({
           inactiveUserData: inactiveUserData,
@@ -169,6 +203,21 @@ class ContactList extends Component {
       })
     } catch (error) {
       console.log('error at contactList firebase', error)
+    }
+  }
+
+  rootSubmenuKeys = ['ADMIN', 'BotResponse', 'InactiveUser']
+
+  onOpenChange = openKeys => {
+    const latestOpenKey = openKeys.find(
+      key => this.state.openKeys.indexOf(key) === -1
+    )
+    if (this.rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
+      this.setState({ openKeys })
+    } else {
+      this.setState({
+        openKeys: latestOpenKey ? [latestOpenKey] : [],
+      })
     }
   }
 
@@ -188,11 +237,11 @@ class ContactList extends Component {
               borderWidth: '0.5px',
               overflow: 'hidden',
               position: 'relative',
+              display: 'flex',
+              flexDirection: 'column',
             }}
           >
-            <div
-              style={{ display: 'flex', height: '13%', position: 'relative' }}
-            >
+            <div style={{ height: '15%', position: 'relative' }}>
               <Menu mode="vertical" style={{ width: '100%' }}>
                 <Menu.Item style={{ fontSize: '20px' }}>
                   ITTP Customer Service
@@ -212,159 +261,61 @@ class ContactList extends Component {
 
             <div
               class="scroll-container"
-              style={{ width: '100%', height: '87%' }}
+              style={{
+                width: '100%',
+                height: '85%',
+                position: 'relative',
+              }}
             >
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              test
-              <br />
-              END
-            </div>
-
-            {/* <div style={{ height: '43.2%' }}>
-              <Tabs defaultActiveKey="ADMIN" type="card">
-                <TabPane tab="ADMIN" key="ADMIN">
-                  <Table
-                    dataSource={contactList}
-                    columns={this.columns}
-                    pagination={false}
-                    scroll={{ y: 200 }}
-                    onRow={record => {
-                      return {
-                        onClick: () => {
-                          this.handleClickRow(record)
-                        },
-                      }
-                    }}
-                  />
-                </TabPane>
-                <TabPane tab="BOT" key="BOT">
-                  <Table
-                    dataSource={botResponseList}
-                    columns={this.columns}
-                    pagination={false}
-                    onRow={record => {
-                      return {
-                        onClick: () => {
-                          this.handleClickRow(record)
-                        },
-                      }
-                    }}
-                  />
-                </TabPane>
-              </Tabs>
-            </div>
-            <div style={{ height: '43.2%' }}>
-              <Table
-                dataSource={inactiveUserList}
-                columns={this.inActiveColumns}
-                pagination={false}
-                scroll={{ y: 200 }}
-                onRow={record => {
-                  return {
-                    onClick: () => {
-                      this.handleClickRow(record)
-                    },
-                  }
+              <Menu
+                mode="inline"
+                openKeys={this.state.openKeys}
+                onOpenChange={this.onOpenChange}
+                style={{ width: '100%' }}
+                onClick={({ key }) => {
+                  this.handleClickRow(key)
                 }}
-              />
-            </div> */}
+              >
+                <SubMenu
+                  key="ADMIN"
+                  title={
+                    <span>
+                      <Icon type="user" />
+                      <span>ADMIN</span>
+                    </span>
+                  }
+                  children={contactList}
+                />
+
+                <SubMenu
+                  key="BotResponse"
+                  title={
+                    <span>
+                      <Icon type="user" />
+                      <span>BotResponse</span>
+                    </span>
+                  }
+                  onClick={({ key }) => {
+                    this.handleClickRow(key)
+                  }}
+                  children={botResponseList}
+                />
+
+                <SubMenu
+                  key="InactiveUser"
+                  title={
+                    <span>
+                      <Icon type="user" />
+                      <span>InactiveUser</span>
+                    </span>
+                  }
+                  onClick={({ key }) => {
+                    this.handleClickRow(key)
+                  }}
+                  children={inactiveUserList}
+                />
+              </Menu>
+            </div>
           </Col>
           <Col span={12} style={{ height: '100%' }}>
             <MessageField activeId={this.state.activeId} />

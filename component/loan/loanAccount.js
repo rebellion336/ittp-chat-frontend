@@ -45,7 +45,6 @@ class LoanAccount extends Component {
 
   render() {
     const { data } = this.props.loans
-    console.log('data in loanAccount', data)
     if (data !== undefined) {
       if (!data.length == 0) {
         return (

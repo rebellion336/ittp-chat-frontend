@@ -35,10 +35,10 @@ class MessageField extends Component {
     // this.scrollToBottom({ block: 'end', behavior: 'smooth' })
     // Typical usage (don't forget to compare props)
     if (this.props.activeId !== prevProps.activeId) {
+      this.setState({
+        loading: true,
+      })
       if (this.props.activeId !== '') {
-        this.setState({
-          loading: true,
-        })
         try {
           //get data from firebase
           const dataRef = database.ref(`Message/${this.props.activeId}`)
@@ -94,7 +94,7 @@ class MessageField extends Component {
           columns={this.columns}
           pagination={false}
           loading={this.state.loading}
-          scroll={{ y: 600 }}
+          scroll={{ y: 540 }}
         />
         <Inputfield id={this.props.activeId} />
       </div>
