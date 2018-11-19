@@ -241,7 +241,7 @@ class ContactList extends Component {
               flexDirection: 'column',
             }}
           >
-            <div style={{ height: '15%', position: 'relative' }}>
+            <div style={{ position: 'relative' }}>
               <Menu mode="vertical" style={{ width: '100%' }}>
                 <Menu.Item style={{ fontSize: '20px' }}>
                   ITTP Customer Service
@@ -263,7 +263,6 @@ class ContactList extends Component {
               class="scroll-container"
               style={{
                 width: '100%',
-                height: '85%',
                 position: 'relative',
               }}
             >

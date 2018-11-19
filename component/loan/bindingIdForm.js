@@ -6,7 +6,6 @@ import { validCitizenId } from '../../tools/validators'
 import { fetchLoan } from '../../redux/ducks/loan'
 
 const FormItem = Form.Item
-const Search = Input.Search
 
 class BindingIdForm extends Component {
   constructor(props) {

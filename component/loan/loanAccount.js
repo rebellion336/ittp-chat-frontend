@@ -24,7 +24,6 @@ class LoanAccount extends Component {
     ]
     this.state = {
       loanData: '',
-      id: 'Uc72aacda842257e6ae27f0bb8d80cc13',
     }
   }
 

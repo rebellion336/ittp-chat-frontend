@@ -12,6 +12,7 @@ class LoanInfo extends Component {
       // รออัพ apiV2 ถึงใช้ได้
       // ใช้เซิฟ test อยู่
       const minimumBalance = loanData.minDue - loanData.minPaid
+      console.log('loanData', loanData)
       return (
         <div>
           <Card>
