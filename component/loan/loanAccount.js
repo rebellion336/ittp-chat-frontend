@@ -43,6 +43,7 @@ class LoanAccount extends Component {
   }
 
   render() {
+    console.log('props', this.props)
     const { data } = this.props.loans
     if (data !== undefined) {
       if (!data.length == 0) {
@@ -66,7 +67,7 @@ class LoanAccount extends Component {
           </div>
         )
       }
-      return <BindingIdForm id={this.state.id} />
+      return <BindingIdForm id={this.props.activeId} />
     }
     const initData = [
       {

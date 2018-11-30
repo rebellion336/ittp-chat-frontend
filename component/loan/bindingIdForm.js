@@ -19,6 +19,8 @@ class BindingIdForm extends Component {
       if (!err) {
         const { citizenId, userName, userLastName, phoneNumber } = values
         const { id } = this.props
+        console.log('values', values)
+        console.log('Id', id)
         try {
           const value = {
             userId: id,
@@ -29,7 +31,7 @@ class BindingIdForm extends Component {
           }
           //await postJSON(`${API_SERVER}/chats/line/binding`, value)
           await postJSON(`${FIREBASE_SERVER}/bindId`, value)
-          this.props.fetchLoan({ id })
+          await this.props.fetchLoan({ id })
         } catch (error) {
           console.error(error)
         }

@@ -10,6 +10,9 @@ const config = {
 }
 
 export const provider = new firebase.auth.GoogleAuthProvider()
+provider.setCustomParameters({
+  prompt: 'select_account',
+})
 
 if (!firebase.apps.length) {
   firebase.initializeApp(config)

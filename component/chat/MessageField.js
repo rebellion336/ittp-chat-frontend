@@ -9,10 +9,21 @@ class MessageField extends Component {
     this.columns = [
       {
         title: 'การสนทนา',
-        dataIndex: 'customerMessage',
-        key: 'customerMessage',
-        align: 'left',
         width: '50%',
+        align: 'left',
+        render: record => {
+          if (record.messageType === 'image') {
+            return (
+              <a href={record.customerMessage} target="_blank" download>
+                <img
+                  src={record.customerMessage}
+                  style={{ maxWidth: '100%' }}
+                />
+              </a>
+            )
+          }
+          return record.customerMessage
+        },
       },
       {
         dataIndex: 'operatorMessage',
@@ -88,15 +99,35 @@ class MessageField extends Component {
 
   render() {
     return (
-      <div style={{ width: '100%', height: '100%' }}>
-        <Table
-          dataSource={this.state.chatLog}
-          columns={this.columns}
-          pagination={false}
-          loading={this.state.loading}
-          scroll={{ y: 540 }}
-        />
-        <Inputfield id={this.props.activeId} />
+      <div
+        style={{
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
+        <div
+          style={{
+            position: 'relative',
+            height: 'auto',
+            overflow: 'scroll',
+            display: 'flex',
+            flex: 1,
+            flexDirection: 'column',
+          }}
+        >
+          <Table
+            dataSource={this.state.chatLog}
+            columns={this.columns}
+            pagination={false}
+            loading={this.state.loading}
+            // scroll={{ y: 600 }}
+          />
+        </div>
+        <div style={{ height: '6%' }}>
+          <Inputfield id={this.props.activeId} />
+        </div>
       </div>
     )
   }

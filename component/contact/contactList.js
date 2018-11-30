@@ -62,7 +62,7 @@ class ContactList extends Component {
     }
     //check if user is signed in
     firebase.auth().onAuthStateChanged(user => {
-      if (user) {
+      if (user && !user.isAnonymous) {
         // User is signed in.
         // infomation that User Obj. have
         const displayName = user.displayName
@@ -81,6 +81,7 @@ class ContactList extends Component {
         // No user is signed in.
         // then redirect to google login to sign user up
         console.log('go to login')
+        console.log('user', user)
         firebase
           .auth()
           .signInWithRedirect(provider)

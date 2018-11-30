@@ -15,6 +15,7 @@ export function* fetchLoanSaga(action) {
   //use api to fetch data from apiV2
   try {
     const data = yield call(getJSON, `${API_SERVER}/chats/${id}`)
+    // const data = yield call(getJSON, `http://45.77.47.114:7778/chats/${id}`)
     yield put(fetchLoanSuccess({ data }))
   } catch (error) {
     console.log('fecthLoanError')

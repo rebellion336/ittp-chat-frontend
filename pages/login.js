@@ -1,4 +1,4 @@
-import React , { Component } from 'react'
+import React, { Component } from 'react'
 import { compose } from 'redux'
 import PropTypes from 'prop-types'
 import Router from 'next/router'
@@ -12,12 +12,11 @@ class Login extends Component {
   componentDidMount() {
     Router.prefetch('/chat')
   }
-  render(){
+  render() {
     const { t } = this.props
-    console.log('props::::>',this.props)
-    return(
+    return (
       <FullPageLayout>
-        <LoginForm t={t}/>
+        <LoginForm t={t} />
       </FullPageLayout>
     )
   }
@@ -33,4 +32,7 @@ Login.getInitialProps = ({ store, res, isServer }) => {
   }
 }
 
-export default compose(withReduxSaga, connectI18n(['common']))(Login)
+export default compose(
+  withReduxSaga,
+  connectI18n(['common'])
+)(Login)
