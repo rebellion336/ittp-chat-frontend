@@ -105,6 +105,8 @@ class MessageField extends Component {
           height: '100%',
           display: 'flex',
           flexDirection: 'column',
+          borderRight: 'solid',
+          borderWidth: '0.5px',
         }}
       >
         <div
