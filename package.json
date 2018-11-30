@@ -4,7 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "cross-env NODE_ENV=develop node server.js"
+    "dev": "cross-env NODE_ENV=develop node server.js",
+    "build": "next build",
+    "start": "next start"
   },
   "dependencies": {
     "@line/bot-sdk": "^6.3.0",

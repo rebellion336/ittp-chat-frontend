@@ -1,0 +1,14 @@
+.contact_list_container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-basis: 220px;
+  flex-shrink: 0;
+  z-index: 201;
+  background: #ffffff;
+  box-sizing: content-box;
+  visibility: visible;
+  height: 100%;
+  border-right: solid;
+  border-width: 0.5px;
+}
