@@ -2,7 +2,6 @@ import { Component } from 'react'
 import { Row, Col } from 'antd'
 import { compose } from 'redux'
 import { withReduxSaga } from '../redux/store'
-import { connectI18n } from '../hocs/connectI18n'
 import FullPageLayout from '../layouts/FullPageLayout'
 import MessageField from '../component/chat/MessageField'
 import LoanAccount from '../component/loan/loanAccount'
@@ -18,7 +17,4 @@ class Chat extends Component {
   }
 }
 
-export default compose(
-  withReduxSaga,
-  connectI18n(['common'])
-)(Chat)
+export default compose(withReduxSaga)(Chat)

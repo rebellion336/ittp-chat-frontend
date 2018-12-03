@@ -9,10 +9,7 @@ class LoanInfo extends Component {
     const { loanData } = this.props
     if (loanData !== '') {
       loanData.name = `${loanData.firstName} ${loanData.lastName}`
-      // รออัพ apiV2 ถึงใช้ได้
-      // ใช้เซิฟ test อยู่
-      const minimumBalance = loanData.minDue - loanData.minPaid
-      console.log('loanData', loanData)
+      const minimumBalance = (loanData.minDue - loanData.minPaid) / 100
       return (
         <div>
           <Card>
@@ -30,9 +27,6 @@ class LoanInfo extends Component {
             </Row>
             <Row>
               <Col>ยอดขั้นต่ำเดือนนี้: {minimumBalance}</Col>
-            </Row>
-            <Row>
-              <Col>ใช้เซิฟ test อยู่ ไม่ได้ใช้ core</Col>
             </Row>
           </Card>
         </div>
