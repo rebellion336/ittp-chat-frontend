@@ -127,7 +127,7 @@ class MessageField extends Component {
             // scroll={{ y: 600 }}
           />
         </div>
-        <div style={{ height: '6%' }}>
+        <div style={{ height: 'auto%' }}>
           <Inputfield id={this.props.activeId} />
         </div>
       </div>

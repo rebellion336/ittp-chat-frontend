@@ -1,6 +1,7 @@
 import { Component } from 'react'
 import { Input, Button } from 'antd'
 import { connect } from 'react-redux'
+import FileUploader from 'react-firebase-file-uploader'
 import { sendMessage, fetchChat } from '../../redux/ducks/chat'
 import { FIREBASE_SERVER, postJSON } from '../../tools/api'
 
@@ -44,7 +45,8 @@ class Inputfield extends Component {
           padding: '3px',
           bottom: '0',
           width: '100%',
-          position: 'absolute',
+          // position: 'absolute',
+          display: 'block',
         }}
       >
         <span>
