@@ -26,10 +26,21 @@ class MessageField extends Component {
         },
       },
       {
-        dataIndex: 'operatorMessage',
-        key: 'operatorMessage',
-        align: 'right',
         width: '50%',
+        align: 'right',
+        render: record => {
+          if (record.messageType === 'image') {
+            return (
+              <a href={record.operatorMessage} target="_blank" download>
+                <img
+                  src={record.operatorMessage}
+                  style={{ maxWidth: '100%' }}
+                />
+              </a>
+            )
+          }
+          return record.operatorMessage
+        },
       },
     ]
     this.state = {
@@ -127,7 +138,7 @@ class MessageField extends Component {
             // scroll={{ y: 600 }}
           />
         </div>
-        <div style={{ height: 'auto%' }}>
+        <div style={{ height: 'auto' }}>
           <Inputfield id={this.props.activeId} />
         </div>
       </div>
