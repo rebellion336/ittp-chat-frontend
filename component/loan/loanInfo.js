@@ -23,7 +23,7 @@ class LoanInfo extends Component {
               <Col>productName: {loanData.productName}</Col>
             </Row>
             <Row>
-              <Col>installAmount: {loanData.installAmount}</Col>
+              <Col>status: {loanData.status}</Col>
             </Row>
             <Row>
               <Col>ยอดขั้นต่ำเดือนนี้: {minimumBalance}</Col>

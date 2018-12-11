@@ -1,6 +1,6 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
-import { Row, Col, Table, Badge, Icon, Tabs, Menu } from 'antd'
+import { Row, Col, Badge, Icon, Menu, Spin } from 'antd'
 import MessageField from '../../component/chat/MessageField'
 import LoanAccount from '../../component/loan/loanAccount'
 import { fetchActiveUser } from '../../redux/ducks/activeUser'
@@ -281,7 +281,7 @@ class ContactList extends Component {
                   title={
                     <span>
                       <Icon type="user" />
-                      <span>ADMIN</span>
+                      <span>Active</span>
                     </span>
                   }
                   children={contactList}
@@ -338,8 +338,8 @@ class ContactList extends Component {
       )
     }
     return (
-      <div style={{ textAlign: 'center', fontSize: '36px', paddingTop: '3%' }}>
-        {this.state.status}
+      <div style={{ textAlign: 'center', fontSize: '100px', paddingTop: '3%' }}>
+        <Spin size="large" />
       </div>
     )
   }
