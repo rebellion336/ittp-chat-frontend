@@ -141,6 +141,14 @@ class MessageField extends Component {
         <div style={{ height: 'auto' }}>
           <Inputfield id={this.props.activeId} />
         </div>
+        <style>{`
+            .scroll-container {
+              overflow: hidden;
+            } 
+            .scroll-container:hover {
+              overflow-y: auto;
+            }
+          `}</style>
       </div>
     )
   }
